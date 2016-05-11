@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+
+        android:id="@+id/iv_papPhoto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:src="@drawable/default_pap_photo"
+        app:civ_border_color="#3c000000"
+        app:civ_border_width="1dp" />
+
+    <TextView
+        android:id="@+id/tv_papName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif"
+        android:padding="8dp"
+        android:text="Sekitoleeko Kenneth"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

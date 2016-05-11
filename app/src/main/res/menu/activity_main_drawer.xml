@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="Home"
+            android:checked="true"/>
+        <item
+            android:id="@+id/nav_project_details"
+            android:icon="@android:drawable/ic_menu_recent_history"
+            android:title="Project Details" />
+        <item
+            android:id="@+id/nav_pap_list"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="PAP List" />
+
+        <item
+            android:id="@+id/nav_chats"
+            android:icon="@drawable/ic_person_add"
+            app:actionLayout="@layout/menu_item_counter"
+            android:title="Chats" />
+
+ <!--       <item
+            android:id="@+id/nav_chats"
+            app:actionLayout="@layout/menu_item_counter"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Chats"
+            app:showAsAction="always"/>
+-->
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Settings" />
+
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Help" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">VCS Mobile</string>
+    <string name="title_activity_pap_view">PAP View</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">enter PAP name</string>
+    <string name="title_activity_login">VCS Mobile</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_pap_details_live">Pap Details</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="title_activity_pap_view_live">Pap View Live</string>
+    <string name="title_activity_new_pap">New PAP</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="title_activity_project_stats">Project Stats</string>
+    <string name="title_activity_news">News</string>
+    <string name="title_activity_my_tasks">MyTasks</string>
+    <string name="other_names">Other names</string>
+</resources>
