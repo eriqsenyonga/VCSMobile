@@ -11,7 +11,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 public class DbClass {
 
     // details of the database that is, database name and version
-    private static final String DATABASE_NAME = "vcs_db.db";
+    private static final String DATABASE_NAME = "vcs_db_android.db";
     private static final int DATABASE_VERSION = 1;
 
     private DbHelper ourHelper; // instance of the DbHelper class
@@ -46,7 +46,7 @@ public class DbClass {
 
 
     public class DbHelper extends SQLiteAssetHelper {
-        //this Class gets the Db from assets/databases folder that is named appropriately ie vcs_db.db
+        //this Class gets the Db from assets/databases folder that is named appropriately ie vcs_db_android.db
 
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
