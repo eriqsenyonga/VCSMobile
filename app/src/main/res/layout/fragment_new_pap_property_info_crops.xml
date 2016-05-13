@@ -5,10 +5,16 @@
     tools:context="ug.dataplus_systems.vcsmobile.NewPapPropertyInfoCrops">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <include layout="@layout/recycler_view" />
+
     <TextView
+        android:id="@+id/tv_no_crops_added"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Property Info:  Crops"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Add crops here"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </FrameLayout>

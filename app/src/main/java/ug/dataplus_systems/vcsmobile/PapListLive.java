@@ -67,10 +67,10 @@ public class PapListLive extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        this.livePapList.hasFixedSize();
-        this.livePapList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        livePapList.hasFixedSize();
+        livePapList.setLayoutManager(new LinearLayoutManager(getActivity()));
         //    this.livePapList.setItemAnimator(new SlideInLeftAnimator());
-        this.papsToShow = new ArrayList();
+        papsToShow = new ArrayList();
         grabPapsToShow();
 
         this.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

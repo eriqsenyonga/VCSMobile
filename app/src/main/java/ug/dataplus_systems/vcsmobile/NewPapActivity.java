@@ -106,12 +106,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         if (v == fab) {
 
-            if (viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_CROPS) {
-                //if crops page is being shown, show new crop dialog
-
-                showDialogFor(PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_CROPS);
-
-            } else if (viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
+           if (viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
                 //if improvements page is being shown, show new improvement dialog
 
                 showDialogFor(PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS);
@@ -129,48 +124,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         if (which == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_CROPS) {
 
-            View dialogView = inflater.inflate(R.layout.dialog_new_crop, null);
 
-            Toolbar dialogToolbar = (Toolbar) dialogView.findViewById(R.id.toolbar_dialog);
-            final TextInputLayout tilCropName = (TextInputLayout) dialogView.findViewById(R.id.til_crop_name);
-            final TextInputLayout tilQuantity = (TextInputLayout) dialogView.findViewById(R.id.til_crop_quantity);
-            Spinner units = (Spinner) dialogView.findViewById(R.id.spinner_crop_units);
-            Button save = (Button) dialogView.findViewById(R.id.b_save_crop);
-            Button cancel = (Button) dialogView.findViewById(R.id.b_cancel);
-
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setView(dialogView);
-
-            final Dialog d = builder.create();
-
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    d.dismiss();
-                }
-            });
-
-            save.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (tilCropName.getEditText().getText().toString().isEmpty()) {
-
-                        tilCropName.getEditText().setError("Enter crop name");
-                    }
-
-                    if (tilQuantity.getEditText().getText().toString().isEmpty()) {
-
-                        tilQuantity.getEditText().setError("Enter quantity");
-                    }
-
-                }
-            });
-
-
-            d.show();
 
         } else if (which == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
 

@@ -2,12 +2,13 @@ package ug.dataplus_systems.vcsmobile;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PapLocal {
     String birthPlace;
     Context context;
-    List<String> crops;
+    List<Crop> crops;
     String dateOfBirth;
     String designation;
     boolean hasCrops;
@@ -43,6 +44,8 @@ public class PapLocal {
 
 
     public PapLocal(Context paramContext) {
+
+        crops = new ArrayList();
         this.context = paramContext;
     }
 
@@ -50,7 +53,7 @@ public class PapLocal {
         return this.birthPlace;
     }
 
-    public List<String> getCrops() {
+    public List<Crop> getCrops() {
         return this.crops;
     }
 
@@ -146,7 +149,7 @@ public class PapLocal {
         this.birthPlace = paramString;
     }
 
-    public void setCrops(List<String> paramList) {
+    public void setCrops(List<Crop> paramList) {
         this.crops = paramList;
     }
 
