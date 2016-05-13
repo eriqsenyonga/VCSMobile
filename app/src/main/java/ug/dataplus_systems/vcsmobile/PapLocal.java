@@ -14,8 +14,8 @@ public class PapLocal {
     boolean hasCrops;
     boolean hasImprovements;
     String id;
-    List<String> improvements;
-    boolean isComplete;
+    List<Improvement> improvements;
+    boolean isComplete = false;
     boolean isMarried = false;
     boolean isResident;
     String name;
@@ -46,6 +46,7 @@ public class PapLocal {
     public PapLocal(Context paramContext) {
 
         crops = new ArrayList();
+        improvements = new ArrayList();
         this.context = paramContext;
     }
 
@@ -69,7 +70,7 @@ public class PapLocal {
         return this.id;
     }
 
-    public List<String> getImprovements() {
+    public List<Improvement> getImprovements() {
         return this.improvements;
     }
 
@@ -173,7 +174,7 @@ public class PapLocal {
         this.id = paramString;
     }
 
-    public void setImprovements(List<String> paramList) {
+    public void setImprovements(List<Improvement> paramList) {
         this.improvements = paramList;
     }
 

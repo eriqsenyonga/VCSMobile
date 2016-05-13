@@ -36,16 +36,16 @@
                 android:padding="16dp">
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_structure_name"
+                    android:id="@+id/til_improvement_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp">
 
                     <AutoCompleteTextView
-                        android:id="@+id/et_structure_name"
+                        android:id="@+id/et_improvement_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Structure"
+                        android:hint="Category"
                         android:inputType="textCapWords"
                         android:textColor="#000000" />
 
@@ -55,11 +55,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Structure Type"
+                    android:text="Improvement Sub Category"
                     android:textColor="@color/colorAccent" />
 
                 <Spinner
-                    android:id="@+id/spinner_structure_type"
+                    android:id="@+id/spinner_improvement_sub_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -67,7 +67,7 @@
 
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_structure_area"
+                    android:id="@+id/til_improvement_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp">
@@ -75,7 +75,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Structure Area"
+                        android:hint="Improvement Area"
                         android:inputType="numberDecimal" />
 
 
@@ -83,7 +83,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spinner_structure_area_units"
+                    android:id="@+id/spinner_improvement_area_units"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -92,7 +92,7 @@
 
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_structure_value"
+                    android:id="@+id/til_improvement_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp">
@@ -100,7 +100,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Value"
+                        android:hint="Total"
                         android:inputType="numberDecimal" />
 
 
@@ -108,7 +108,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spinner_structure_value_currency"
+                    android:id="@+id/spinner_improvement_value_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -171,6 +171,22 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/et_doors_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Doors Type"
+                        android:inputType="textCapWords"
+                        android:textColor="#000000" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_floor_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/et_floor_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Doors Type"
