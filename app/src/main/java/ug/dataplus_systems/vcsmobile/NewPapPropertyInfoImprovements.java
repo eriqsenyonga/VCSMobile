@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewPapPropertyInfoImprovements extends Fragment implements View.OnClickListener{
+public class NewPapPropertyInfoImprovements extends Fragment implements View.OnClickListener {
 
     RecyclerView rvImprovementsList;
     TextView tvNoImprovementsMessage;
@@ -42,9 +43,9 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v =inflater.inflate(R.layout.fragment_new_pap_property_info_improvements, container, false);
+        v = inflater.inflate(R.layout.fragment_new_pap_property_info_improvements, container, false);
         rvImprovementsList = (RecyclerView) v.findViewById(R.id.recycler_view);
-        tvNoImprovementsMessage = (TextView)v.findViewById(R.id.tv_no_improvements);
+        tvNoImprovementsMessage = (TextView) v.findViewById(R.id.tv_no_improvements);
 
 
         return v;
@@ -53,7 +54,6 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
 
 
         rvImprovementsList.hasFixedSize();
@@ -73,24 +73,36 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
 
     }
 
+    private void showImprovements() {
+
+        adapter = new ImprovementsListAdapter(getActivity(), improvementsHere);
+        rvImprovementsList.setAdapter(adapter);
+
+
+    }
+
     @Override
     public void onClick(View v) {
-        if(v == newPapActivity.fab){
+        if (v == newPapActivity.fab) {
 
-            LayoutInflater inflater =  LayoutInflater.from(getActivity());
+
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
 
             View dialogView = inflater.inflate(R.layout.dialog_new_improvement, null);
 
-            TextInputLayout tilCategory = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_name);
-            Spinner spinnerSubCategory = (Spinner) dialogView.findViewById(R.id.spinner_improvement_sub_category);
-            TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
-            Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
-            TextInputLayout tilTotal = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_value);
+            final TextInputLayout tilCategory = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_name);
+            final Spinner spinnerSubCategory = (Spinner) dialogView.findViewById(R.id.spinner_improvement_sub_category);
+            final TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
+            final Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
+            final TextInputLayout tilTotal = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_value);
             TextInputLayout tilRoofType = (TextInputLayout) dialogView.findViewById(R.id.til_roof_type);
             TextInputLayout tilWallsType = (TextInputLayout) dialogView.findViewById(R.id.til_walls_type);
             TextInputLayout tilWindowsType = (TextInputLayout) dialogView.findViewById(R.id.til_windows_type);
             TextInputLayout tilDoorsType = (TextInputLayout) dialogView.findViewById(R.id.til_doors_type);
             TextInputLayout tilFloorType = (TextInputLayout) dialogView.findViewById(R.id.til_floor_type);
+            Button save = (Button) dialogView.findViewById(R.id.b_save_improvement);
+            Button cancel = (Button) dialogView.findViewById(R.id.b_cancel);
+
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -98,8 +110,82 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
 
             final Dialog d = builder.create();
 
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    d.dismiss();
+                }
+            });
+
+            save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (tilCategory.getEditText().getText().toString().isEmpty()
+                            || tilTotal.getEditText().getText().toString().isEmpty()
+                            || tilArea.getEditText().getText().toString().isEmpty()) {
+
+                        if (tilCategory.getEditText().getText().toString().isEmpty()) {
+
+                            tilCategory.getEditText().setError("Enter category");
+                        }
+                        if (tilTotal.getEditText().getText().toString().isEmpty()) {
+
+                            tilTotal.getEditText().setError("Enter total");
+                        }
+                        if (tilArea.getEditText().getText().toString().isEmpty()) {
+
+                            tilArea.getEditText().setError("Enter area");
+                        }
+
+                    } else {
+
+                        Improvement improvement = new Improvement();
+
+                        improvement.setCategory(tilCategory.getEditText().getText().toString());
+                        improvement.setSubCategory(spinnerSubCategory.getSelectedItem().toString());
+                        improvement.setArea(Double.valueOf(tilArea.getEditText().getText().toString()));
+                        improvement.setUnit(spinnerUnits.getSelectedItem().toString());
+
+                        improvementsHere.add(improvement);
+
+                        papLocal.setImprovements(improvementsHere);
+
+                        showImprovements();
+
+                        d.dismiss();
+
+                    }
+
+
+                }
+            });
+
             d.show();
 
+
         }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser && isResumed()) {
+            onResume();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (!getUserVisibleHint()) {
+            return;
+        }
+
+        newPapActivity.fab.setOnClickListener(this);
+
+
     }
 }

@@ -222,7 +222,7 @@
                     android:background="@color/primary_500" />
 
                 <Button
-                    android:id="@+id/b_save_crop"
+                    android:id="@+id/b_save_improvement"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

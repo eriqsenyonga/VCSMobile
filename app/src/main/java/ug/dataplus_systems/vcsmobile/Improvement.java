@@ -10,7 +10,7 @@ public class Improvement {
     String improvementName;
     String category;
     String subCategory;
-    long area;
+    double area;
     String unit;
     long total;
     String roof;
@@ -44,11 +44,11 @@ public class Improvement {
         this.subCategory = subCategory;
     }
 
-    public long getArea() {
+    public double getArea() {
         return area;
     }
 
-    public void setArea(long area) {
+    public void setArea(double area) {
         this.area = area;
     }
 

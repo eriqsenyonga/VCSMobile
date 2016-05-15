@@ -45,6 +45,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
+        fab.hide();
         adapter = new PagerAdapterNewPap(getSupportFragmentManager());
 
         viewPager.setAdapter(adapter);
@@ -57,7 +58,8 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         showOrHideFab();
 
-        fab.setOnClickListener(this);
+        
+  //      fab.setOnClickListener(this);
 
     }
 
@@ -104,7 +106,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         }
 
-        if (v == fab) {
+   /*     if (v == fab) {
 
            if (viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
                 //if improvements page is being shown, show new improvement dialog
@@ -115,10 +117,11 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
 
         }
+        */
 
     }
 
-    private void showDialogFor(int which) {
+  /*  private void showDialogFor(int which) {
 
         LayoutInflater inflater = LayoutInflater.from(this);
 
@@ -140,6 +143,12 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         }
 
 
+    }
+    */
+
+    public int whichScreenNowActive()
+    {
+       return viewPager.getCurrentItem();
     }
 
     private void setStepTitle(int pageIndex) {
@@ -199,4 +208,9 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-}
+
+
+    }
+
+
+
