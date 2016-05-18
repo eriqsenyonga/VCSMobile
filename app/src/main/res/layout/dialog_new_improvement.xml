@@ -91,29 +91,6 @@
                     android:entries="@array/land_size_units" />
 
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_improvement_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Total"
-                        android:inputType="numberDecimal" />
-
-
-                </android.support.design.widget.TextInputLayout>
-
-
-                <Spinner
-                    android:id="@+id/spinner_improvement_value_currency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="4dp"
-                    android:entries="@array/currencies" />
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/til_roof_type"
