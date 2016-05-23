@@ -1,14 +1,91 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ug.dataplus_systems.vcsmobile.NewPapPhotosFrag">
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Photos Fragment"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context="ug.dataplus_systems.vcsmobile.NewPapPhotosFrag">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="MAIN PAP PHOTO"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/iv_main_pap_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/add_pic"
+            android:scaleType="centerCrop"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:text="OTHER PAP PHOTOS"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+
+        <ImageButton
+            android:id="@+id/b_add_other_pap_photos"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/add_pic"
+
+            />
+
+        <HorizontalScrollView
+            android:id="@+id/sv_photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:fillViewport="false"
+            android:foregroundGravity="left"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp">
+
+            <LinearLayout
+                android:id="@+id/other_photos_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:animateLayoutChanges="true"
+                android:background="#e3e3e3"
+                android:clipToPadding="false"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <!-- images will be added dynamicall to this layout -->
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+</ScrollView>

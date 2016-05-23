@@ -94,7 +94,7 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
             final Spinner spinnerSubCategory = (Spinner) dialogView.findViewById(R.id.spinner_improvement_sub_category);
             final TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
             final Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
-            final TextInputLayout tilTotal = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_value);
+
             TextInputLayout tilRoofType = (TextInputLayout) dialogView.findViewById(R.id.til_roof_type);
             TextInputLayout tilWallsType = (TextInputLayout) dialogView.findViewById(R.id.til_walls_type);
             TextInputLayout tilWindowsType = (TextInputLayout) dialogView.findViewById(R.id.til_windows_type);
@@ -122,17 +122,13 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
                 public void onClick(View v) {
 
                     if (tilCategory.getEditText().getText().toString().isEmpty()
-                            || tilTotal.getEditText().getText().toString().isEmpty()
                             || tilArea.getEditText().getText().toString().isEmpty()) {
 
                         if (tilCategory.getEditText().getText().toString().isEmpty()) {
 
                             tilCategory.getEditText().setError("Enter category");
                         }
-                        if (tilTotal.getEditText().getText().toString().isEmpty()) {
 
-                            tilTotal.getEditText().setError("Enter total");
-                        }
                         if (tilArea.getEditText().getText().toString().isEmpty()) {
 
                             tilArea.getEditText().setError("Enter area");

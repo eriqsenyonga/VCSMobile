@@ -10,6 +10,14 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
 
     <application
@@ -103,6 +111,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ug.dataplus_systems.vcsmobile.MainActivity" />
         </activity>
+
+        <activity android:name="nl.changer.polypicker.ImagePickerActivity" />
     </application>
 
 </manifest>
