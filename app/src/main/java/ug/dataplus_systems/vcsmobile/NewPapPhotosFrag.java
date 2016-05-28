@@ -97,16 +97,12 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     }
 
     private void getOtherPhotos() {
+        ImageChooserManager imageChooserManager = new ImageChooserManager(this, ChooserType.REQUEST_PICK_PICTURE);
+        imageChooserManager.setImageChooserListener(this);
 
-        Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
-        Config config = new Config.Builder()
-                .setTabBackgroundColor(R.color.white)    // set tab background color. Default white.
-                .setTabSelectionIndicatorColor(R.color.blue)
-                .setCameraButtonColor(R.color.orange)
-                // .setSelectionLimit(1)    // set photo selection limit. Default unlimited selection.
-                .build();
-        ImagePickerActivity.setConfig(config);
-        startActivityForResult(intent, INTENT_REQUEST_GET_OTHER_PHOTOS);
+        Bundle extras = new Bundle();
+        extras.putBoolean(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        imageChooserManager.setExtras(extras);
     }
 
 
@@ -188,6 +184,8 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
 
     @Override
     public void onImagesChosen(ChosenImages chosenImages) {
+        ivMainPapPhoto.setImageURI(Uri.parse(new File(chosenImages.getImage(0)
+                .getFileThumbnail()).toString()));
 
     }
 }
