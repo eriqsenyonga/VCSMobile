@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     View v;
     ImageView ivMainPapPhoto;
     ImageButton bAddOtherPhotos;
-    private ViewGroup mOtherImagesContainer;
+  //  private ViewGroup mOtherImagesContainer;
     HashSet<Uri> otherPhotos = new HashSet<Uri>();
     Uri mainPhotoUri;
     private static final int INTENT_REQUEST_GET_PAP_PHOTO = 100;
@@ -67,7 +68,7 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
         v = inflater.inflate(R.layout.fragment_new_pap_photos, container, false);
         ivMainPapPhoto = (ImageView) v.findViewById(R.id.iv_main_pap_photo);
         bAddOtherPhotos = (ImageButton) v.findViewById(R.id.b_add_other_pap_photos);
-        mOtherImagesContainer = (ViewGroup) v.findViewById(R.id.other_photos_container);
+     //   mOtherImagesContainer = (ViewGroup) v.findViewById(R.id.other_photos_container);
 
         return v;
     }
@@ -166,11 +167,12 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
 
 
                     ivMainPapPhoto.setImageURI(Uri.parse(new File(image
-                            .getFilePathOriginal()).toString()));
+                            .getFileThumbnail()).toString()));
 
                     int wdpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
                     int htpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
-                    ivMainPapPhoto.setLayoutParams(new FrameLayout.LayoutParams(wdpx, htpx));
+                    ivMainPapPhoto.setLayoutParams(new LinearLayout.LayoutParams(wdpx, htpx));
+
               //      imageViewThumbSmall.setImageURI(Uri.parse(new File(image
                //             .getFileThumbnailSmall()).toString()));
                 }

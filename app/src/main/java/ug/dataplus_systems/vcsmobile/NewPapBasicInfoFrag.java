@@ -161,7 +161,7 @@ public class NewPapBasicInfoFrag extends Fragment {
             public void afterTextChanged(Editable s) {
 
                 if (!tilPhysicalAddress.getEditText().getText().toString().equals("")) {
-                    physicalAddress = tilOtherNames.getEditText().getText().toString();
+                    physicalAddress = tilPhysicalAddress.getEditText().getText().toString();
                 } else {
                     physicalAddress = "";
                 }
