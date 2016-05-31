@@ -4,6 +4,7 @@ package ug.dataplus_systems.vcsmobile;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,7 +50,7 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     View v;
     ImageView ivMainPapPhoto;
     ImageButton bAddOtherPhotos;
-  //  private ViewGroup mOtherImagesContainer;
+    //  private ViewGroup mOtherImagesContainer;
     HashSet<Uri> otherPhotos = new HashSet<Uri>();
     Uri mainPhotoUri;
     private static final int INTENT_REQUEST_GET_PAP_PHOTO = 100;
@@ -68,7 +69,7 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
         v = inflater.inflate(R.layout.fragment_new_pap_photos, container, false);
         ivMainPapPhoto = (ImageView) v.findViewById(R.id.iv_main_pap_photo);
         bAddOtherPhotos = (ImageButton) v.findViewById(R.id.b_add_other_pap_photos);
-     //   mOtherImagesContainer = (ViewGroup) v.findViewById(R.id.other_photos_container);
+        //   mOtherImagesContainer = (ViewGroup) v.findViewById(R.id.other_photos_container);
 
         return v;
     }
@@ -85,7 +86,28 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     public void onClick(View v) {
         if (v == ivMainPapPhoto) {
             //if the ivMainPapPhoto is clicked, open the photo capture thing and then set the pic
-            getPapPhoto();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setItems(new String[]{"Take picture", "Choose image"}, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    if (which == 0) {
+
+                        takePapPhoto();
+
+                    }
+                    if (which == 1) {
+
+                        getPapPhoto();
+                    }
+
+                }
+            });
+
+            Dialog d = builder.create();
+            d.show();
+
 
         }
 
@@ -96,19 +118,46 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
         }
     }
 
-    private void getOtherPhotos() {
-        ImageChooserManager imageChooserManager = new ImageChooserManager(this, ChooserType.REQUEST_PICK_PICTURE);
+    private void takePapPhoto() {
+
+        imageChooserManager = new ImageChooserManager(this,
+                ChooserType.REQUEST_CAPTURE_PICTURE);
         imageChooserManager.setImageChooserListener(this);
+
+        try {
+            mediaPath = imageChooserManager.choose();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void getOtherPhotos() {
+        imageChooserManager = new ImageChooserManager(this, ChooserType.REQUEST_PICK_PICTURE);
+
 
         Bundle extras = new Bundle();
         extras.putBoolean(Intent.EXTRA_ALLOW_MULTIPLE, true);
         imageChooserManager.setExtras(extras);
+
+        imageChooserManager.setImageChooserListener(this);
+
+        try {
+            mediaPath = imageChooserManager.choose();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     private void getPapPhoto() {
 
-        ImageChooserManager imageChooserManager = new ImageChooserManager(this, ChooserType.REQUEST_PICK_PICTURE);
+        imageChooserManager = new ImageChooserManager(this, ChooserType.REQUEST_PICK_PICTURE);
         imageChooserManager.setImageChooserListener(this);
 
         try {
@@ -148,19 +197,16 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     public void onImageChosen(final ChosenImage image) {
 
         Log.d(getClass().getName(), "onImageChosen: " + image.getFilePathOriginal());
-  //      finalPath = image.getFilePathOriginal();
-     //   thumbPath = image.getFileThumbnail();
-       // thumbPathSmall = image.getFileThumbnailSmall();
+        //      finalPath = image.getFilePathOriginal();
+        //   thumbPath = image.getFileThumbnail();
+        // thumbPathSmall = image.getFileThumbnailSmall();
         this.activity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
-               // pbar.setVisibility(View.GONE);
+                // pbar.setVisibility(View.GONE);
                 if (image != null) {
-              //      textViewFile.setText(image.getFilePathOriginal());
-
-
-
+                    //      textViewFile.setText(image.getFilePathOriginal());
 
                     ivMainPapPhoto.setImageURI(Uri.parse(new File(image
                             .getFileThumbnail()).toString()));
@@ -169,8 +215,8 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
                     int htpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
                     ivMainPapPhoto.setLayoutParams(new LinearLayout.LayoutParams(wdpx, htpx));
 
-              //      imageViewThumbSmall.setImageURI(Uri.parse(new File(image
-               //             .getFileThumbnailSmall()).toString()));
+                    //      imageViewThumbSmall.setImageURI(Uri.parse(new File(image
+                    //             .getFileThumbnailSmall()).toString()));
                 }
             }
         });
@@ -184,6 +230,7 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
 
     @Override
     public void onImagesChosen(ChosenImages chosenImages) {
+
         ivMainPapPhoto.setImageURI(Uri.parse(new File(chosenImages.getImage(0)
                 .getFileThumbnail()).toString()));
 

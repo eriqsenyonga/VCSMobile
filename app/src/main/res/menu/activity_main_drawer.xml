@@ -6,16 +6,22 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@android:drawable/ic_menu_compass"
-            android:title="Home"
+            android:title="Dashboard"
             android:checked="true"/>
         <item
             android:id="@+id/nav_project_details"
             android:icon="@android:drawable/ic_menu_recent_history"
-            android:title="Project Details" />
+            android:title="Project" />
         <item
             android:id="@+id/nav_pap_list"
             android:icon="@android:drawable/ic_menu_agenda"
-            android:title="PAP List" />
+            android:title="PAP" />
+
+        <item
+            android:id="@+id/nav_valuation"
+            android:icon="@drawable/ic_person_add"
+            app:actionLayout="@layout/menu_item_counter"
+            android:title="Valuation" />
 
         <item
             android:id="@+id/nav_chats"

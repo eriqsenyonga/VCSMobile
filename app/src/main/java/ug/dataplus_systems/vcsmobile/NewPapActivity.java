@@ -88,14 +88,26 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         if (v == b_right) {
 
             int currentPageIndex = viewPager.getCurrentItem();
+
             int newPageIndex = currentPageIndex + 1;
 
 
             setCurrentItem(newPageIndex, true);
-            tv_step_number.setText("Step " + (newPageIndex + 1) + " of 5");
+            tv_step_number.setText("Step " + (newPageIndex + 1) + " of 7");
             b_left.setVisibility(View.VISIBLE);
 
             setStepTitle(newPageIndex);
+
+            if(whichScreenNowActive() == 6){
+                tv_step_number.setText("Step 7 of 7");
+
+                b_right.setText("Finish");
+            }else{
+                b_right.setText("Next");
+            }
+            if(whichScreenNowActive() != 0){
+                b_left.setText("Back");
+            }
 
 
         }
@@ -182,9 +194,17 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         int currentPageIndex = viewPager.getCurrentItem();
         int newPageIndex = currentPageIndex - 1;
         setCurrentItem(newPageIndex, true);
-        tv_step_number.setText("Step " + (newPageIndex + 1) + " of 5");
+        tv_step_number.setText("Step " + (newPageIndex + 1) + " of 7");
 
         setStepTitle(newPageIndex);
+
+
+        if(whichScreenNowActive() == 0){
+            tv_step_number.setText("Step 1 of 7");
+            b_left.setText("");
+        }else{
+            b_left.setText("Back");
+        }
     }
 
     @Override
