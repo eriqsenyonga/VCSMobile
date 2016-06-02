@@ -2,6 +2,7 @@ package ug.dataplus_systems.vcsmobile;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -58,8 +59,8 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         showOrHideFab();
 
-        
-  //      fab.setOnClickListener(this);
+
+        //      fab.setOnClickListener(this);
 
     }
 
@@ -87,29 +88,35 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         if (v == b_right) {
 
-            int currentPageIndex = viewPager.getCurrentItem();
+            if (!b_right.getText().equals("Finish")) {
 
-            int newPageIndex = currentPageIndex + 1;
+                int currentPageIndex = viewPager.getCurrentItem();
+
+                int newPageIndex = currentPageIndex + 1;
 
 
-            setCurrentItem(newPageIndex, true);
-            tv_step_number.setText("Step " + (newPageIndex + 1) + " of 7");
-            b_left.setVisibility(View.VISIBLE);
+                setCurrentItem(newPageIndex, true);
+                tv_step_number.setText("Step " + (newPageIndex + 1) + " of 7");
+                b_left.setVisibility(View.VISIBLE);
 
-            setStepTitle(newPageIndex);
+                setStepTitle(newPageIndex);
 
-            if(whichScreenNowActive() == 6){
-                tv_step_number.setText("Step 7 of 7");
+                if (whichScreenNowActive() == 6) {
+                    tv_step_number.setText("Step 7 of 7");
 
-                b_right.setText("Finish");
-            }else{
-                b_right.setText("Next");
+                    b_right.setText("Finish");
+                } else {
+                    b_right.setText("Next");
+                }
+                if (whichScreenNowActive() != 0) {
+                    b_left.setText("Back");
+                }
+
+            } else {
+
+                savePapLocally();
+
             }
-            if(whichScreenNowActive() != 0){
-                b_left.setText("Back");
-            }
-
-
         }
 
         if (v == b_left) {
@@ -130,6 +137,26 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         }
         */
+
+    }
+
+    private void savePapLocally() {
+
+        /*
+        preferabbly show progress bar as the pap is saved into the local sqlite db
+                * get the PAPLOCAL item and sace it to SQLite Database
+                *  redirect to Main Activity
+                */
+
+        DbClass mDbClass = new DbClass(NewPapActivity.this);
+        mDbClass.open();
+        mDbClass.insertPap(papLocal);
+        mDbClass.close();
+
+
+        Intent i = new Intent(NewPapActivity.this, MainActivity.class);
+        startActivity(i);
+
 
     }
 
@@ -158,9 +185,8 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
     }
     */
 
-    public int whichScreenNowActive()
-    {
-       return viewPager.getCurrentItem();
+    public int whichScreenNowActive() {
+        return viewPager.getCurrentItem();
     }
 
     private void setStepTitle(int pageIndex) {
@@ -199,10 +225,10 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         setStepTitle(newPageIndex);
 
 
-        if(whichScreenNowActive() == 0){
+        if (whichScreenNowActive() == 0) {
             tv_step_number.setText("Step 1 of 7");
             b_left.setText("");
-        }else{
+        } else {
             b_left.setText("Back");
         }
     }
@@ -228,9 +254,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-
-
-    }
+}
 
 
 
