@@ -86,7 +86,7 @@ public class NewPapPreviewFragment extends Fragment {
         tvDob.setText(papLocal.getDateOfBirth());
         tvSex.setText(papLocal.getSex());
         tvReligion.setText(papLocal.getReligion());
-        tvDesignation.setText(papLocal.getDesignation());
+        tvDesignation.setText(papLocal.getPapStatus());
         tvPlotRef.setText(papLocal.getPlotReference());
 
         if (papLocal.isMarried() == true) {

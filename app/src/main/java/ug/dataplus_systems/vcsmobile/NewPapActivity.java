@@ -153,6 +153,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         mDbClass.insertPap(papLocal);
         mDbClass.close();
 
+        Toast.makeText(this, "Pap CREATED", Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(NewPapActivity.this, MainActivity.class);
         startActivity(i);

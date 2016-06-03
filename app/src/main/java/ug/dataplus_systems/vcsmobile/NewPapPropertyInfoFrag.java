@@ -166,7 +166,7 @@ public class NewPapPropertyInfoFrag extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 TextView tvPapDesignation = (TextView) view;
-                papLocal.setDesignation(tvPapDesignation.getText().toString());
+                papLocal.setPapStatus(tvPapDesignation.getText().toString());
                 newPapActivity.updatePapLocalItem(papLocal);
             }
 

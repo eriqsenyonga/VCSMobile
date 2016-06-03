@@ -2,6 +2,7 @@ package ug.dataplus_systems.vcsmobile;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -150,6 +151,10 @@ public class DbClass {
     public static final String DATABASE_TABLE_MST_BIO_TRIBE = "mst_bio_tribe";
     public static final String KEY_TRIBE = "TRIBE";
 
+    //column names for table mst_bio_religion
+    public static final String DATABASE_TABLE_MST_BIO_RELIGION = "mst_bio_religion";
+    public static final String KEY_RELIGION = "RELIGION";
+
     //column names for trn_proj_details
     public static final String DATABASE_TABLE_TRN_PROJ_DETAILS = "trn_proj_details";
     public static final String KEY_PROJECT_NAME = "PROJ_NAME";
@@ -215,34 +220,87 @@ public class DbClass {
         cv.put(KEY_PLOT_REFERENCE, papLocal.getPlotReference());
         cv.put(KEY_BIRTH_PLACE, papLocal.getBirthPlace());
         cv.put(KEY_REFERENCE_NO, papLocal.getPlotReference());
-
+        cv.put(KEY_PAP_TYPE, papLocal.getPapType());
 
         //since these are captured as Booleans and yet they are saved as TEXT in the database
         if (papLocal.isResident()) {
-            cv.put(KEY_IS_RESIDENT, "True");
+            cv.put(KEY_IS_RESIDENT, "true");
         } else {
 
-            cv.put(KEY_IS_RESIDENT, "False");
+            cv.put(KEY_IS_RESIDENT, "false");
         }
 
         if (papLocal.isMarried()) {
-            cv.put(KEY_IS_MARRIED, "True");
+            cv.put(KEY_IS_MARRIED, "true");
         } else {
 
-            cv.put(KEY_IS_MARRIED, "False");
+            cv.put(KEY_IS_MARRIED, "false");
         }
 
 
         //this method checks for the item in the table and returns its id
-        checkForEntryAndReturnId(papLocal.getTribe(), DATABASE_TABLE_MST_BIO_TRIBE, );
+        cv.put(KEY_TRIBE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_TRIBE, KEY_TRIBE, papLocal.getTribe()));
+        cv.put(KEY_RELIGION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELIGION, KEY_RELIGION, papLocal.getReligion()));
+        cv.put(KEY_OCCUPATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_OCCUPATION, KEY_OCCUPATION_NAME, papLocal.getOccupation()));
+        cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
 
 
+        //insert the values into database
+        ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_INFO, null, cv);
 
 
+    }
+
+    private long checkForEntryAndReturnId(String tableNameToBeSearched, String columnNameWhereClause, String parameter) {
+
+        String sql = "SELECT " + KEY_ID
+                + " FROM " + tableNameToBeSearched
+                + " WHERE " + columnNameWhereClause + " = '" + parameter + "'";
+
+        Cursor c = ourDatabase.rawQuery(sql, null);
+
+        c.moveToFirst();
+
+        if (c.getCount() > 0) {
+            //if there is a row with that entry already, get the _id and return it to caller
+            long id = c.getLong(c.getColumnIndex(KEY_ID));
+            c.close();
+            return id;
+        } else {
+            //if the row is not there, insert the row and then get its id and return it
+            c.close();
+            return insertParameterIntoTable(tableNameToBeSearched, columnNameWhereClause, parameter);
+            //  ContentValues cv = new ContentValues();
 
 
-        long papId = ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_INFO, null, cv);
+        }
 
+
+    }
+
+    private long insertParameterIntoTable(String tableNameToBeInserted, String columnNameToInsert, String parameter) {
+
+        ContentValues cv = new ContentValues();
+        cv.put(columnNameToInsert, parameter);
+        cv.put(KEY_IS_DELETED, "False");
+
+        return ourDatabase.insert(tableNameToBeInserted, null, cv);
+
+
+    }
+
+    public Cursor getLocalPapCursor() {
+
+        String sql = "SELECT " + KEY_ID + ", " + KEY_NAME + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_INFO;
+
+        open();
+        Cursor c = ourDatabase.rawQuery(sql, null);
+
+        if (c.getCount() > 0) {
+            return c;
+        } else {
+            return null;
+        }
 
     }
 

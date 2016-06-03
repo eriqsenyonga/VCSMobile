@@ -19,7 +19,7 @@ public class PapLive {
     boolean isMarried;
     String plotReference;
     String referenceNumber;
-    String designation;
+    String papStatus;
     long rightOfWaySize;
     long wayLeaveSize;
     boolean isResident;
@@ -118,12 +118,12 @@ public class PapLive {
         this.referenceNumber = referenceNumber;
     }
 
-    public String getDesignation() {
-        return designation;
+    public String getPapStatus() {
+        return papStatus;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setPapStatus(String papStatus) {
+        this.papStatus = papStatus;
     }
 
     public long getRightOfWaySize() {

@@ -126,7 +126,7 @@ public class PapListLiveAdapter extends RecyclerView.Adapter<PapListLiveAdapter.
         localBundle.putString("sex", selectedPap.getSex());
         localBundle.putString("dateOfBirth", selectedPap.getDateOfBirth());
         localBundle.putString("physicalAddress", selectedPap.getPhysicalAddress());
-        localBundle.putString("designation", selectedPap.getDesignation());
+        localBundle.putString("papStatus", selectedPap.getPapStatus());
         localBundle.putString("plotReference", selectedPap.getPlotReference());
         localBundle.putString("photoUrl", selectedPap.getPapPhotoUrl());
         localBundle.putString("birthPlace", selectedPap.getBirthPlace());

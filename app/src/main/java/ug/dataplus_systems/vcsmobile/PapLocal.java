@@ -10,7 +10,7 @@ public class PapLocal {
     Context context;
     List<Crop> crops;
     String dateOfBirth;
-    String designation;
+    String papStatus;
     boolean hasCrops;
     boolean hasImprovements;
     String id;
@@ -62,8 +62,8 @@ public class PapLocal {
         return this.dateOfBirth;
     }
 
-    public String getDesignation() {
-        return this.designation;
+    public String getPapStatus() {
+        return this.papStatus;
     }
 
     public String getId() {
@@ -158,8 +158,8 @@ public class PapLocal {
         this.dateOfBirth = paramString;
     }
 
-    public void setDesignation(String paramString) {
-        this.designation = paramString;
+    public void setPapStatus(String paramString) {
+        this.papStatus = paramString;
     }
 
     public void setHasCrops(boolean paramBoolean) {
