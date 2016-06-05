@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by senyer on 6/2/2016.
  */
@@ -32,7 +34,7 @@ public class PapListPendingAdapter extends CursorRecyclerAdapter<PapListPendingA
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.pap_list_item_live, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.pap_list_item_pending, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(v);
 
@@ -43,15 +45,17 @@ public class PapListPendingAdapter extends CursorRecyclerAdapter<PapListPendingA
 
         private ItemClickListener clickListener;
         TextView tvPapName;
-        NetworkImageView ivPapPhoto;
-        TextView tvHHID;
+        CircleImageView ivPapPhoto;
+        View viewStatusIndicator;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvPapName = (TextView) itemView.findViewById(R.id.tv_papName);
-            ivPapPhoto = (NetworkImageView) itemView.findViewById(R.id.iv_papPhoto);
-            tvHHID = (TextView) itemView.findViewById(R.id.tv_papHHID);
+            ivPapPhoto = (CircleImageView) itemView.findViewById(R.id.iv_papPhoto);
+            viewStatusIndicator = (View) itemView.findViewById(R.id.view_status_indicator);
+
+
         }
 
         public void bindData(final Cursor cursor) {
