@@ -65,6 +65,11 @@
         <item>Temporary</item>
     </string-array>
 
+    <string-array name="crop_types">
+        <item>Perennial</item>
+        <item>Seasonal</item>
+    </string-array>
+
     <string-array name="currencies">
         <item>UGX</item>
         <item>USD</item>

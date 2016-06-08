@@ -18,7 +18,7 @@ public class PapLocal {
     boolean isComplete = false;
     boolean isMarried = false;
     boolean isResident;
-    String name;
+    String name = "";
     String occupation;
     List<String> otherPhotosUrlList;
     String papPhotoUrl;
@@ -31,6 +31,7 @@ public class PapLocal {
     String sex = "Male";
     String tribe;
     long wayLeaveSize;
+
 
     public String getLandUnits() {
         return landUnits;

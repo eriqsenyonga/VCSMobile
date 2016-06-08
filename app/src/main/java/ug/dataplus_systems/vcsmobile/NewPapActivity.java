@@ -142,22 +142,32 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
     private void savePapLocally() {
 
-        /*
-        preferabbly show progress bar as the pap is saved into the local sqlite db
-                * get the PAPLOCAL item and sace it to SQLite Database
-                *  redirect to Main Activity
-                */
+        /*preferabbly show progress bar as the pap is saved into the local sqlite db
+         * get the PAPLOCAL item and save it to SQLite Database
+         *  redirect to Main Activity
+         */
 
-        DbClass mDbClass = new DbClass(NewPapActivity.this);
-        mDbClass.open();
-        mDbClass.insertPap(papLocal);
-        mDbClass.close();
+        if ((papLocal.getName() == "") || (papLocal.getReferenceNumber() == "")) {
+            //if pap has no name, dont save or reference number
 
-        Toast.makeText(this, "Pap CREATED", Toast.LENGTH_LONG).show();
+            if (papLocal.getName() == "") {
+                Toast.makeText(this, "Please Enter Name", Toast.LENGTH_LONG).show();
+            }
 
-        Intent i = new Intent(NewPapActivity.this, MainActivity.class);
-        startActivity(i);
+            if (papLocal.getReferenceNumber() == "") {
+                Toast.makeText(this, "Please Enter Reference Number", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            DbClass mDbClass = new DbClass(NewPapActivity.this);
+            mDbClass.open();
+            mDbClass.insertPap(papLocal);
+            mDbClass.close();
 
+            Toast.makeText(this, "Pap CREATED", Toast.LENGTH_LONG).show();
+
+            Intent i = new Intent(NewPapActivity.this, MainActivity.class);
+            startActivity(i);
+        }
 
     }
 
@@ -231,6 +241,10 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
             b_left.setText("");
         } else {
             b_left.setText("Back");
+        }
+
+        if(!(whichScreenNowActive() == 6)){
+            b_right.setText("Next");
         }
     }
 

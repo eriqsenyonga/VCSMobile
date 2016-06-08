@@ -291,7 +291,7 @@ public class DbClass {
 
     public Cursor getLocalPapCursor() {
 
-        String sql = "SELECT " + KEY_ID + ", " + KEY_NAME + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_INFO;
+        String sql = "SELECT " + KEY_ID + ", " + KEY_NAME + ", " + KEY_COMPLETE + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_INFO;
 
         open();
         Cursor c = ourDatabase.rawQuery(sql, null);

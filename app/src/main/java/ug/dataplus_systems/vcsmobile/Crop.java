@@ -5,11 +5,22 @@ package ug.dataplus_systems.vcsmobile;
  */
 public class Crop {
 
-    String cropName;
-    long quantity;
-    String unit;
-    String otherDetails;
-    String cropType;
+    String cropName = "";
+    String quantity = "";
+    String unit = "";
+    String otherDetails = "";
+    String cropType ="";
+    String cropDescription = "";
+
+    public String getCropDescription() {
+        return cropDescription;
+    }
+
+    public void setCropDescription(String cropDescription) {
+        this.cropDescription = cropDescription;
+    }
+
+
 
 
 
@@ -21,11 +32,11 @@ public class Crop {
         this.cropName = cropName;
     }
 
-    public long getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

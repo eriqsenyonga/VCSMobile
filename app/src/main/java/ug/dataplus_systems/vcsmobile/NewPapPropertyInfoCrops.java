@@ -93,8 +93,10 @@ public class NewPapPropertyInfoCrops extends Fragment implements View.OnClickLis
 
             Toolbar dialogToolbar = (Toolbar) dialogView.findViewById(R.id.toolbar_dialog);
             final TextInputLayout tilCropName = (TextInputLayout) dialogView.findViewById(R.id.til_crop_name);
+            final TextInputLayout tilCropDescription = (TextInputLayout) dialogView.findViewById(R.id.til_crop_description);
             final TextInputLayout tilQuantity = (TextInputLayout) dialogView.findViewById(R.id.til_crop_quantity);
             final Spinner units = (Spinner) dialogView.findViewById(R.id.spinner_crop_units);
+            final Spinner spnCropType = (Spinner) dialogView.findViewById(R.id.spinner_crop_type);
             Button save = (Button) dialogView.findViewById(R.id.b_save_crop);
             Button cancel = (Button) dialogView.findViewById(R.id.b_cancel);
 
@@ -132,7 +134,9 @@ public class NewPapPropertyInfoCrops extends Fragment implements View.OnClickLis
                         Crop crop = new Crop();
 
                         crop.setCropName(tilCropName.getEditText().getText().toString());
-                        crop.setQuantity(Long.valueOf(tilQuantity.getEditText().getText().toString()));
+                        crop.setCropDescription(tilCropDescription.getEditText().getText().toString());
+                        crop.setCropType(spnCropType.getSelectedItem().toString());
+                        crop.setQuantity(tilQuantity.getEditText().getText().toString());
                         crop.setUnit(units.getSelectedItem().toString());
 
                         cropsHere.add(crop);
