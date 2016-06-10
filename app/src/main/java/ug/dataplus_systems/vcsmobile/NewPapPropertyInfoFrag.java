@@ -132,7 +132,7 @@ public class NewPapPropertyInfoFrag extends Fragment {
                 } else {
                     ROW = "0";
                 }
-                papLocal.setRightOfWaySize(mCC.valueConverter(ROW)); //turns it into db value with no decimals
+                papLocal.setRightOfWaySize(ROW); //turns it into db value with no decimals
                 newPapActivity.updatePapLocalItem(papLocal);
 
             }
@@ -155,7 +155,7 @@ public class NewPapPropertyInfoFrag extends Fragment {
                 } else {
                     wayleave = "0";
                 }
-                papLocal.setRightOfWaySize(mCC.valueConverter(wayleave)); //turns it into db value with no decimals
+                papLocal.setRightOfWaySize(wayleave); //turns it into db value with no decimals
                 newPapActivity.updatePapLocalItem(papLocal);
 
             }

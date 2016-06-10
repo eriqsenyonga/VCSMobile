@@ -84,7 +84,7 @@ public class CropsListAdapter extends RecyclerView.Adapter<CropsListAdapter.View
                 } else if (which == 2) {
                     //if delete is clicked
 
-                    Toast.makeText(context, "Delete Crop Coming soon", Toast.LENGTH_LONG).show();
+
 
                     openConfirmDeleteDialog(position);
                 }
@@ -101,6 +101,15 @@ public class CropsListAdapter extends RecyclerView.Adapter<CropsListAdapter.View
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Are you sure you want to delete this crop?");
         builder.setTitle("Delete Crop");
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {

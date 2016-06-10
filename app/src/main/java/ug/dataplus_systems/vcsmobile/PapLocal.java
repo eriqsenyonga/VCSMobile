@@ -21,16 +21,16 @@ public class PapLocal {
     String name = "";
     String occupation;
     List<String> otherPhotosUrlList;
-    String papPhotoUrl;
+    String papPhotoUriString;
     String papType = "Individual";
     String physicalAddress;
     String plotReference;
     String referenceNumber;
     String religion;
-    long rightOfWaySize;
+    String rightOfWaySize;
     String sex = "Male";
     String tribe;
-    long wayLeaveSize;
+    String wayLeaveSize;
 
 
     public String getLandUnits() {
@@ -87,8 +87,8 @@ public class PapLocal {
         return this.otherPhotosUrlList;
     }
 
-    public String getPapPhotoUrl() {
-        return this.papPhotoUrl;
+    public String getPapPhotoUriString() {
+        return this.papPhotoUriString;
     }
 
     public String getPapType() {
@@ -111,7 +111,7 @@ public class PapLocal {
         return this.religion;
     }
 
-    public long getRightOfWaySize() {
+    public String getRightOfWaySize() {
         return this.rightOfWaySize;
     }
 
@@ -123,7 +123,7 @@ public class PapLocal {
         return this.tribe;
     }
 
-    public long getWayLeaveSize() {
+    public String getWayLeaveSize() {
         return this.wayLeaveSize;
     }
 
@@ -203,8 +203,8 @@ public class PapLocal {
         this.otherPhotosUrlList = paramList;
     }
 
-    public void setPapPhotoUrl(String paramString) {
-        this.papPhotoUrl = paramString;
+    public void setPapPhotoUriString(String paramString) {
+        this.papPhotoUriString = paramString;
     }
 
     public void setPapType(String paramString) {
@@ -227,7 +227,7 @@ public class PapLocal {
         this.religion = paramString;
     }
 
-    public void setRightOfWaySize(long paramLong) {
+    public void setRightOfWaySize(String paramLong) {
         this.rightOfWaySize = paramLong;
     }
 
@@ -239,7 +239,7 @@ public class PapLocal {
         this.tribe = paramString;
     }
 
-    public void setWayLeaveSize(long paramLong) {
+    public void setWayLeaveSize(String paramLong) {
         this.wayLeaveSize = paramLong;
     }
 }

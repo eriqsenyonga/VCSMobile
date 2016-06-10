@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String LOGIN_URL_BAGZ = "http://bagz-vostro/vcs_prodn/mobi_login.php";
 
-    String LOGIN_URL_ERIC = "http://192.168.0.10/VcsMobileLoginAuth/loginAuth.php";
+    String LOGIN_URL_ERIC = "http://192.168.0.11/VcsMobileLoginAuth/loginAuth.php";
 
     public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
     ActionProcessButton btnSignIn;

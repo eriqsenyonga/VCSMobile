@@ -4,8 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Eriq on 12/3/2015.
@@ -53,8 +57,8 @@ public class DbClass {
     //column names for table trn_val_crop
     public static final String DATABASE_TABLE_TRN_VAL_CROP = "trn_val_crop";
     public static final String KEY_CROP_ID = "CROP_ID";
-    public static final String KEY_TYPE_ID = "TYPE_ID";
-    public static final String KEY_DESCRIPTION_ID = "DESC_ID";
+    public static final String KEY_CROP_TYPE_ID = "TYPE_ID";
+    public static final String KEY_CROP_DESCRIPTION_ID = "DESC_ID";
     public static final String KEY_UNIT_OF_MEASURE = "UNIT_MSR";
     public static final String KEY_QUANTITY = "QUANTITY";
     public static final String KEY_TOTAL = "TOTAL";
@@ -63,7 +67,7 @@ public class DbClass {
     //column names for table trn_val_impr
     public static final String DATABASE_TABLE_TRN_VAL_IMPR = "trn_val_impr";
     public static final String KEY_STRUCTURE_CATEGORY_ID = "STR_CATG";
-    public static final String KEY_STRUCTUTRE_SUB_CATEGORY = "STR_SUBCATG";
+    public static final String KEY_STRUCTUTRE_SUB_CATEGORY_ID = "STR_SUBCATG";
     public static final String KEY_AREA = "AREA";
     public static final String KEY_STRUCTURE_TOTAL = "STR_TOTAL";
     public static final String KEY_ROOF = "ROOF";
@@ -221,6 +225,8 @@ public class DbClass {
         cv.put(KEY_BIRTH_PLACE, papLocal.getBirthPlace());
         cv.put(KEY_REFERENCE_NO, papLocal.getPlotReference());
         cv.put(KEY_PAP_TYPE, papLocal.getPapType());
+        cv.put(KEY_PHOTO, papLocal.getPapPhotoUriString());
+        cv.put(KEY_IS_DELETED, "false");
 
         //since these are captured as Booleans and yet they are saved as TEXT in the database
         if (papLocal.isResident()) {
@@ -239,14 +245,111 @@ public class DbClass {
 
 
         //this method checks for the item in the table and returns its id
+        cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
         cv.put(KEY_TRIBE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_TRIBE, KEY_TRIBE, papLocal.getTribe()));
         cv.put(KEY_RELIGION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELIGION, KEY_RELIGION, papLocal.getReligion()));
         cv.put(KEY_OCCUPATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_OCCUPATION, KEY_OCCUPATION_NAME, papLocal.getOccupation()));
         cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
 
 
-        //insert the values into database
-        ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_INFO, null, cv);
+        //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
+
+
+        /*insert the values into database and get the id for the pap so as to be able to
+        insert crops and improvements in their respective tables
+        */
+
+        Long papId = ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_INFO, null, cv);
+
+
+        addPapLandInfoToDatabase(papId, papLocal);
+
+
+        if (!papLocal.getCrops().isEmpty()) {
+            //if pap has crops
+
+
+            addCropsToDatabase(papId, papLocal.getCrops());
+
+        }
+
+        if (!papLocal.getImprovements().isEmpty()) {
+            //if pap has improvements
+
+
+            addImprovementsToDatabase(papId, papLocal.getImprovements());
+
+        }
+
+
+    }
+
+    private void addPapLandInfoToDatabase(Long papId, PapLocal papLocal) {
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(KEY_PAP_ID, papId);
+        cv.put(KEY_RIGHT_OF_WAY_SIZE, papLocal.getRightOfWaySize());
+        cv.put(KEY_WAYLEAVE_SIZE, papLocal.getWayLeaveSize());
+
+
+    }
+
+    private void addCropsToDatabase(Long papId, List<Crop> crops) {
+
+
+        for (Crop crop : crops) {
+
+            ContentValues cv = new ContentValues();
+
+            cv.put(KEY_PAP_ID, papId);
+            cv.put(KEY_CROP_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_CROP, KEY_CROP, crop.getCropName()));
+            cv.put(KEY_CROP_TYPE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_CROP_TYPE, KEY_CROP_TYPE, crop.getCropType()));
+            cv.put(KEY_QUANTITY, crop.getQuantity());
+            cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, crop.getUnit()));
+            cv.put(KEY_IS_DELETED, "false");
+
+            //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
+
+
+            Long cropId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_CROP, null, cv);
+
+            Log.d("CROP ID", "" + cropId);
+
+
+        }
+    }
+
+    private void addImprovementsToDatabase(Long papId, List<Improvement> improvements) {
+
+
+        //TODO save improvements
+
+/*
+
+        for(Improvement improvement : improvements){
+
+            ContentValues cv =  new ContentValues();
+
+            cv.put(KEY_PAP_ID, papId);
+            cv.put(KEY_STRUCTURE_CATEGORY_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR, KEY_STRUCTURE_CATEGORY, improvement.getCategory()));
+            cv.put(, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_CROP_TYPE, KEY_CROP_TYPE, crop.getCropType()));
+            cv.put(KEY_QUANTITY, crop.getQuantity());
+            cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR,KEY_UNIT_OF_MEASURE, improvement.getUnit()));
+            cv.put(KEY_IS_DELETED, "false");
+
+            //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
+
+
+            Long cropId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_CROP, null, cv);
+
+            Log.d("CROP ID", "" + cropId);
+
+
+        }
+
+
+*/
 
 
     }
@@ -283,6 +386,8 @@ public class DbClass {
         ContentValues cv = new ContentValues();
         cv.put(columnNameToInsert, parameter);
         cv.put(KEY_IS_DELETED, "False");
+
+        //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
 
         return ourDatabase.insert(tableNameToBeInserted, null, cv);
 

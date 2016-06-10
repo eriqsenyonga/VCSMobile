@@ -33,7 +33,7 @@ public class ProjectInfoFragment extends Fragment {
 
     public static final String KEY_PROJECT_ID = "project_id";
 
-    String URL_GET_PROJECT_DETAILS = "http://192.168.0.10/VcsMobileLoginAuth/getProjectDetails.php";
+    String URL_GET_PROJECT_DETAILS = "http://192.168.0.11/VcsMobileLoginAuth/getProjectDetails.php";
 
     TextView tvProjectName, tvProjectCode, tvProjectClient, tvProjectObjective, tvProjectStartDate, tvProjectEndDate, tvProjectManager;
 

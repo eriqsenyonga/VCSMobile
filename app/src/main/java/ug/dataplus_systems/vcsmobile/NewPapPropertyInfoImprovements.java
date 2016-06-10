@@ -95,11 +95,11 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
             final TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
             final Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
 
-            TextInputLayout tilRoofType = (TextInputLayout) dialogView.findViewById(R.id.til_roof_type);
-            TextInputLayout tilWallsType = (TextInputLayout) dialogView.findViewById(R.id.til_walls_type);
-            TextInputLayout tilWindowsType = (TextInputLayout) dialogView.findViewById(R.id.til_windows_type);
-            TextInputLayout tilDoorsType = (TextInputLayout) dialogView.findViewById(R.id.til_doors_type);
-            TextInputLayout tilFloorType = (TextInputLayout) dialogView.findViewById(R.id.til_floor_type);
+            final TextInputLayout tilRoofType = (TextInputLayout) dialogView.findViewById(R.id.til_roof_type);
+            final TextInputLayout tilWallsType = (TextInputLayout) dialogView.findViewById(R.id.til_walls_type);
+            final TextInputLayout tilWindowsType = (TextInputLayout) dialogView.findViewById(R.id.til_windows_type);
+            final TextInputLayout tilDoorsType = (TextInputLayout) dialogView.findViewById(R.id.til_doors_type);
+            final TextInputLayout tilFloorType = (TextInputLayout) dialogView.findViewById(R.id.til_floor_type);
             Button save = (Button) dialogView.findViewById(R.id.b_save_improvement);
             Button cancel = (Button) dialogView.findViewById(R.id.b_cancel);
 
@@ -140,8 +140,13 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
 
                         improvement.setCategory(tilCategory.getEditText().getText().toString());
                         improvement.setSubCategory(spinnerSubCategory.getSelectedItem().toString());
-                        improvement.setArea(Double.valueOf(tilArea.getEditText().getText().toString()));
+                        improvement.setArea(tilArea.getEditText().getText().toString());
                         improvement.setUnit(spinnerUnits.getSelectedItem().toString());
+                        improvement.setRoof(tilRoofType.getEditText().getText().toString());
+                        improvement.setFloor(tilFloorType.getEditText().getText().toString());
+                        improvement.setWalls(tilWallsType.getEditText().getText().toString());
+                        improvement.setWindows(tilWindowsType.getEditText().getText().toString());
+                        improvement.setDoors(tilDoorsType.getEditText().getText().toString());
 
                         improvementsHere.add(improvement);
 

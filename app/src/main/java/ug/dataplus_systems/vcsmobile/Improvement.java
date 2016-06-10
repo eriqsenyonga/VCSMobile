@@ -6,11 +6,10 @@ package ug.dataplus_systems.vcsmobile;
 public class Improvement {
 
 
-
     String improvementName;
     String category;
     String subCategory;
-    double area;
+    String area;
     String unit;
     long total;
     String roof;
@@ -44,11 +43,11 @@ public class Improvement {
         this.subCategory = subCategory;
     }
 
-    public double getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(double area) {
+    public void setArea(String area) {
         this.area = area;
     }
 

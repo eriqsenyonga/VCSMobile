@@ -6,12 +6,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,19 +15,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.HashSet;
-import java.util.Iterator;
-
-import nl.changer.polypicker.Config;
-import nl.changer.polypicker.ImagePickerActivity;
-import nl.changer.polypicker.utils.ImageInternalFetcher;
 
 import com.kbeanie.imagechooser.api.ChooserType;
 import com.kbeanie.imagechooser.api.ChosenImage;
@@ -50,6 +39,8 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     View v;
     ImageView ivMainPapPhoto;
     ImageButton bAddOtherPhotos;
+    NewPapActivity newPapActivity;
+    PapLocal papLocal;
     //  private ViewGroup mOtherImagesContainer;
     HashSet<Uri> otherPhotos = new HashSet<Uri>();
     Uri mainPhotoUri;
@@ -77,6 +68,9 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        newPapActivity = (NewPapActivity) getActivity();
+        papLocal = newPapActivity.getPapLocalItem();
 
         ivMainPapPhoto.setOnClickListener(this);
         bAddOtherPhotos.setOnClickListener(this);
@@ -210,6 +204,10 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
 
                     ivMainPapPhoto.setImageURI(Uri.parse(new File(image
                             .getFileThumbnail()).toString()));
+
+                    papLocal.setPapPhotoUriString(image.getFilePathOriginal());
+
+                    newPapActivity.updatePapLocalItem(papLocal);
 
                     int wdpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
                     int htpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
