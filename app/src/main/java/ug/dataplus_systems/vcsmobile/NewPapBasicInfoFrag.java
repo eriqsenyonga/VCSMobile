@@ -31,7 +31,7 @@ public class NewPapBasicInfoFrag extends Fragment {
     Calendar c;
     CheckBox cbIsMarried;
     Button dobButton;
-    String firstName = "", physicalAddress = "";
+    String firstName = "", physicalAddress = "", birthPlace = "";
     ConversionClass mCC;
     NewPapActivity newPapActivity;
     String otherNames = "";
@@ -44,6 +44,7 @@ public class NewPapBasicInfoFrag extends Fragment {
     TextInputLayout tilOtherNames;
     TextInputLayout tilPhysicalAddress;
     TextInputLayout tilSurname;
+    TextInputLayout tilBirthPlace;
 
     public NewPapBasicInfoFrag() {
         // Required empty public constructor
@@ -62,6 +63,7 @@ public class NewPapBasicInfoFrag extends Fragment {
         tilSurname = (TextInputLayout) rootView.findViewById(R.id.til_surname);
         tilOtherNames = (TextInputLayout) rootView.findViewById(R.id.til_othernames);
         tilPhysicalAddress = (TextInputLayout) rootView.findViewById(R.id.til_physical_address);
+        tilBirthPlace = (TextInputLayout) rootView.findViewById(R.id.til_birth_palce);
         spnSex = (Spinner) rootView.findViewById(R.id.spinner_sex);
         spnPapType = (Spinner) rootView.findViewById(R.id.spinner_pap_type);
         cbIsMarried = (CheckBox) rootView.findViewById(R.id.cb_is_married);
@@ -166,6 +168,29 @@ public class NewPapBasicInfoFrag extends Fragment {
                     physicalAddress = "";
                 }
                 papLocal.setPhysicalAddress(physicalAddress);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilBirthPlace.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilBirthPlace.getEditText().getText().toString().equals("")) {
+                    birthPlace = tilBirthPlace.getEditText().getText().toString();
+                } else {
+                    birthPlace = "";
+                }
+                papLocal.setBirthPlace(birthPlace);
                 newPapActivity.updatePapLocalItem(papLocal);
 
             }

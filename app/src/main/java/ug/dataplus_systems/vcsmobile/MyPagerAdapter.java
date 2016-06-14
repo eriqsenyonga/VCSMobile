@@ -113,7 +113,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        // TODO Auto-generated method stub
+
 
         if (whichViewPager == PROJECT_DETAILS_VIEWPAGER) {
             if (position == 0) {

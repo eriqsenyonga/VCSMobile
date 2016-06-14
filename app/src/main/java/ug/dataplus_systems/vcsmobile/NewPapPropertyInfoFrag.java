@@ -23,6 +23,7 @@ public class NewPapPropertyInfoFrag extends Fragment {
     CheckBox cbHasCrops;
     CheckBox cbHasImprovements;
     CheckBox cbIsResident;
+    CheckBox cbIsTitled;
     NewPapActivity newPapActivity;
     PapLocal papLocal;
     View rv;
@@ -32,7 +33,11 @@ public class NewPapPropertyInfoFrag extends Fragment {
     TextInputLayout tilROW;
     TextInputLayout tilRefNo;
     TextInputLayout tilWayleave;
-    String plotRef = "", refNo="", ROW="", wayleave="";
+    TextInputLayout tilLandRate;
+    TextInputLayout tilLandType;
+    TextInputLayout tilDiminution;
+    TextInputLayout tilShareOfLand;
+    String plotRef = "", refNo="", ROW="", wayleave="", landRate = "", landType = "", dimunition = "", shareOfLand = "";
     ConversionClass mCC;
 
 
@@ -51,11 +56,16 @@ public class NewPapPropertyInfoFrag extends Fragment {
         tilRefNo = (TextInputLayout) rv.findViewById(R.id.til_ref_no);
         tilROW = (TextInputLayout) rv.findViewById(R.id.til_right_of_way_size);
         tilWayleave = (TextInputLayout) rv.findViewById(R.id.til_wayleave_size);
+        tilLandRate = (TextInputLayout) rv.findViewById(R.id.til_land_rate);
+        tilLandType = (TextInputLayout) rv.findViewById(R.id.til_land_type);
+        tilShareOfLand = (TextInputLayout) rv.findViewById(R.id.til_share_of_land);
+        tilDiminution = (TextInputLayout) rv.findViewById(R.id.til_diminution);
         spnDesignation = (Spinner) rv.findViewById(R.id.spinner_pap_designation);
         spnUnits = (Spinner) rv.findViewById(R.id.spinner_land_units);
         cbIsResident = (CheckBox) rv.findViewById(R.id.cb_is_resident);
         cbHasCrops = (CheckBox) rv.findViewById(R.id.cb_has_crops);
         cbHasImprovements = (CheckBox) rv.findViewById(R.id.cb_has_improvements);
+        cbIsTitled = (CheckBox) rv.findViewById(R.id.cb_is_titled);
 
 
         return rv;
@@ -155,7 +165,100 @@ public class NewPapPropertyInfoFrag extends Fragment {
                 } else {
                     wayleave = "0";
                 }
-                papLocal.setRightOfWaySize(wayleave); //turns it into db value with no decimals
+                papLocal.setWayLeaveSize(wayleave);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+
+        tilLandRate.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilLandRate.getEditText().getText().toString().equals("")) {
+                    landRate = tilLandRate.getEditText().getText().toString();
+                } else {
+                    landRate = "";
+                }
+                papLocal.setLandRate(landRate);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilLandType.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilLandType.getEditText().getText().toString().equals("")) {
+                    landType = tilLandType.getEditText().getText().toString();
+                } else {
+                    landType = "";
+                }
+                papLocal.setLandType(landType);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilDiminution.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilDiminution.getEditText().getText().toString().equals("")) {
+                    dimunition = tilDiminution.getEditText().getText().toString();
+                } else {
+                    dimunition = "";
+                }
+                papLocal.setDiminution(dimunition);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilShareOfLand.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilShareOfLand.getEditText().getText().toString().equals("")) {
+                    shareOfLand = tilShareOfLand.getEditText().getText().toString();
+                } else {
+                    shareOfLand = "";
+                }
+                papLocal.setShareOfLand(shareOfLand);
                 newPapActivity.updatePapLocalItem(papLocal);
 
             }
@@ -197,6 +300,18 @@ public class NewPapPropertyInfoFrag extends Fragment {
                     papLocal.setIsResident(true);
                 } else {
                     papLocal.setIsResident(false);
+                }
+
+                newPapActivity.updatePapLocalItem(papLocal);
+            }
+        });
+
+        cbIsTitled.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View paramAnonymousView) {
+                if (cbIsResident.isChecked()) {
+                    papLocal.setIsTitled(true);
+                } else {
+                    papLocal.setIsTitled(false);
                 }
 
                 newPapActivity.updatePapLocalItem(papLocal);

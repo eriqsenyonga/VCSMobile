@@ -166,7 +166,7 @@
                         android:id="@+id/et_floor_type"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Doors Type"
+                        android:hint="Floor Type"
                         android:inputType="textCapWords"
                         android:textColor="#000000" />
 

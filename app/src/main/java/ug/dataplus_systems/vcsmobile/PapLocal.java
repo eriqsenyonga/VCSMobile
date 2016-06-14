@@ -31,6 +31,11 @@ public class PapLocal {
     String sex = "Male";
     String tribe;
     String wayLeaveSize;
+    String landType;
+    String landRate;
+    String diminution;
+    String shareOfLand;
+    boolean isTitledLand = false;
 
 
     public String getLandUnits() {
@@ -147,6 +152,46 @@ public class PapLocal {
         return this.isResident;
     }
 
+    public boolean isTitledLand(){return  this.isTitledLand;}
+
+    public String getShareOfLand() {
+        return shareOfLand;
+    }
+
+    public void setShareOfLand(String shareOfLand) {
+        this.shareOfLand = shareOfLand;
+    }
+
+    public String getDiminution() {
+        return diminution;
+    }
+
+    public void setDiminution(String diminution) {
+        this.diminution = diminution;
+    }
+
+    public String getLandRate() {
+        return landRate;
+    }
+
+    public void setLandRate(String landRate) {
+        this.landRate = landRate;
+    }
+
+    public String getLandType() {
+        return landType;
+    }
+
+    public void setLandType(String landType) {
+        this.landType = landType;
+    }
+
+    public void setIsTitled(boolean paramBoolean){
+
+        this.isTitledLand = paramBoolean;
+
+    }
+
     public void setBirthPlace(String paramString) {
         this.birthPlace = paramString;
     }
@@ -239,7 +284,7 @@ public class PapLocal {
         this.tribe = paramString;
     }
 
-    public void setWayLeaveSize(String paramLong) {
-        this.wayLeaveSize = paramLong;
+    public void setWayLeaveSize(String paramString) {
+        this.wayLeaveSize = paramString;
     }
 }

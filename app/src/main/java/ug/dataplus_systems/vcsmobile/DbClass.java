@@ -31,6 +31,7 @@ public class DbClass {
     public static final String KEY_PROJECT_ID = "PROJ_ID";
     public static final String KEY_CATEGORY = "CATG";
     public static final String KEY_SUB_CATEGORY = "SUB_CATG";
+    public static final String KEY_UNIT_OF_MEASURE = "UNIT_MSR";
 
 
     //column names for table trn_bio_pap_info
@@ -59,17 +60,17 @@ public class DbClass {
     public static final String KEY_CROP_ID = "CROP_ID";
     public static final String KEY_CROP_TYPE_ID = "TYPE_ID";
     public static final String KEY_CROP_DESCRIPTION_ID = "DESC_ID";
-    public static final String KEY_UNIT_OF_MEASURE = "UNIT_MSR";
+
     public static final String KEY_QUANTITY = "QUANTITY";
     public static final String KEY_TOTAL = "TOTAL";
 
 
     //column names for table trn_val_impr
     public static final String DATABASE_TABLE_TRN_VAL_IMPR = "trn_val_impr";
-    public static final String KEY_STRUCTURE_CATEGORY_ID = "STR_CATG";
-    public static final String KEY_STRUCTUTRE_SUB_CATEGORY_ID = "STR_SUBCATG";
-    public static final String KEY_AREA = "AREA";
-    public static final String KEY_STRUCTURE_TOTAL = "STR_TOTAL";
+    public static final String KEY_STRUCTURE_NAME_ID = "STR_CATG";
+    public static final String KEY_STRUCTURE_CATEGORY_ID = "STR_SUBCATG";
+    public static final String KEY_STRUCTURE_AREA = "STR_AREA";
+    public static final String KEY_STRUCTURE_VALUE = "STR_TOTAL";
     public static final String KEY_ROOF = "ROOF";
     public static final String KEY_WALLS = "WALLS";
     public static final String KEY_WINDOWS = "WINDOWS";
@@ -86,7 +87,7 @@ public class DbClass {
     public static final String KEY_WAYLEAVE_VALUE = "WL_VALUE";
     public static final String KEY_RIGHT_OF_WAY_VALUE = "ROW_VALUE";
     public static final String KEY_LAND_TYPE_ID = "LND_TYPE";
-    public static final String KEY_IS_TITLED = "synced";
+    public static final String KEY_IS_TITLED = "IS_TITLED";
 
     //column names for table mst_val_crop
     public static final String DATABASE_TABLE_MST_VAL_CROP = "mst_val_crop";
@@ -106,7 +107,7 @@ public class DbClass {
 
     //column names for table mst_val_str
     public static final String DATABASE_TABLE_MST_VAL_STR = "mst_val_str";
-    public static final String KEY_STRUCTURE_TYPE = "STR_TYPE";
+    public static final String KEY_STRUCTURE_NAME = "STR_TYPE";
 
     //column names for table mst_val_str_catg
     public static final String DATABASE_TABLE_MST_VAL_STR_CATG = "mst_val_str_catg";
@@ -291,7 +292,25 @@ public class DbClass {
         cv.put(KEY_PAP_ID, papId);
         cv.put(KEY_RIGHT_OF_WAY_SIZE, papLocal.getRightOfWaySize());
         cv.put(KEY_WAYLEAVE_SIZE, papLocal.getWayLeaveSize());
+        cv.put(KEY_LAND_TYPE, papLocal.getLandType());
+        cv.put(KEY_SHARE_OF_LAND, papLocal.getShareOfLand());
+        cv.put(KEY_DIMINUTION, papLocal.getDiminution());
+        cv.put(KEY_LAND_RATE, papLocal.getLandRate());
 
+        cv.put(KEY_LAND_TYPE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_LAND, KEY_LAND_TYPE, papLocal.getLandType()));
+
+        cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, papLocal.getLandUnits()));
+
+        if (papLocal.isTitledLand()) {
+            cv.put(KEY_IS_TITLED, "true");
+        } else {
+
+            cv.put(KEY_IS_TITLED, "false");
+        }
+
+        //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
+
+        Long landId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_LAND, null, cv);
 
     }
 
@@ -325,31 +344,34 @@ public class DbClass {
 
         //TODO save improvements
 
-/*
 
-        for(Improvement improvement : improvements){
+        for (Improvement improvement : improvements) {
 
-            ContentValues cv =  new ContentValues();
+            ContentValues cv = new ContentValues();
 
             cv.put(KEY_PAP_ID, papId);
-            cv.put(KEY_STRUCTURE_CATEGORY_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR, KEY_STRUCTURE_CATEGORY, improvement.getCategory()));
-            cv.put(, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_CROP_TYPE, KEY_CROP_TYPE, crop.getCropType()));
-            cv.put(KEY_QUANTITY, crop.getQuantity());
-            cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR,KEY_UNIT_OF_MEASURE, improvement.getUnit()));
+            cv.put(KEY_STRUCTURE_NAME_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR, KEY_STRUCTURE_NAME, improvement.getCategory()));
+            cv.put(KEY_STRUCTURE_CATEGORY_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR_CATG, KEY_STRUCTURE_CATEGORY, improvement.getSubCategory()));
+            cv.put(KEY_STRUCTURE_AREA, improvement.getArea());
+            cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, improvement.getUnit()));
+            cv.put(KEY_ROOF, improvement.getRoof());
+            cv.put(KEY_WALLS, improvement.getWalls());
+            cv.put(KEY_WINDOWS, improvement.getWindows());
+            cv.put(KEY_DOORS, improvement.getDoors());
+            cv.put(KEY_FLOOR, improvement.getFloor());
+            cv.put(KEY_STRUCTURE_VALUE, improvement.getTotal());
             cv.put(KEY_IS_DELETED, "false");
+            cv.put(KEY_OTHER_DETAILS, improvement.getOtherDetails());
 
             //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
 
 
-            Long cropId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_CROP, null, cv);
+            Long improvementId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_IMPR, null, cv);
 
-            Log.d("CROP ID", "" + cropId);
+            Log.d("IMPROVEMENT ID", "" + improvementId);
 
 
         }
-
-
-*/
 
 
     }
