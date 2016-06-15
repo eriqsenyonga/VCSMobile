@@ -35,7 +35,7 @@ public class PapListLive extends Fragment {
 
 
     public static final String KEY_PROJECT_ID = "project_id";
-    String URL_GET_PAP_LIST = "http://192.168.0.3/VcsMobile/getPapList.php";
+    String URL_GET_PAP_LIST = "VcsMobile/getPapList.php";
     PapListLiveAdapter adapter;
     MyApplicationClass helper = MyApplicationClass.getInstance();
     RecyclerView.LayoutManager layoutManager;
@@ -93,7 +93,7 @@ public class PapListLive extends Fragment {
 
     private void grabPapsToShow() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_PAP_LIST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, helper.getGeneralUrl() + URL_GET_PAP_LIST,
                 new Response.Listener<String>() {
 
                     @Override

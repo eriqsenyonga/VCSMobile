@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String LOGIN_URL_BAGZ = "http://bagz-vostro/vcs_prodn/mobi_login.php";
 
-    String LOGIN_URL_ERIC = "http://192.168.0.3/VcsMobileLoginAuth/loginAuth.php";
+    String LOGIN_URL_ERIC = "VcsMobileLoginAuth/loginAuth.php";
 
     public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
     ActionProcessButton btnSignIn;
@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean verifyDetails(final String username, final String password) {
         //method to verify the input details with the server
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL_ERIC,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, helper.getGeneralUrl() + LOGIN_URL_ERIC,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

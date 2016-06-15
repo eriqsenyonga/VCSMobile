@@ -18,6 +18,7 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Add Improvement"
+            app:navigationIcon="@drawable/ic_structure"
             app:titleTextColor="#ffffff" />
 
         <ScrollView

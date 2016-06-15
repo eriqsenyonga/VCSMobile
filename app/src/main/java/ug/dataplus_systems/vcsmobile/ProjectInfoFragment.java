@@ -33,7 +33,7 @@ public class ProjectInfoFragment extends Fragment {
 
     public static final String KEY_PROJECT_ID = "project_id";
 
-    String URL_GET_PROJECT_DETAILS = "http://192.168.0.3/VcsMobileLoginAuth/getProjectDetails.php";
+    String URL_GET_PROJECT_DETAILS = "VcsMobile/getProjectDetails.php";
 
     TextView tvProjectName, tvProjectCode, tvProjectClient, tvProjectObjective, tvProjectStartDate, tvProjectEndDate, tvProjectManager;
 
@@ -66,7 +66,7 @@ public class ProjectInfoFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_GET_PROJECT_DETAILS,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, helper.getGeneralUrl() + URL_GET_PROJECT_DETAILS,
                 new Response.Listener<String>() {
 
                     @Override

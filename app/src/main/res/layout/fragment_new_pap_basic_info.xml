@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/sex"
-                android:paddingLeft="@dimen/activity_vertical_margin"/>
+                android:paddingLeft="@dimen/activity_vertical_margin" />
 
 
         </LinearLayout>
@@ -111,6 +111,38 @@
 
         </LinearLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:inputType="phone" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,26 +162,29 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/pap_types"
-                android:paddingLeft="@dimen/activity_vertical_margin"/>
+                android:paddingLeft="@dimen/activity_vertical_margin" />
 
 
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_physical_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
-
-        <EditText
+            android:id="@+id/til_physical_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Physical Address"
-            android:inputType="textCapWords" />
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Physical Address"
+                android:inputType="textCapWords" />
 
 
-    </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>
+
+
+
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_birth_palce"
@@ -168,20 +203,17 @@
         </android.support.design.widget.TextInputLayout>
 
 
-
-            <CheckBox
-                android:id="@+id/cb_is_married"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="false"
-                android:text="Is Married"
-                android:textSize="18sp"
-                />
+        <CheckBox
+            android:id="@+id/cb_is_married"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Is Married"
+            android:textSize="18sp" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 </ScrollView>
