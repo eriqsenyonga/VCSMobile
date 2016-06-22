@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/tv_plot_no_road"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prince Charles Drive"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#025196"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_village"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Namilyango"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tv_district"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Kabarole"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

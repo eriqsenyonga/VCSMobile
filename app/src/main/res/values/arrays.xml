@@ -81,4 +81,28 @@
         <item>Delete Pap</item>
     </string-array>
 
+
+    <string-array name="districts">
+        <item>Arua</item>
+        <item>Kampala</item>
+        <item>Yumbe</item>
+    </string-array>
+
+    <string-array name="counties">
+        <item>Buloba</item>
+        <item>Kiira</item>
+        <item>Yumbe</item>
+    </string-array>
+
+    <string-array name="sub_counties">
+        <item>Buloba A</item>
+        <item>Kiira B</item>
+        <item>Yumbe C</item>
+    </string-array>
+
+    <string-array name="villages">
+        <item>Makerere</item>
+        <item>Mukonja</item>
+        <item>Mbalwa</item>
+    </string-array>
 </resources>

@@ -14,7 +14,7 @@ public class MyApplicationClass extends Application {
     private RequestQueue mRequestQueue;
     private static MyApplicationClass mInstance;
     public static final String TAG = MyApplicationClass.class.getName();
-    private String generalUrl = "http://192.168.0.4/";
+    private String generalUrl = "http://172.20.10.9/";
 
 
     @Override
@@ -42,7 +42,7 @@ public class MyApplicationClass extends Application {
         mRequestQueue.cancelAll(TAG);
     }
 
-    public String getGeneralUrl(){
+    public String getGeneralUrl() {
         return generalUrl;
     }
 }

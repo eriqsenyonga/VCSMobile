@@ -63,7 +63,7 @@ public class NewPapBasicInfoFrag extends Fragment {
         tilSurname = (TextInputLayout) rootView.findViewById(R.id.til_surname);
         tilOtherNames = (TextInputLayout) rootView.findViewById(R.id.til_othernames);
         tilPhysicalAddress = (TextInputLayout) rootView.findViewById(R.id.til_physical_address);
-        tilBirthPlace = (TextInputLayout) rootView.findViewById(R.id.til_birth_palce);
+        tilBirthPlace = (TextInputLayout) rootView.findViewById(R.id.til_birth_place);
         spnSex = (Spinner) rootView.findViewById(R.id.spinner_sex);
         spnPapType = (Spinner) rootView.findViewById(R.id.spinner_pap_type);
         cbIsMarried = (CheckBox) rootView.findViewById(R.id.cb_is_married);

@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_dialog"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/ic_structure"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="Add Improvement"
+        app:titleTextColor="#ffffff" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_dialog"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Add Improvement"
-            app:navigationIcon="@drawable/ic_structure"
-            app:titleTextColor="#ffffff" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,7 +84,6 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="4dp"
                     android:entries="@array/land_size_units" />
-
 
 
                 <android.support.design.widget.TextInputLayout
@@ -209,10 +202,12 @@
 
             </LinearLayout>
 
-            </LinearLayout>
 
-        </ScrollView>
+        </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</android.support.v7.widget.CardView>
+
+
+</LinearLayout>
+

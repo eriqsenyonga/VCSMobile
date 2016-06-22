@@ -36,6 +36,8 @@ public class PapLocal {
     String diminution;
     String shareOfLand;
     boolean isTitledLand = false;
+    List<Address> papAddresses;
+    List<FamilyMember> papFamilyMembers;
 
 
     public String getLandUnits() {
@@ -53,7 +55,26 @@ public class PapLocal {
 
         crops = new ArrayList();
         improvements = new ArrayList();
+        papAddresses = new ArrayList();
+        papFamilyMembers = new ArrayList();
+
         this.context = paramContext;
+    }
+
+    public List<FamilyMember> getPapFamilyMembers() {
+        return papFamilyMembers;
+    }
+
+    public void setPapFamilyMembers(List<FamilyMember> papFamilyMembers) {
+        this.papFamilyMembers = papFamilyMembers;
+    }
+
+    public List<Address> getPapAddresses() {
+        return papAddresses;
+    }
+
+    public void setPapAddresses(List<Address> papAddresses) {
+        this.papAddresses = papAddresses;
     }
 
     public String getBirthPlace() {
@@ -152,7 +173,9 @@ public class PapLocal {
         return this.isResident;
     }
 
-    public boolean isTitledLand(){return  this.isTitledLand;}
+    public boolean isTitledLand() {
+        return this.isTitledLand;
+    }
 
     public String getShareOfLand() {
         return shareOfLand;
@@ -186,7 +209,7 @@ public class PapLocal {
         this.landType = landType;
     }
 
-    public void setIsTitled(boolean paramBoolean){
+    public void setIsTitled(boolean paramBoolean) {
 
         this.isTitledLand = paramBoolean;
 

@@ -51,7 +51,7 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         viewPager.setAdapter(adapter);
 
-        viewPager.setOffscreenPageLimit(6);
+        viewPager.setOffscreenPageLimit(7);
 
         b_right.setOnClickListener(this);
 
@@ -67,7 +67,8 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
     private void showOrHideFab() {
 
         if (viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_CROPS ||
-                viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
+                viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS ||
+                viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_ADDRESSES) {
 
             fab.show();
 
@@ -96,13 +97,13 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
 
                 setCurrentItem(newPageIndex, true);
-                tv_step_number.setText("Step " + (newPageIndex + 1) + " of 7");
+                tv_step_number.setText("Step " + (newPageIndex + 1) + " of 8");
                 b_left.setVisibility(View.VISIBLE);
 
                 setStepTitle(newPageIndex);
 
-                if (whichScreenNowActive() == 6) {
-                    tv_step_number.setText("Step 7 of 7");
+                if (whichScreenNowActive() == 8) {
+                    tv_step_number.setText("Step 8 of 8");
 
                     b_right.setText("Finish");
                 } else {
@@ -208,19 +209,24 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         if (pageIndex == 1) {
             tv_step_title.setText("Property Info");
         }
-        if (pageIndex == 2) {
+
+        if(pageIndex == 2){
+            tv_step_title.setText("Addresses");
+        }
+
+        if (pageIndex == 3) {
             tv_step_title.setText("Crops");
         }
-        if (pageIndex == 3) {
+        if (pageIndex == 4) {
             tv_step_title.setText("Improvements");
         }
-        if (pageIndex == 4) {
+        if (pageIndex == 5) {
             tv_step_title.setText("Other Details");
         }
-        if (pageIndex == 5) {
+        if (pageIndex == 6) {
             tv_step_title.setText("Photos");
         }
-        if (pageIndex == 6) {
+        if (pageIndex == 7) {
             tv_step_title.setText("Preview");
         }
 
@@ -231,19 +237,19 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         int currentPageIndex = viewPager.getCurrentItem();
         int newPageIndex = currentPageIndex - 1;
         setCurrentItem(newPageIndex, true);
-        tv_step_number.setText("Step " + (newPageIndex + 1) + " of 7");
+        tv_step_number.setText("Step " + (newPageIndex + 1) + " of 8");
 
         setStepTitle(newPageIndex);
 
 
         if (whichScreenNowActive() == 0) {
-            tv_step_number.setText("Step 1 of 7");
+            tv_step_number.setText("Step 1 of 8");
             b_left.setText("");
         } else {
             b_left.setText("Back");
         }
 
-        if(!(whichScreenNowActive() == 6)){
+        if(!(whichScreenNowActive() == 7)){
             b_right.setText("Next");
         }
     }

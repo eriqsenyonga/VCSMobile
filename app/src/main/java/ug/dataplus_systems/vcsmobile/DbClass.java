@@ -36,7 +36,7 @@ public class DbClass {
 
     //column names for table trn_bio_pap_info
     public static final String DATABASE_TABLE_TRN_BIO_PAP_INFO = "trn_bio_pap_info";
-    public static final String KEY_NAME = "NAME";
+    public static final String KEY_NAME = "PAP_NAME";
     public static final String KEY_DATE_OF_BIRTH = "DOB";
     public static final String KEY_SEX = "SEX";
     public static final String KEY_PLOT_REFERENCE = "PLOT_REF";
@@ -52,8 +52,10 @@ public class DbClass {
     public static final String KEY_DESIGNATION = "DESIGN";
     public static final String KEY_PHOTO = "PHOTO";
     public static final String KEY_PAP_TYPE = "PAP_TYPE";
-    public static final String KEY_COMPLETE = "complete";
-    public static final String KEY_SYNCED = "synced";
+    public static final String KEY_COMPLETE = "COMPLETE";
+    public static final String KEY_SYNCED = "SYNCED";
+   
+    public static final String KEY_OTHER_PHONE_NO = "OTHR_PHONE_NO";
 
     //column names for table trn_val_crop
     public static final String DATABASE_TABLE_TRN_VAL_CROP = "trn_val_crop";
@@ -184,7 +186,7 @@ public class DbClass {
 
     // details of the database that is, database name and version
     private static final String DATABASE_NAME = "vcs_db_android.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     private DbHelper ourHelper; // instance of the DbHelper class
     private Context ourContext;
@@ -438,7 +440,7 @@ public class DbClass {
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-            //setForcedUpgrade();
+          //  setForcedUpgrade();
         }
 
 
