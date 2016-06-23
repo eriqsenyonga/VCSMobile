@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Step 1 of 8" />
+            android:text="Step 1 of 9" />
 
 
         <Button

@@ -230,6 +230,23 @@ public class ConversionClass {
 		return formatted;
 	}
 
+
+	public Date returnDateObjectFromDisplayString(String displayString){
+
+		Date date = null;
+
+		try {
+			 date = sdf4Display.parse(displayString);
+			return date;
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return date;
+
+	}
+
 	public Long dateForAlarmManager(String date) {
 
 		Long dateInMillis = null;

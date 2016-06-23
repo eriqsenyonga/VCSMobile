@@ -69,7 +69,7 @@
                 android:id="@+id/til_relation_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
                     android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                 android:id="@+id/til_place_of_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
                     android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                 android:id="@+id/til_religion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="8dp">
 
                 <AutoCompleteTextView
                     android:layout_width="match_parent"
@@ -175,7 +175,7 @@
                     android:background="@color/primary_500" />
 
                 <Button
-                    android:id="@+id/b_save_improvement"
+                    android:id="@+id/b_save"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
