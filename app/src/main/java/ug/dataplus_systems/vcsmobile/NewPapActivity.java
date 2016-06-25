@@ -98,13 +98,13 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
 
                 setCurrentItem(newPageIndex, true);
-                tv_step_number.setText("Step " + (newPageIndex + 1) + " of 9");
+                tv_step_number.setText("Step " + (newPageIndex + 1) + " of 8");
                 b_left.setVisibility(View.VISIBLE);
 
                 setStepTitle(newPageIndex);
 
-                if (whichScreenNowActive() == 8) {
-                    tv_step_number.setText("Step 9 of 9");
+                if (whichScreenNowActive() == 7) {
+                    tv_step_number.setText("Step 8 of 8");
 
                     b_right.setText("Finish");
                 } else {
@@ -127,18 +127,6 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
         }
 
-   /*     if (v == fab) {
-
-           if (viewPager.getCurrentItem() == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
-                //if improvements page is being shown, show new improvement dialog
-
-                showDialogFor(PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS);
-
-            }
-
-
-        }
-        */
 
     }
 
@@ -173,30 +161,6 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-  /*  private void showDialogFor(int which) {
-
-        LayoutInflater inflater = LayoutInflater.from(this);
-
-        if (which == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_CROPS) {
-
-
-
-        } else if (which == PagerAdapterNewPap.NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
-
-            View dialogView = inflater.inflate(R.layout.dialog_new_improvement, null);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setView(dialogView);
-
-            final Dialog d = builder.create();
-
-            d.show();
-        }
-
-
-    }
-    */
 
     public int whichScreenNowActive() {
         return viewPager.getCurrentItem();
@@ -226,13 +190,11 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         if (pageIndex == 5) {
             tv_step_title.setText("Improvements");
         }
+
         if (pageIndex == 6) {
-            tv_step_title.setText("Other Details");
-        }
-        if (pageIndex == 7) {
             tv_step_title.setText("Photos");
         }
-        if (pageIndex == 8) {
+        if (pageIndex == 7) {
             tv_step_title.setText("Preview");
         }
 
@@ -243,19 +205,19 @@ public class NewPapActivity extends AppCompatActivity implements View.OnClickLis
         int currentPageIndex = viewPager.getCurrentItem();
         int newPageIndex = currentPageIndex - 1;
         setCurrentItem(newPageIndex, true);
-        tv_step_number.setText("Step " + (newPageIndex + 1) + " of 9");
+        tv_step_number.setText("Step " + (newPageIndex + 1) + " of 8");
 
         setStepTitle(newPageIndex);
 
 
         if (whichScreenNowActive() == 0) {
-            tv_step_number.setText("Step 1 of 9");
+            tv_step_number.setText("Step 1 of 8");
             b_left.setText("");
         } else {
             b_left.setText("Back");
         }
 
-        if (!(whichScreenNowActive() == 8)) {
+        if (!(whichScreenNowActive() == 7)) {
             b_right.setText("Next");
         }
     }

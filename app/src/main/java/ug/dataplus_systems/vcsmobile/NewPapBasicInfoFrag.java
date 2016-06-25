@@ -42,9 +42,11 @@ public class NewPapBasicInfoFrag extends Fragment {
     String surName = "";
     TextInputLayout tilFirstName;
     TextInputLayout tilOtherNames;
-    TextInputLayout tilPhysicalAddress;
+
     TextInputLayout tilSurname;
     TextInputLayout tilBirthPlace;
+    TextInputLayout tilTribe, tilOccupation, tilReligion;
+    String tribe = "", occupation = "", religion = "";
 
     public NewPapBasicInfoFrag() {
         // Required empty public constructor
@@ -62,10 +64,12 @@ public class NewPapBasicInfoFrag extends Fragment {
         tilFirstName = (TextInputLayout) rootView.findViewById(R.id.til_firstname);
         tilSurname = (TextInputLayout) rootView.findViewById(R.id.til_surname);
         tilOtherNames = (TextInputLayout) rootView.findViewById(R.id.til_othernames);
-        tilPhysicalAddress = (TextInputLayout) rootView.findViewById(R.id.til_physical_address);
         tilBirthPlace = (TextInputLayout) rootView.findViewById(R.id.til_birth_place);
         spnSex = (Spinner) rootView.findViewById(R.id.spinner_sex);
         spnPapType = (Spinner) rootView.findViewById(R.id.spinner_pap_type);
+        tilTribe = (TextInputLayout) rootView.findViewById(R.id.til_tribe);
+        tilOccupation = (TextInputLayout) rootView.findViewById(R.id.til_occupation);
+        tilReligion = (TextInputLayout) rootView.findViewById(R.id.til_religion);
         cbIsMarried = (CheckBox) rootView.findViewById(R.id.cb_is_married);
 
         return rootView;
@@ -76,7 +80,7 @@ public class NewPapBasicInfoFrag extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mCC = new ConversionClass(getActivity());
-        newPapActivity = ((NewPapActivity)getActivity());
+        newPapActivity = ((NewPapActivity) getActivity());
         papLocal = newPapActivity.getPapLocalItem();
 
         c = Calendar.getInstance();
@@ -150,28 +154,6 @@ public class NewPapBasicInfoFrag extends Fragment {
             }
         });
 
-        tilPhysicalAddress.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (!tilPhysicalAddress.getEditText().getText().toString().equals("")) {
-                    physicalAddress = tilPhysicalAddress.getEditText().getText().toString();
-                } else {
-                    physicalAddress = "";
-                }
-                papLocal.setPhysicalAddress(physicalAddress);
-                newPapActivity.updatePapLocalItem(papLocal);
-
-            }
-        });
 
         tilBirthPlace.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -198,7 +180,7 @@ public class NewPapBasicInfoFrag extends Fragment {
 
         dobButton.setText(mCC.dateForDisplayFromCalendarInstance(c.getTime()));
 
-     //   dateButton.setText(buttonTextDate);
+        //   dateButton.setText(buttonTextDate);
 
 //        papLocal.setDateOfBirth(dobButton.getText().toString()); //to set the date just incase it is not clicked
 
@@ -243,8 +225,10 @@ public class NewPapBasicInfoFrag extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView tvSex = (TextView) view;
-                papLocal.setSex(tvSex.getText().toString());
+
+                papLocal.setSex(spnSex.getSelectedItem().toString());
+
+
                 newPapActivity.updatePapLocalItem(papLocal);
             }
 
@@ -265,6 +249,75 @@ public class NewPapBasicInfoFrag extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        tilTribe.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilTribe.getEditText().getText().toString().equals("")) {
+                    tribe = tilTribe.getEditText().getText().toString();
+                } else {
+                    tribe = "";
+                }
+                papLocal.setTribe(tribe);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilOccupation.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilOccupation.getEditText().getText().toString().equals("")) {
+                    occupation = tilOccupation.getEditText().getText().toString();
+                } else {
+                    occupation = "";
+                }
+                papLocal.setOccupation(occupation);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilReligion.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilReligion.getEditText().getText().toString().equals("")) {
+                    religion = tilReligion.getEditText().getText().toString();
+                } else {
+                    religion = "";
+                }
+                papLocal.setReligion(religion);
+                newPapActivity.updatePapLocalItem(papLocal);
 
             }
         });

@@ -15,10 +15,8 @@ public class PagerAdapterNewPap extends FragmentStatePagerAdapter {
     public static int NEW_PAP_STEP_FAMILY_MEMBERS = 3;
     public static int NEW_PAP_STEP_PROPERTY_INFO_CROPS = 4;
     public static int NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS = 5;
-    public static int NEW_PAP_STEP_OTHER_DETAILS = 6;
-    public static int NEW_PAP_STEP_PAP_PHOTOS= 7;
-    public static int NEW_PAP_STEP_PREVIEW = 8;
-
+    public static int NEW_PAP_STEP_PAP_PHOTOS = 6;
+    public static int NEW_PAP_STEP_PREVIEW = 7;
 
 
     public PagerAdapterNewPap(FragmentManager fm) {
@@ -65,10 +63,6 @@ public class PagerAdapterNewPap extends FragmentStatePagerAdapter {
 
         }
 
-        if (position == NEW_PAP_STEP_OTHER_DETAILS) {
-
-            return new NewPapOtherDetailsFrag();
-        }
 
         if (position == NEW_PAP_STEP_PAP_PHOTOS) {
 
@@ -88,6 +82,6 @@ public class PagerAdapterNewPap extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
 
-        return 9;
+        return 8;
     }
 }
