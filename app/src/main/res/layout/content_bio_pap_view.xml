@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e4eeefef"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-   >
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,12 +14,12 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="12dp"
-            android:id="@+id/card_id">
+            android:layout_marginTop="12dp">
 
             <LinearLayout
 
@@ -54,6 +53,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_basic_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
@@ -76,6 +76,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#e3e3e3" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_papName"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name: " />
+
+                    <TextView
+                        android:id="@+id/tv_entry_papName"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/tv_label_papName"
+                        android:gravity="right"
+                       />
+
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -173,26 +197,75 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tv_label_physicalAddress"
+                        android:id="@+id/tv_label_tribe"
                         style="@style/mDetailTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Physical Address: " />
+                        android:text="Tribe: " />
 
                     <TextView
-                        android:id="@+id/tv_entry_physicalAddress"
+                        android:id="@+id/tv_entry_tribe"
                         style="@style/mDetailTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@id/tv_label_physicalAddress"
+                        android:layout_toRightOf="@id/tv_label_tribe"
                         android:gravity="right"
-                        android:text="Mbalwa Estate, Kyaliwajala" />
+                        android:text="Muganda" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_religion"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Religion: " />
+
+                    <TextView
+                        android:id="@+id/tv_entry_religion"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/tv_label_religion"
+                        android:gravity="right"
+                        android:text="Catholic" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_occupation"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Occupation: " />
+
+                    <TextView
+                        android:id="@+id/tv_entry_occupation"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/tv_label_occupation"
+                        android:gravity="right"
+                        android:text="Business man" />
 
 
                 </RelativeLayout>
@@ -204,6 +277,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_property_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
@@ -338,109 +412,6 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    style="@style/mTitleTextStyle2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Other Details" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#e3e3e3" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_label_tribe"
-                        style="@style/mDetailTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tribe: " />
-
-                    <TextView
-                        android:id="@+id/tv_entry_tribe"
-                        style="@style/mDetailTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@id/tv_label_tribe"
-                        android:gravity="right"
-                        android:text="Muganda" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_label_religion"
-                        style="@style/mDetailTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Religion: " />
-
-                    <TextView
-                        android:id="@+id/tv_entry_religion"
-                        style="@style/mDetailTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@id/tv_label_religion"
-                        android:gravity="right"
-                        android:text="Catholic" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_label_occupation"
-                        style="@style/mDetailTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Occupation: " />
-
-                    <TextView
-                        android:id="@+id/tv_entry_occupation"
-                        style="@style/mDetailTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_toRightOf="@id/tv_label_occupation"
-                        android:gravity="right"
-                        android:text="Business man" />
-
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="12dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -560,106 +531,199 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_addresses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginTop="12dp">
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/tv_label_occupati"
-                    style="@style/mDetailTextStyle"
-                    android:layout_width="wrap_content"
+                    style="@style/mTitleTextStyle2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:onClick="GetBelow"
-                    android:text="Occupation: " />
+                    android:text="Addresses" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e3e3e3" />
 
-                <TextView
-                    android:id="@+id/tv_entry_occupati"
-                    style="@style/mDetailTextStyle"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_addresses"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:scrollbars="vertical" />
 
-                    android:layout_below="@id/tv_label_occupati"
-                    android:gravity="start"
-                    android:text="Business man"
-                    android:visibility="gone" />
 
-            </RelativeLayout>
+            </LinearLayout>
+
 
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_photos"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    style="@style/mTitleTextStyle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Photos" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e3e3e3" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager_photos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+
+                    />
 
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
+            </LinearLayout>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/spinner_down" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_family_members"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    style="@style/mTitleTextStyle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Family Members" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e3e3e3" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_family_members"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:scrollbars="vertical" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_crops"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    style="@style/mTitleTextStyle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Crops" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e3e3e3" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_crops"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:scrollbars="vertical" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/card_improvements"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp" />
+                <TextView
+                    style="@style/mTitleTextStyle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Improvements" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e3e3e3" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_improvements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:scrollbars="vertical" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 

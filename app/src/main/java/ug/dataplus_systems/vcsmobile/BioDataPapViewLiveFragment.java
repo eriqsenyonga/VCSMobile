@@ -23,7 +23,7 @@ public class BioDataPapViewLiveFragment extends Fragment {
     TextView tvIsMarried;
     TextView tvIsResident;
     TextView tvOccupation;
-    TextView tvPhysicalAddress;
+
     TextView tvPlotRef;
     TextView tvRefNo;
     TextView tvReligion;
@@ -46,7 +46,7 @@ public class BioDataPapViewLiveFragment extends Fragment {
         tvDob = ((TextView)this.v.findViewById(R.id.tv_entry_papDOB));
         tvBirthPlace = ((TextView)this.v.findViewById(R.id.tv_entry_birthPlace));
         tvIsMarried = ((TextView)this.v.findViewById(R.id.tv_entry_isMarried));
-        tvPhysicalAddress = ((TextView)this.v.findViewById(R.id.tv_entry_physicalAddress));
+
         tvPlotRef = ((TextView)this.v.findViewById(R.id.tv_entry_plotRef));
         tvRefNo = ((TextView)this.v.findViewById(R.id.tv_entry_refNo));
         tvDesignation = ((TextView)this.v.findViewById(R.id.tv_entry_designation));

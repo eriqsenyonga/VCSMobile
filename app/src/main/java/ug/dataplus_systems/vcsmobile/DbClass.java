@@ -18,11 +18,11 @@ public class DbClass {
 
     //all tables have these fields
     public static final String KEY_ID = "_id";
-    public static final String KEY_IS_DELETED = "ISDELETED";
-    public static final String KEY_UPDATED_BY = "UPDATEDBY";
-    public static final String KEY_UPDATED = "UPDATED";
-    public static final String KEY_CREATED_BY = "CREATEDBY";
-    public static final String KEY_CREATED = "CREATED";
+    public static final String KEY_IS_DELETED = "IS_DELETED";
+    public static final String KEY_UPDATED_BY = "UPDATED_BY";
+    public static final String KEY_UPDATED_DATE = "UPDATED_DATE";
+    public static final String KEY_CREATED_BY = "CREATED_BY";
+    public static final String KEY_CREATED_DATE = "CREATED_DATE";
     public static final String KEY_OTHER_DETAILS = "OTHER_DTL";
     public static final String KEY_PAP_ID = "PAP_ID";
     public static final String KEY_EMAIL = "EMAIL";
@@ -44,7 +44,6 @@ public class DbClass {
     public static final String KEY_IS_RESIDENT = "IS_RESIDENT";
     public static final String KEY_BIRTH_PLACE = "BIRTH_PLACE";
     public static final String KEY_IS_MARRIED = "IS_MARRIED";
-    public static final String KEY_ADDRESS_ID = "ADDR_ID";
     public static final String KEY_TRIBE_ID = "TRIBE_ID";
     public static final String KEY_RELIGION_ID = "RELGN_ID";
     public static final String KEY_OCCUPATION_ID = "OCCUPN_ID";
@@ -81,13 +80,11 @@ public class DbClass {
 
     //column names for table trn_val_land
     public static final String DATABASE_TABLE_TRN_VAL_LAND = "trn_val_land";
-    public static final String KEY_RIGHT_OF_WAY_SIZE = "ROW_UNITS";
-    public static final String KEY_WAYLEAVE_SIZE = "WL_UNITS";
+    public static final String KEY_RIGHT_OF_WAY_SIZE = "ROW_SIZE";
+    public static final String KEY_WAYLEAVE_SIZE = "WL_SIZE";
     public static final String KEY_SHARE_OF_LAND = "SHARE_OF_LND";
     public static final String KEY_DIMINUTION = "DIMINUTION";
     public static final String KEY_LAND_RATE = "LAND_RATE";
-    public static final String KEY_WAYLEAVE_VALUE = "WL_VALUE";
-    public static final String KEY_RIGHT_OF_WAY_VALUE = "ROW_VALUE";
     public static final String KEY_LAND_TYPE_ID = "LND_TYPE";
     public static final String KEY_IS_TITLED = "IS_TITLED";
 
@@ -148,7 +145,7 @@ public class DbClass {
 
     //column names for table mst_bio_occupation
     public static final String DATABASE_TABLE_MST_BIO_OCCUPATION = "mst_bio_occupation";
-    public static final String KEY_OCCUPATION_NAME = "NAME";
+    public static final String KEY_OCCUPATION_NAME = "OCCUPN_NAME";
 
     //column names for table mst_bio_papstatus
     public static final String DATABASE_TABLE_MST_BIO_PAPSTATUS = "mst_bio_papstatus";
@@ -181,12 +178,14 @@ public class DbClass {
     //column names for trn_proj_expense
     public static final String DATABASE_TABLE_PROJ_EXPENSE = "trn_proj_expense";
     public static final String KEY_EXPENSE_AMOUNT = "EXP_AMT";
-    public static final String KEY_EXPENSE_PERCENTAGE = "EXP_PCTG";
+    public static final String KEY_EXPENSE_NAME = "EXP_NAME";
+    public static final String KEY_EXPENSE_SUB_CATEGORY_ID = "SUB_CATG_ID";
     public static final String KEY_EXPENSE_DATE = "EXP_DATE";
+
 
     // details of the database that is, database name and version
     private static final String DATABASE_NAME = "vcs_db_android.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 6;
 
     private DbHelper ourHelper; // instance of the DbHelper class
     private Context ourContext;
@@ -215,7 +214,7 @@ public class DbClass {
     }
 
     public void insertPap(PapLocal papLocal) {
-
+        Log.d("checking this nigga", "1");
 
         ContentValues cv = new ContentValues();
 
@@ -248,11 +247,16 @@ public class DbClass {
 
 
         //this method checks for the item in the table and returns its id
+        Log.d("checking this nigga", "2");
         cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
+        Log.d("checking this nigga", "3");
         cv.put(KEY_TRIBE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_TRIBE, KEY_TRIBE, papLocal.getTribe()));
+        Log.d("checking this nigga", "4");
         cv.put(KEY_RELIGION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELIGION, KEY_RELIGION, papLocal.getReligion()));
+        Log.d("checking this nigga", "5");
         cv.put(KEY_OCCUPATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_OCCUPATION, KEY_OCCUPATION_NAME, papLocal.getOccupation()));
-        cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
+        Log.d("checking this nigga", "6");
+       // cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
 
 
         //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
@@ -261,16 +265,16 @@ public class DbClass {
         /*insert the values into database and get the id for the pap so as to be able to
         insert crops and improvements in their respective tables
         */
-
+        Log.d("checking this nigga", "7");
         Long papId = ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_INFO, null, cv);
 
-
+        Log.d("checking this nigga", "8");
         addPapLandInfoToDatabase(papId, papLocal);
 
 
         if (!papLocal.getCrops().isEmpty()) {
             //if pap has crops
-
+            Log.d("checking this nigga", "9");
 
             addCropsToDatabase(papId, papLocal.getCrops());
 
@@ -279,7 +283,7 @@ public class DbClass {
         if (!papLocal.getImprovements().isEmpty()) {
             //if pap has improvements
 
-
+            Log.d("checking this nigga", "10");
             addImprovementsToDatabase(papId, papLocal.getImprovements());
 
         }
@@ -380,17 +384,25 @@ public class DbClass {
 
     private long checkForEntryAndReturnId(String tableNameToBeSearched, String columnNameWhereClause, String parameter) {
 
+
+Log.d("checccc", "1");
         String sql = "SELECT " + KEY_ID
                 + " FROM " + tableNameToBeSearched
                 + " WHERE " + columnNameWhereClause + " = '" + parameter + "'";
 
         Cursor c = ourDatabase.rawQuery(sql, null);
 
-        c.moveToFirst();
+        Log.d("checccc", "2");
 
         if (c.getCount() > 0) {
+            Log.d("checccc", "3");
             //if there is a row with that entry already, get the _id and return it to caller
+            c.moveToFirst();
+
+            Log.d("checccc", "4");
             long id = c.getLong(c.getColumnIndex(KEY_ID));
+
+            Log.d("checccc", "5");
             c.close();
             return id;
         } else {
@@ -440,7 +452,7 @@ public class DbClass {
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-          //  setForcedUpgrade();
+            setForcedUpgrade();
         }
 
 

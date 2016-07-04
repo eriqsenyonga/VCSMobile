@@ -131,7 +131,7 @@ public class PapViewLocal extends AppCompatActivity {
 
 
     }
-
+/*
     public void toggleContent(View v){
 
         if(iv.isActivated()){iv.setActivated(false);}else{
@@ -157,5 +157,7 @@ public class PapViewLocal extends AppCompatActivity {
                 : View.VISIBLE);
 
     }
+
+    */
 
 }

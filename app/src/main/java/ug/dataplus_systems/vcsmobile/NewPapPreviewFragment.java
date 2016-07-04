@@ -4,7 +4,10 @@ package ug.dataplus_systems.vcsmobile;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +28,7 @@ public class NewPapPreviewFragment extends Fragment {
     TextView tvIsMarried;
     TextView tvIsResident;
     TextView tvOccupation;
-    TextView tvPhysicalAddress;
+    TextView tvName;
     TextView tvPlotRef;
     TextView tvRefNo;
     TextView tvReligion;
@@ -33,6 +36,10 @@ public class NewPapPreviewFragment extends Fragment {
     TextView tvTribe;
     PapLocal papLocal;
     CardView idCard;
+    CardView cardAddresses, cardFamilyMembers, cardCrops, cardImprovements, cardPhotos;
+    RecyclerView rvAddresses, rvFamilyMembers, rvCrops, rvImprovements;
+    ViewPager vpPhotos;
+    PapImagesPagerAdapter papImagesPagerAdapter;
     View v;
 
 
@@ -47,11 +54,21 @@ public class NewPapPreviewFragment extends Fragment {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_bio_data_pap_view_live, container, false);
+
+        cardAddresses = (CardView) v.findViewById(R.id.card_addresses);
+        cardFamilyMembers = (CardView) v.findViewById(R.id.card_family_members);
+        cardCrops = (CardView) v.findViewById(R.id.card_crops);
+        cardImprovements = (CardView) v.findViewById(R.id.card_improvements);
+        cardPhotos = (CardView) v.findViewById(R.id.card_photos);
+        rvAddresses = (RecyclerView) v.findViewById(R.id.rv_addresses);
+        rvFamilyMembers = (RecyclerView) v.findViewById(R.id.rv_family_members);
+        rvCrops = (RecyclerView) v.findViewById(R.id.rv_crops);
+        rvImprovements = (RecyclerView) v.findViewById(R.id.rv_improvements);
+        vpPhotos = (ViewPager) v.findViewById(R.id.view_pager_photos);
         tvHhid = ((TextView) this.v.findViewById(R.id.tv_papID));
         tvDob = ((TextView) this.v.findViewById(R.id.tv_entry_papDOB));
         tvBirthPlace = ((TextView) this.v.findViewById(R.id.tv_entry_birthPlace));
         tvIsMarried = ((TextView) this.v.findViewById(R.id.tv_entry_isMarried));
-        tvPhysicalAddress = ((TextView) this.v.findViewById(R.id.tv_entry_physicalAddress));
         tvPlotRef = ((TextView) this.v.findViewById(R.id.tv_entry_plotRef));
         tvRefNo = ((TextView) this.v.findViewById(R.id.tv_entry_refNo));
         tvDesignation = ((TextView) this.v.findViewById(R.id.tv_entry_designation));
@@ -60,7 +77,8 @@ public class NewPapPreviewFragment extends Fragment {
         tvOccupation = ((TextView) this.v.findViewById(R.id.tv_entry_occupation));
         tvReligion = ((TextView) this.v.findViewById(R.id.tv_entry_religion));
         tvSex = ((TextView) this.v.findViewById(R.id.tv_entry_sex));
-        idCard =  (CardView)v.findViewById(R.id.card_id);
+        idCard = (CardView) v.findViewById(R.id.card_id);
+        tvName = (TextView) v.findViewById(R.id.tv_entry_papName);
 
         return v;
     }
@@ -76,13 +94,14 @@ public class NewPapPreviewFragment extends Fragment {
 
         idCard.setVisibility(View.GONE);
 
+
         populateFields();
 
 
     }
 
     private void populateFields() {
-
+        tvName.setText(papLocal.getName());
         tvDob.setText(papLocal.getDateOfBirth());
         tvSex.setText(papLocal.getSex());
         tvReligion.setText(papLocal.getReligion());
@@ -105,10 +124,148 @@ public class NewPapPreviewFragment extends Fragment {
 
         tvRefNo.setText(papLocal.getReferenceNumber());
         tvTribe.setText(papLocal.getTribe());
-        tvPhysicalAddress.setText(papLocal.getPhysicalAddress());
+
         tvOccupation.setText(papLocal.getOccupation());
 
+        if (papLocal.getPapAddresses().size() > 0) {
+            cardAddresses.setVisibility(View.VISIBLE);
+            setAddresses();
+        } else {
+            cardAddresses.setVisibility(View.GONE);
+        }
+
+
+        if (papLocal.getPapFamilyMembers().size() > 0) {
+            cardFamilyMembers.setVisibility(View.VISIBLE);
+            setFamilyMembers();
+        } else {
+            cardFamilyMembers.setVisibility(View.GONE);
+        }
+
+
+        if (papLocal.getCrops().size() > 0) {
+            cardCrops.setVisibility(View.VISIBLE);
+            setCrops();
+        } else {
+            cardCrops.setVisibility(View.GONE);
+        }
+
+
+        if (papLocal.getImprovements().size() > 0) {
+            cardImprovements.setVisibility(View.VISIBLE);
+            setImprovements();
+        } else {
+            cardImprovements.setVisibility(View.GONE);
+        }
+
+
+        setPhotos();
+
     }
+
+    private void setAddresses() {
+
+        /* addresses are contained in a recyclerview
+        * and therefore we shall set up the addresses recyclerview
+        * and attach a simple adapter*/
+
+
+        rvAddresses.hasFixedSize();
+        rvAddresses.setLayoutManager(new LinearLayoutManager(getActivity()) {
+
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        OverviewRecyclerViewAdapter addressAdapter = new OverviewRecyclerViewAdapter(getActivity(),
+                papLocal.getPapAddresses(),
+                OverviewRecyclerViewAdapter.OVERVIEW_ADDRESSES_LIST);
+
+        rvAddresses.setAdapter(addressAdapter);
+
+
+    }
+
+    private void setFamilyMembers() {
+
+        rvFamilyMembers.hasFixedSize();
+        rvFamilyMembers.setLayoutManager(new LinearLayoutManager(getActivity()) {
+
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        OverviewRecyclerViewAdapter familyAdapter = new OverviewRecyclerViewAdapter(getActivity(),
+                papLocal.getPapFamilyMembers(),
+                OverviewRecyclerViewAdapter.OVERVIEW_FAMILY_MEMBERS_LIST);
+
+        rvFamilyMembers.setAdapter(familyAdapter);
+
+
+    }
+
+    private void setCrops() {
+
+        rvCrops.hasFixedSize();
+        rvCrops.setLayoutManager(new LinearLayoutManager(getActivity()) {
+
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        OverviewRecyclerViewAdapter cropsAdapter = new OverviewRecyclerViewAdapter(getActivity(),
+                papLocal.getCrops(),
+                OverviewRecyclerViewAdapter.OVERVIEW_CROPS_LIST);
+
+        rvCrops.setAdapter(cropsAdapter);
+
+
+    }
+
+    private void setImprovements() {
+
+        rvImprovements.hasFixedSize();
+        rvImprovements.setLayoutManager(new LinearLayoutManager(getActivity()) {
+
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+
+        OverviewRecyclerViewAdapter improvementsAdapter = new OverviewRecyclerViewAdapter(getActivity(),
+                papLocal.getImprovements(),
+                OverviewRecyclerViewAdapter.OVERVIEW_IMPROVEMENTS_LIST);
+
+        rvImprovements.setAdapter(improvementsAdapter);
+
+
+    }
+
+    private void setPhotos() {
+
+        //TODO change this to retrieve images from papLocal object
+        int[] papImages = {
+                R.drawable.uuu,
+                R.drawable.house,
+                R.drawable.plantation,
+                R.drawable.agric,
+                R.drawable.prof_pic
+
+        };
+
+
+        PapImagesPagerAdapter papImagesPagerAdapter = new PapImagesPagerAdapter(getActivity(), papImages);
+
+        vpPhotos.setAdapter(papImagesPagerAdapter);
+    }
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
