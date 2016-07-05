@@ -96,7 +96,7 @@ public class ProjectInfoFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                map.put(KEY_PROJECT_ID, "1");
+                map.put(KEY_PROJECT_ID, "10");
 
                 return map;
             }

@@ -23,6 +23,18 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /*
+    * This activity should send username and password to server and then return
+    * details if the user has entered the correct info
+    *
+    *
+    * The details returned should include true or false depending on whether the
+    * user was found.
+    *
+    * Also details include the display name, email address, id and also the projects
+    * that the user is attached to
+    *
+    * */
 
     EditText etUsername, etPassword;
     TextView tvForgotPassword;
@@ -36,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String LOGIN_URL_BAGZ = "http://bagz-vostro/vcs_prodn/mobi_login.php";
 
-    String LOGIN_URL_ERIC = "VcsMobileLoginAuth/loginAuth.php";
+    String LOGIN_URL_ERIC = "VcsMobile/loginAuth.php";
 
     public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
     ActionProcessButton btnSignIn;
