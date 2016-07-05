@@ -141,7 +141,7 @@ public class PapListLive extends Fragment {
                 JSONObject localJSONObject = paramJSONArray.getJSONObject(i);
                 PapLive localPapLive = new PapLive(getActivity());
                 localPapLive.setHhid(localJSONObject.getString("HHID"));
-                localPapLive.setName(localJSONObject.getString("NAME"));
+                localPapLive.setName(localJSONObject.getString("PAP_NAME"));
                 localPapLive.setPapPhotoUrl(localJSONObject.getString("PHOTO"));
                 localPapLive.setSex(localJSONObject.getString("SEX"));
                 localPapLive.setPlotReference(localJSONObject.getString("PLOT_REF"));
