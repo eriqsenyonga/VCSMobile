@@ -322,6 +322,10 @@ public class DbClass {
 
             }
 
+            cv.put(KEY_IS_DELETED, "false");
+
+            //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
+
 
             ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_ADDR, null, cv);
 
