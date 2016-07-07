@@ -11,9 +11,6 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Eriq on 12/3/2015.
- */
 public class DbClass {
 
     //all tables have these fields
@@ -53,8 +50,8 @@ public class DbClass {
     public static final String KEY_PAP_TYPE = "PAP_TYPE";
     public static final String KEY_COMPLETE = "COMPLETE";
     public static final String KEY_SYNCED = "SYNCED";
-
     public static final String KEY_OTHER_PHONE_NO = "OTHR_PHONE_NO";
+
 
     //column names for table trn_val_crop
     public static final String DATABASE_TABLE_TRN_VAL_CROP = "trn_val_crop";
@@ -114,8 +111,8 @@ public class DbClass {
 
     //column names for table trn_bio_pap_addr
     public static final String DATABASE_TABLE_TRN_BIO_PAP_ADDR = "trn_bio_pap_addr";
+    public static final String KEY_ROAD = "ROAD";
     public static final String KEY_COUNTY_ID = "CTY_ID";
-    public static final String KEY_SUBCOUNTY_ID = "SUBCTY_ID";
     public static final String KEY_VILLAGE_ID = "VILL_ID";
 
 
@@ -181,6 +178,11 @@ public class DbClass {
     public static final String KEY_EXPENSE_NAME = "EXP_NAME";
     public static final String KEY_EXPENSE_SUB_CATEGORY_ID = "SUB_CATG_ID";
     public static final String KEY_EXPENSE_DATE = "EXP_DATE";
+
+    //column names for mst_bio_village
+    public static final String DATABASE_TABLE_MST_BIO_VILLAGE = "mst_bio_village";
+    public static final String KEY_VILLAGE_NAME = "VILLAGE";
+    public static final String KEY_SUBCOUNTY_ID = "SUBCTY_ID";
 
 
     // details of the database that is, database name and version
@@ -272,9 +274,18 @@ public class DbClass {
         addPapLandInfoToDatabase(papId, papLocal);
 
 
+        if (!papLocal.getPapAddresses().isEmpty()) {
+            //if pap has addresses
+
+            addAddressesToDatabase(papId, papLocal.getPapAddresses());
+
+
+        }
+
+
         if (!papLocal.getCrops().isEmpty()) {
             //if pap has crops
-            Log.d("checking this nigga", "9");
+
 
             addCropsToDatabase(papId, papLocal.getCrops());
 
@@ -288,6 +299,33 @@ public class DbClass {
 
         }
 
+
+    }
+
+    private void addAddressesToDatabase(Long papId, List<Address> papAddresses) {
+
+
+        for (Address address : papAddresses) {
+
+            ContentValues cv = new ContentValues();
+
+            cv.put(KEY_PAP_ID, papId);
+            cv.put(KEY_ROAD, address.getPlotNoRoad());
+            cv.put(KEY_VILLAGE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_VILLAGE, KEY_VILLAGE_NAME, address.getVillage()));
+
+            if(address.isMainAddress()){
+
+                cv.put(KEY_IS_RESIDENT, "true");
+
+            }else{
+                cv.put(KEY_IS_RESIDENT, "false");
+
+            }
+
+
+            ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_ADDR, null, cv);
+
+        }
 
     }
 

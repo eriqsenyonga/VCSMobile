@@ -73,6 +73,7 @@ public class ProjectInfoFragment extends Fragment {
                     public void onResponse(String response) {
 
                         try {
+                            Log.d("Project Info", response);
                             JSONObject jsonResponse = new JSONObject(response);
                             populateFields(jsonResponse);
                         } catch (JSONException e) {
@@ -95,7 +96,7 @@ public class ProjectInfoFragment extends Fragment {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
+                Map<String, String> map = new HashMap<>();
                 map.put(KEY_PROJECT_ID, "10");
 
                 return map;
