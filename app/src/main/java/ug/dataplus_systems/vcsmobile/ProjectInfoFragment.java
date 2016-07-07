@@ -86,7 +86,7 @@ public class ProjectInfoFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
-                        Log.d("PROJECT INFO", "PROJECT INFO ERROR");
+                        Log.d("PROJECT INFO", error.toString());
 
 
                     }

@@ -53,7 +53,7 @@ public class DbClass {
     public static final String KEY_PAP_TYPE = "PAP_TYPE";
     public static final String KEY_COMPLETE = "COMPLETE";
     public static final String KEY_SYNCED = "SYNCED";
-   
+
     public static final String KEY_OTHER_PHONE_NO = "OTHR_PHONE_NO";
 
     //column names for table trn_val_crop
@@ -68,15 +68,15 @@ public class DbClass {
 
     //column names for table trn_val_impr
     public static final String DATABASE_TABLE_TRN_VAL_IMPR = "trn_val_impr";
-    public static final String KEY_STRUCTURE_NAME_ID = "STR_CATG";
-    public static final String KEY_STRUCTURE_CATEGORY_ID = "STR_SUBCATG";
+    public static final String KEY_STRUCTURE_ID = "STR_CATG";
+    public static final String KEY_STRUCTURE_CATEGORY_ID = "CATG_ID";
     public static final String KEY_STRUCTURE_AREA = "STR_AREA";
-    public static final String KEY_STRUCTURE_VALUE = "STR_TOTAL";
-    public static final String KEY_ROOF = "ROOF";
-    public static final String KEY_WALLS = "WALLS";
-    public static final String KEY_WINDOWS = "WINDOWS";
-    public static final String KEY_DOORS = "DOORS";
-    public static final String KEY_FLOOR = "FLOOR";
+    public static final String KEY_STRUCTURE_VALUE = "STR_VALUE";
+    public static final String KEY_ROOF = "STR_ROOF";
+    public static final String KEY_WALLS = "STR_WALL";
+    public static final String KEY_WINDOWS = "STR_WINDW";
+    public static final String KEY_DOORS = "STR_DOOR";
+    public static final String KEY_FLOOR = "STR_FLOOR";
 
     //column names for table trn_val_land
     public static final String DATABASE_TABLE_TRN_VAL_LAND = "trn_val_land";
@@ -256,7 +256,7 @@ public class DbClass {
         Log.d("checking this nigga", "5");
         cv.put(KEY_OCCUPATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_OCCUPATION, KEY_OCCUPATION_NAME, papLocal.getOccupation()));
         Log.d("checking this nigga", "6");
-       // cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
+        // cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
 
 
         //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
@@ -356,7 +356,7 @@ public class DbClass {
             ContentValues cv = new ContentValues();
 
             cv.put(KEY_PAP_ID, papId);
-            cv.put(KEY_STRUCTURE_NAME_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR, KEY_STRUCTURE_NAME, improvement.getCategory()));
+            cv.put(KEY_STRUCTURE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR, KEY_STRUCTURE_NAME, improvement.getCategory()));
             cv.put(KEY_STRUCTURE_CATEGORY_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR_CATG, KEY_STRUCTURE_CATEGORY, improvement.getSubCategory()));
             cv.put(KEY_STRUCTURE_AREA, improvement.getArea());
             cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, improvement.getUnit()));
@@ -385,7 +385,7 @@ public class DbClass {
     private long checkForEntryAndReturnId(String tableNameToBeSearched, String columnNameWhereClause, String parameter) {
 
 
-Log.d("checccc", "1");
+        Log.d("checccc", "1");
         String sql = "SELECT " + KEY_ID
                 + " FROM " + tableNameToBeSearched
                 + " WHERE " + columnNameWhereClause + " = '" + parameter + "'";
@@ -452,7 +452,7 @@ Log.d("checccc", "1");
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-            setForcedUpgrade();
+            //setForcedUpgrade();
         }
 
 
