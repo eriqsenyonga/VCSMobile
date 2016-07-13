@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Eriq on 3/4/2016.
+ * Created by Eric Senyonga on 3/4/2016.
  */
 public class PapListLiveAdapter extends RecyclerView.Adapter<PapListLiveAdapter.ViewHolder> {
 
@@ -44,19 +44,19 @@ public class PapListLiveAdapter extends RecyclerView.Adapter<PapListLiveAdapter.
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.pap_list_item_live, parent, false);
 
-        ViewHolder viewHolder = new ViewHolder(v);
 
-        return viewHolder;
+
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        PapLive localPapLive = (PapLive) this.papLives.get(position);
-        this.imageLoader = CustomVolleyRequest.getInstance(this.context).getImageLoader();
-        this.imageLoader.get(localPapLive.getPapPhotoUrl(), ImageLoader.getImageListener(holder.ivPapPhoto,
+        PapLive localPapLive = papLives.get(position);
+        imageLoader = CustomVolleyRequest.getInstance(this.context).getImageLoader();
+        imageLoader.get(localPapLive.getPapPhotoUrl(), ImageLoader.getImageListener(holder.ivPapPhoto,
                 R.drawable.default_pap_photo, R.drawable.default_pap_photo));
-        holder.ivPapPhoto.setImageUrl(localPapLive.getPapPhotoUrl(), this.imageLoader);
+        holder.ivPapPhoto.setImageUrl(localPapLive.getPapPhotoUrl(), imageLoader);
         holder.tvHHID.setText("HHID: " + localPapLive.getHhid());
         holder.tvPapName.setText(localPapLive.getName());
 
@@ -66,7 +66,6 @@ public class PapListLiveAdapter extends RecyclerView.Adapter<PapListLiveAdapter.
                 if (isLongClick) {
 
 
-                    Toast.makeText(PapListLiveAdapter.this.context, "Long:" + ((PapLive) PapListLiveAdapter.this.papLives.get(position)).getName() + "\n dialog show", Toast.LENGTH_LONG).show();
                     final String[] papLiveClickOptions = PapListLiveAdapter.this.context.getResources().getStringArray(R.array.live_pap_click_options);
 
 
@@ -93,7 +92,6 @@ public class PapListLiveAdapter extends RecyclerView.Adapter<PapListLiveAdapter.
                     return;
                 }
 
-                Toast.makeText(PapListLiveAdapter.this.context, "Short:" + ((PapLive) PapListLiveAdapter.this.papLives.get(position)).getName(), Toast.LENGTH_LONG).show();
                 PapListLiveAdapter.this.viewPap(position);
             }
         });
@@ -139,9 +137,15 @@ public class PapListLiveAdapter extends RecyclerView.Adapter<PapListLiveAdapter.
         Intent i = new Intent(this.context, PapViewLive.class);
         i.putExtra("papBundle", localBundle);
         this.context.startActivity(i);
-        return;
 
 
+
+    }
+
+    public void addToList(List<PapLive> papsToShow) {
+
+        papLives.addAll(papsToShow);
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {

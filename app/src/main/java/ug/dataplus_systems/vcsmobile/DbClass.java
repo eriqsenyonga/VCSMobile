@@ -53,6 +53,12 @@ public class DbClass {
     public static final String KEY_OTHER_PHONE_NO = "OTHR_PHONE_NO";
 
 
+    //column names for table trn_bio_pap_family
+    public static final String DATABASE_TABLE_TRN_BIO_PAP_FAMILY = "trn_bio_pap_family";
+    public static final String KEY_FAMILY_MEMBER_NAME = "MBR_NAME";
+    public static final String KEY_FAMILY_RELATION_ID = "RLTN_ID";
+
+
     //column names for table trn_val_crop
     public static final String DATABASE_TABLE_TRN_VAL_CROP = "trn_val_crop";
     public static final String KEY_CROP_ID = "CROP_ID";
@@ -156,6 +162,10 @@ public class DbClass {
     public static final String DATABASE_TABLE_MST_BIO_RELIGION = "mst_bio_religion";
     public static final String KEY_RELIGION = "RELIGION";
 
+    //column names for table mst_bio_relation
+    public static final String DATABASE_TABLE_MST_BIO_RELATION = "mst_bio_relation";
+    public static final String KEY_RELATION = "RELATION";
+
     //column names for trn_proj_details
     public static final String DATABASE_TABLE_TRN_PROJ_DETAILS = "trn_proj_details";
     public static final String KEY_PROJECT_NAME = "PROJ_NAME";
@@ -249,15 +259,15 @@ public class DbClass {
 
 
         //this method checks for the item in the table and returns its id
-        Log.d("checking this nigga", "2");
+
         cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
-        Log.d("checking this nigga", "3");
+
         cv.put(KEY_TRIBE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_TRIBE, KEY_TRIBE, papLocal.getTribe()));
-        Log.d("checking this nigga", "4");
+
         cv.put(KEY_RELIGION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELIGION, KEY_RELIGION, papLocal.getReligion()));
-        Log.d("checking this nigga", "5");
+
         cv.put(KEY_OCCUPATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_OCCUPATION, KEY_OCCUPATION_NAME, papLocal.getOccupation()));
-        Log.d("checking this nigga", "6");
+
         // cv.put(KEY_PAP_STATUS_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_PAPSTATUS, KEY_PAP_STATUS, papLocal.getPapStatus()));
 
 
@@ -283,6 +293,14 @@ public class DbClass {
         }
 
 
+        if (!papLocal.getPapFamilyMembers().isEmpty()) {
+            //if pap has family members
+
+            addFamilyMembersToDatabase(papId, papLocal.getPapFamilyMembers());
+
+        }
+
+
         if (!papLocal.getCrops().isEmpty()) {
             //if pap has crops
 
@@ -294,12 +312,37 @@ public class DbClass {
         if (!papLocal.getImprovements().isEmpty()) {
             //if pap has improvements
 
-            Log.d("checking this nigga", "10");
+
             addImprovementsToDatabase(papId, papLocal.getImprovements());
 
         }
 
 
+    }
+
+    private void addFamilyMembersToDatabase(Long papId, List<FamilyMember> papFamilyMembers) {
+
+
+        for (FamilyMember familyMember : papFamilyMembers) {
+
+            ContentValues cv = new ContentValues();
+
+            cv.put(KEY_PAP_ID, papId);
+            cv.put(KEY_FAMILY_MEMBER_NAME, familyMember.getName());
+            cv.put(KEY_DATE_OF_BIRTH, familyMember.getDateOfBirth());
+            cv.put(KEY_BIRTH_PLACE, familyMember.getPlaceOfBirth());
+            cv.put(KEY_SEX, familyMember.getSex());
+            cv.put(KEY_FAMILY_RELATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELATION, KEY_RELATION, familyMember.getRelationType()));
+            cv.put(KEY_TRIBE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_TRIBE, KEY_TRIBE, familyMember.getTribe()));
+            cv.put(KEY_RELIGION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELIGION, KEY_RELIGION, familyMember.getReligion()));
+
+            cv.put(KEY_IS_DELETED, "false");
+
+            //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
+
+            ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_FAMILY, null, cv);
+
+        }
     }
 
     private void addAddressesToDatabase(Long papId, List<Address> papAddresses) {
@@ -313,11 +356,11 @@ public class DbClass {
             cv.put(KEY_ROAD, address.getPlotNoRoad());
             cv.put(KEY_VILLAGE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_VILLAGE, KEY_VILLAGE_NAME, address.getVillage()));
 
-            if(address.isMainAddress()){
+            if (address.isMainAddress()) {
 
                 cv.put(KEY_IS_RESIDENT, "true");
 
-            }else{
+            } else {
                 cv.put(KEY_IS_RESIDENT, "false");
 
             }
@@ -379,9 +422,9 @@ public class DbClass {
             //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
 
 
-            Long cropId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_CROP, null, cv);
+            ourDatabase.insert(DATABASE_TABLE_TRN_VAL_CROP, null, cv);
 
-            Log.d("CROP ID", "" + cropId);
+
 
 
         }

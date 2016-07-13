@@ -1,17 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ug.dataplus_systems.vcsmobile.PapListPending">
+    android:orientation="vertical"
+    tools:context="ug.dataplus_systems.vcsmobile.PapListLive">
 
-    <!-- TODO: Update blank fragment layout -->
- <!-- <include
-      layout="@layout/recycler_view"/>
--->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Pending Pap List"/>
 
-</FrameLayout>
+    <include layout="@layout/recycler_view" />
+
+
+</LinearLayout>
