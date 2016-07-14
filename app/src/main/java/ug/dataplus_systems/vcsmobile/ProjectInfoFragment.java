@@ -35,7 +35,7 @@ public class ProjectInfoFragment extends Fragment {
 
     String URL_GET_PROJECT_DETAILS = "VcsMobile/getProjectDetails.php";
 
-    TextView tvProjectName, tvProjectCode, tvProjectClient, tvProjectObjective, tvProjectStartDate, tvProjectEndDate, tvProjectManager;
+    TextView tvProjectName, tvProjectCode, tvProjectDescription, tvProjectObjective, tvProjectStartDate, tvProjectEndDate, tvProjectManager;
 
     View rv;
 
@@ -53,7 +53,7 @@ public class ProjectInfoFragment extends Fragment {
 
         tvProjectName = (TextView) rv.findViewById(R.id.tv_project_name);
         tvProjectCode = (TextView) rv.findViewById(R.id.tv_project_code);
-        tvProjectClient = (TextView) rv.findViewById(R.id.tv_project_client);
+        tvProjectDescription = (TextView) rv.findViewById(R.id.tv_project_description);
         tvProjectObjective = (TextView) rv.findViewById(R.id.tv_project_objective);
         tvProjectStartDate = (TextView) rv.findViewById(R.id.tv_project_start_date);
         tvProjectEndDate = (TextView) rv.findViewById(R.id.tv_project_end_date);
@@ -113,7 +113,7 @@ public class ProjectInfoFragment extends Fragment {
         try {
             tvProjectName.setText(response.getString("project_name"));
             tvProjectCode.setText(response.getString("project_code"));
-            tvProjectClient.setText(response.getString("project_client"));
+            tvProjectDescription.setText(response.getString("project_description"));
             tvProjectObjective.setText(response.getString("project_objective"));
             tvProjectStartDate.setText(response.getString("project_start_date"));
             tvProjectEndDate.setText(response.getString("project_end_date"));
