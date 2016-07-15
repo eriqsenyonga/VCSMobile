@@ -12,6 +12,4 @@
         android:textStyle="bold"
         android:gravity="center"/>
 
-
-
 </FrameLayout>
