@@ -43,7 +43,7 @@ public class ProjectsDetailsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getChildFragmentManager(), getActivity(), 3, MyPagerAdapter.PROJECT_DETAILS_VIEWPAGER);
+        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getChildFragmentManager(), getActivity(), 6, MyPagerAdapter.PROJECT_DETAILS_VIEWPAGER);
         viewPager.setAdapter(myPagerAdapter);
 
         tabs.setupWithViewPager(viewPager);

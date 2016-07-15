@@ -29,8 +29,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     }
 
-    public MyPagerAdapter(FragmentManager fm, Context context, int numberOfTabs, int whichViewPager, Bundle bundle)
-    {
+    public MyPagerAdapter(FragmentManager fm, Context context, int numberOfTabs, int whichViewPager, Bundle bundle) {
         super(fm);
         this.context = context;
         this.whichViewPager = whichViewPager;
@@ -44,10 +43,15 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         if (whichViewPager == PROJECT_DETAILS_VIEWPAGER) {
             Fragment projectInfoFragment = new ProjectInfoFragment();
 
-            Fragment projectStakeHoldersFragment = new ProjectStakeHoldersFragment();
+            Fragment projectClientsFragment = new ProjectClientsFragment();
 
-            Fragment projectDisputesFragment = new ProjectDisputesFragment();
+            Fragment projectBudgetFragment = new ProjectBudgetFragment();
 
+            Fragment projectExpensesFragment = new ProjectExpensesFragment();
+
+            Fragment projectPersonnelFragment = new ProjectPersonnelFragment();
+
+            Fragment projectSectionsFragment = new ProjectSectionsFragment();
 
 
             if (position == 0) {
@@ -57,12 +61,27 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
             if (position == 1) {
 
-                return projectStakeHoldersFragment;
+                return projectClientsFragment;
             }
 
             if (position == 2) {
 
-                return projectDisputesFragment;
+                return projectBudgetFragment;
+            }
+
+            if (position == 3) {
+
+                return projectExpensesFragment;
+            }
+
+            if (position == 4) {
+
+                return projectPersonnelFragment;
+            }
+
+            if (position == 5) {
+
+                return projectSectionsFragment;
             }
         }
 
@@ -94,7 +113,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
             if (position == 0) {
 
-                return  bioDataPapViewLiveFragment;
+                return bioDataPapViewLiveFragment;
             }
 
             if (position == 1) {
@@ -125,15 +144,38 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
                 //   String finishedTabTitle = context.getResources().getString(
                 //         R.string.finished);
-                return "Stakeholders";
+                return "Clients";
             }
 
             if (position == 2) {
 
                 //   String finishedTabTitle = context.getResources().getString(
                 //         R.string.finished);
-                return "Disputes";
+                return "Budget";
             }
+
+            if (position == 3) {
+
+                //   String finishedTabTitle = context.getResources().getString(
+                //         R.string.finished);
+                return "Expenses";
+            }
+
+            if (position == 4) {
+
+                //   String finishedTabTitle = context.getResources().getString(
+                //         R.string.finished);
+                return "Personnel";
+            }
+
+            if (position == 5) {
+
+                //   String finishedTabTitle = context.getResources().getString(
+                //         R.string.finished);
+                return "Sections";
+            }
+
+
         }
 
         if (whichViewPager == PAP_LIST_VIEWPAGER) {
