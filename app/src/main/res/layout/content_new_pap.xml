@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ug.dataplus_systems.vcsmobile.NewPapActivity"
-    tools:showIn="@layout/activity_new_pap"
-    android:orientation="vertical">
+    tools:showIn="@layout/activity_new_pap">
 
     <TextView
         android:id="@+id/tv_step_title"
+        style="@style/mTitleTextStyle2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
-        android:text="Basic Info"
-        android:textColor="@color/white"
-        style="@style/mTitleTextStyle2"
         android:gravity="center"
-        />
-
+        android:text="Basic Info"
+        android:textColor="@color/white" />
 
 
     <ug.dataplus_systems.vcsmobile.NonSwipeableViewPager
@@ -70,7 +68,6 @@
             />
 
     </RelativeLayout>
-
 
 
 </LinearLayout>

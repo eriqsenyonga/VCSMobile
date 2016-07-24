@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
 public class ProjectPersonnelFragment extends Fragment {
 
 
