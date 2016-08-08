@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
+import org.json.JSONObject;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class DbClass {
     public static final String KEY_OTHER_DETAILS = "OTHER_DTL";
     public static final String KEY_PAP_ID = "PAP_ID";
     public static final String KEY_EMAIL = "EMAIL";
-    public static final String KEY_PHONE = "PHONE";
+    public static final String KEY_PHONE = "PHONE_NO";
     public static final String KEY_DISTRICT_ID = "DIST_ID";
     public static final String KEY_PROJECT_ID = "PROJ_ID";
     public static final String KEY_CATEGORY = "CATG";
@@ -241,6 +243,8 @@ public class DbClass {
         cv.put(KEY_PAP_TYPE, papLocal.getPapType());
         cv.put(KEY_PHOTO, papLocal.getPapPhotoUriString());
         cv.put(KEY_IS_DELETED, "false");
+        cv.put(KEY_SYNCED, "false");
+        cv.put(KEY_COMPLETE, "true");
 
         //since these are captured as Booleans and yet they are saved as TEXT in the database
         if (papLocal.isResident()) {
@@ -528,6 +532,61 @@ public class DbClass {
             return null;
         }
 
+    }
+
+    public JSONObject getPapsForUploadAndConvertToJson(){
+
+
+        String selectIds = "Select "
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_ID + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_DATE_OF_BIRTH + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_SEX + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_PLOT_REFERENCE + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_REFERENCE_NO + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_IS_RESIDENT + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_BIRTH_PLACE + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_IS_MARRIED + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_PHONE + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_OTHER_PHONE_NO + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_EMAIL + ","
+                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_DESIGNATION + ","
+                +DATABASE_TABLE_MST_BIO_TRIBE +"."+ KEY_TRIBE + ","
+                +DATABASE_TABLE_MST_BIO_RELIGION +"."+ KEY_RELIGION + ","
+                +DATABASE_TABLE_MST_BIO_OCCUPATION +"."+ KEY_OCCUPATION_NAME + ","
+                +DATABASE_TABLE_MST_BIO_PAPSTATUS +"."+ KEY_PAP_STATUS + ","
+                +DATABASE_TABLE_TRN_PROJ_DETAILS + "."+ KEY_PROJECT_NAME
+                + " FROM "
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO
+                + " INNER JOIN "
+                + DATABASE_TABLE_MST_BIO_TRIBE + " ON "
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_TRIBE_ID + " = " + DATABASE_TABLE_MST_BIO_TRIBE + "." + KEY_ID
+                + " INNER JOIN "
+                + DATABASE_TABLE_MST_BIO_RELIGION + " ON "
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_RELIGION_ID + " = " + DATABASE_TABLE_MST_BIO_RELIGION + "." + KEY_ID
+                + " INNER JOIN "
+                + DATABASE_TABLE_MST_BIO_OCCUPATION + " ON "
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_OCCUPATION_ID + " = " + DATABASE_TABLE_MST_BIO_OCCUPATION + "." + KEY_ID
+                + " INNER JOIN "
+                + DATABASE_TABLE_MST_BIO_PAPSTATUS + " ON "
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_PAP_STATUS_ID + " = " + DATABASE_TABLE_MST_BIO_PAPSTATUS + "." + KEY_ID
+                + " INNER JOIN "
+                + DATABASE_TABLE_TRN_PROJ_DETAILS + " ON "
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_PROJECT_ID + " = " + DATABASE_TABLE_TRN_PROJ_DETAILS + "." + KEY_ID
+
+                + " WHERE " + KEY_COMPLETE + " = 'true' AND "
+                + KEY_SYNCED + " = 'false'";
+
+        open();
+
+        Cursor c = ourDatabase.rawQuery(selectIds, null);
+
+c.close();
+        JSONObject paps = new JSONObject();
+
+
+
+
+        return paps;
     }
 
 
