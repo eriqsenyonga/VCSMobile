@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -242,6 +243,9 @@ public class DbClass {
         cv.put(KEY_REFERENCE_NO, papLocal.getPlotReference());
         cv.put(KEY_PAP_TYPE, papLocal.getPapType());
         cv.put(KEY_PHOTO, papLocal.getPapPhotoUriString());
+        cv.put(KEY_EMAIL, papLocal.getEmail());
+        cv.put(KEY_PHONE, papLocal.getPhoneNumber());
+        cv.put(KEY_OTHER_PHONE_NO, papLocal.getOtherPhoneNumber());
         cv.put(KEY_IS_DELETED, "false");
         cv.put(KEY_SYNCED, "false");
         cv.put(KEY_COMPLETE, "true");
@@ -429,8 +433,6 @@ public class DbClass {
             ourDatabase.insert(DATABASE_TABLE_TRN_VAL_CROP, null, cv);
 
 
-
-
         }
     }
 
@@ -534,27 +536,27 @@ public class DbClass {
 
     }
 
-    public JSONObject getPapsForUploadAndConvertToJson(){
+    public JSONObject getPapsForUploadAndConvertToJson(Context ctx) {
 
 
         String selectIds = "Select "
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_ID + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_DATE_OF_BIRTH + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_SEX + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_PLOT_REFERENCE + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_REFERENCE_NO + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_IS_RESIDENT + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_BIRTH_PLACE + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_IS_MARRIED + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_PHONE + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_OTHER_PHONE_NO + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_EMAIL + ","
-                +DATABASE_TABLE_TRN_BIO_PAP_INFO +"."+ KEY_DESIGNATION + ","
-                +DATABASE_TABLE_MST_BIO_TRIBE +"."+ KEY_TRIBE + ","
-                +DATABASE_TABLE_MST_BIO_RELIGION +"."+ KEY_RELIGION + ","
-                +DATABASE_TABLE_MST_BIO_OCCUPATION +"."+ KEY_OCCUPATION_NAME + ","
-                +DATABASE_TABLE_MST_BIO_PAPSTATUS +"."+ KEY_PAP_STATUS + ","
-                +DATABASE_TABLE_TRN_PROJ_DETAILS + "."+ KEY_PROJECT_NAME
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_ID + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_DATE_OF_BIRTH + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_SEX + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_PLOT_REFERENCE + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_REFERENCE_NO + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_IS_RESIDENT + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_BIRTH_PLACE + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_IS_MARRIED + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_PHONE + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_OTHER_PHONE_NO + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_EMAIL + ","
+                + DATABASE_TABLE_TRN_BIO_PAP_INFO + "." + KEY_DESIGNATION + ","
+                + DATABASE_TABLE_MST_BIO_TRIBE + "." + KEY_TRIBE + ","
+                + DATABASE_TABLE_MST_BIO_RELIGION + "." + KEY_RELIGION + ","
+                + DATABASE_TABLE_MST_BIO_OCCUPATION + "." + KEY_OCCUPATION_NAME + ","
+                + DATABASE_TABLE_MST_BIO_PAPSTATUS + "." + KEY_PAP_STATUS + ","
+                + DATABASE_TABLE_TRN_PROJ_DETAILS + "." + KEY_PROJECT_NAME
                 + " FROM "
                 + DATABASE_TABLE_TRN_BIO_PAP_INFO
                 + " INNER JOIN "
@@ -576,17 +578,215 @@ public class DbClass {
                 + " WHERE " + KEY_COMPLETE + " = 'true' AND "
                 + KEY_SYNCED + " = 'false'";
 
+        List<PapLocal> localPapList = new ArrayList<>();//List that will be converted to JSON
+
         open();
 
         Cursor c = ourDatabase.rawQuery(selectIds, null);
 
-c.close();
+        if (c.getCount() > 0) {
+            //put all results into a papLocal object to be added to localPapList for conversion to JSON
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+
+                PapLocal papLocal = new PapLocal(ctx);
+
+                Long papId = c.getLong(c.getColumnIndex(KEY_ID));
+
+//Section for add Id and basic details to papLocal
+                papLocal.setId("" + papId);
+                papLocal.setName(c.getString(c.getColumnIndex(KEY_NAME)));
+                papLocal.setBirthPlace(c.getString(c.getColumnIndex(KEY_BIRTH_PLACE)));
+                papLocal.setSex(c.getString(c.getColumnIndex(KEY_SEX)));
+                papLocal.setDateOfBirth(c.getString(c.getColumnIndex(KEY_DATE_OF_BIRTH)));
+                papLocal.setPhoneNumber(c.getString(c.getColumnIndex(KEY_PHONE)));
+                papLocal.setOtherPhoneNumber(c.getString(c.getColumnIndex(KEY_OTHER_PHONE_NO)));
+                papLocal.setEmail(c.getString(c.getColumnIndex(KEY_EMAIL)));
+                papLocal.setPapType(c.getString(c.getColumnIndex(KEY_PAP_TYPE)));
+                papLocal.setTribe(c.getString(c.getColumnIndex(KEY_TRIBE)));
+                papLocal.setReligion(c.getString(c.getColumnIndex(KEY_RELIGION)));
+                papLocal.setOccupation(c.getString(c.getColumnIndex(KEY_OCCUPATION_NAME)));
+
+                if (c.getString(c.getColumnIndex(KEY_IS_MARRIED)) == "true") {
+                    papLocal.setIsMarried(true);
+                } else {
+                    papLocal.setIsMarried(false);
+                }
+
+                if (c.getString(c.getColumnIndex(KEY_IS_RESIDENT)) == "true") {
+                    papLocal.setIsResident(true);
+                } else {
+                    papLocal.setIsResident(false);
+                }
+
+                papLocal.setPlotReference(c.getString(c.getColumnIndex(KEY_PLOT_REFERENCE)));
+                papLocal.setReferenceNumber(c.getString(c.getColumnIndex(KEY_REFERENCE_NO)));
+                papLocal.setPapStatus(c.getString(c.getColumnIndex(KEY_PAP_STATUS)));
+
+//section for land details being added to papLocal
+                String sqlLandDetails = "SELECT "
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_RIGHT_OF_WAY_SIZE + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_WAYLEAVE_SIZE + ","
+                        + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_UNIT_OF_MEASURE + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_SHARE_OF_LAND + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_DIMINUTION + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_LAND_RATE + ","
+                        + DATABASE_TABLE_MST_VAL_LAND + "." + KEY_LAND_TYPE + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_IS_TITLED
+                        + " FROM " + DATABASE_TABLE_TRN_VAL_LAND
+                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_LAND
+                        + " ON "
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_LAND_TYPE_ID + " = " + DATABASE_TABLE_MST_VAL_LAND + "." + KEY_ID
+                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_UNIT_MSR
+                        + " ON "
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_UNIT_OF_MEASURE + " = " + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_ID
+                        + " WHERE " + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_PAP_ID + " = " + papId
+                        + " AND " + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_IS_DELETED + " = false";
+
+
+                Cursor landCursor = ourDatabase.rawQuery(sqlLandDetails, null);
+
+                if (landCursor.getCount() > 0) {
+
+                    for (landCursor.moveToFirst(); !landCursor.isAfterLast(); landCursor.moveToNext()) {
+
+                        papLocal.setRightOfWaySize(landCursor.getString(landCursor.getColumnIndex(KEY_RIGHT_OF_WAY_SIZE)));
+                        papLocal.setWayLeaveSize(landCursor.getString(landCursor.getColumnIndex(KEY_WAYLEAVE_SIZE)));
+                        papLocal.setLandUnits(landCursor.getString(landCursor.getColumnIndex(KEY_UNIT_OF_MEASURE)));
+                        papLocal.setDiminution(landCursor.getString(landCursor.getColumnIndex(KEY_DIMINUTION)));
+                        papLocal.setLandRate(landCursor.getString(landCursor.getColumnIndex(KEY_LAND_RATE)));
+                        papLocal.setShareOfLand(landCursor.getString(landCursor.getColumnIndex(KEY_SHARE_OF_LAND)));
+                        papLocal.setLandType(landCursor.getString(landCursor.getColumnIndex(KEY_LAND_TYPE)));
+
+                        if (landCursor.getString(landCursor.getColumnIndex(KEY_IS_TITLED)) == "true") {
+                            papLocal.setIsTitled(true);
+                        } else {
+                            papLocal.setIsTitled(false);
+                        }
+                    }
+
+
+                }
+
+                landCursor.close();
+
+
+//section for adding PAP addresses
+
+                String sqlAdresses = "SELECT "
+                        + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_ROAD + ", "
+                        + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_IS_RESIDENT + ", "
+                        + DATABASE_TABLE_MST_BIO_VILLAGE + "." + KEY_VILLAGE_NAME
+                        + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_ADDR
+                        + " INNER JOIN " + DATABASE_TABLE_MST_BIO_VILLAGE
+                        +" ON "
+                        + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_VILLAGE_ID + " = " + DATABASE_TABLE_MST_BIO_VILLAGE + "." + KEY_ID
+                        + " WHERE " + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_PAP_ID + " = " + papId
+                        + " AND " + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_IS_DELETED + " = false";
+
+                Cursor addressCursor = ourDatabase.rawQuery(sqlAdresses,null);
+
+                if(addressCursor.getCount() > 0){
+
+                    List<Address> addresses = new ArrayList<>();
+
+                    for(addressCursor.moveToFirst(); !addressCursor.isAfterLast(); addressCursor.moveToNext()){
+
+                        Address address = new Address();
+                        address.setVillage(addressCursor.getString(addressCursor.getColumnIndex(KEY_VILLAGE_NAME)));
+                        address.setPlotNoRoad(addressCursor.getString(addressCursor.getColumnIndex(KEY_ROAD)));
+
+                        if (addressCursor.getString(addressCursor.getColumnIndex(KEY_IS_RESIDENT)) == "true") {
+                            address.setIsMainAddress(true);
+                        } else {
+                            address.setIsMainAddress(false);
+                        }
+
+                        addresses.add(address);
+
+                    }
+
+                    papLocal.setPapAddresses(addresses);
+
+
+                }
+
+                addressCursor.close();
+
+//section for adding family members
+
+            String sqlFamily = "SELECT "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_FAMILY_MEMBER_NAME + " , "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_SEX + " , "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_DATE_OF_BIRTH + " , "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_BIRTH_PLACE + " , "
+                    + DATABASE_TABLE_MST_BIO_TRIBE + "." + KEY_TRIBE + " , "
+                    + DATABASE_TABLE_MST_BIO_RELIGION + "." + KEY_RELIGION + " , "
+                    + DATABASE_TABLE_MST_BIO_RELATION + "." + KEY_RELATION
+                    + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_FAMILY
+                    + " INNER JOIN " + DATABASE_TABLE_MST_BIO_TRIBE
+                    + " ON "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_TRIBE_ID + " = " + DATABASE_TABLE_MST_BIO_TRIBE + "."+ KEY_ID
+                    + " INNER JOIN " + DATABASE_TABLE_MST_BIO_RELIGION
+                    + " ON "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_RELIGION_ID + " = " + DATABASE_TABLE_MST_BIO_RELIGION + "."+ KEY_ID
+                    + " INNER JOIN " + DATABASE_TABLE_MST_BIO_RELATION
+                    + " ON "
+                    + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_FAMILY_RELATION_ID + " = " + DATABASE_TABLE_MST_BIO_RELATION + "."+ KEY_ID
+                    + " WHERE " + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_PAP_ID + " = " + papId
+                    + " AND " + DATABASE_TABLE_TRN_BIO_PAP_FAMILY + "." + KEY_IS_DELETED + " = false";
+
+
+
+
+
+            }
+
+
+        }
+
+        c.close();
         JSONObject paps = new JSONObject();
 
 
-
+        Log.d("end", "end");
 
         return paps;
+    }
+
+    public List<Project> getAllProjects(Context ctx) {
+
+        List<Project> projects = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DATABASE_TABLE_TRN_PROJ_DETAILS + " WHERE " + KEY_IS_DELETED + " = 'false' ORDER BY " + KEY_PROJECT_NAME;
+
+        open();
+        Cursor c = ourDatabase.rawQuery(sql, null);
+
+        if (c.getCount() > 0) {
+
+            c.moveToFirst();
+
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+
+                Project project = new Project(ctx);
+
+                project.setProjectName(c.getString(c.getColumnIndex(KEY_PROJECT_NAME)));
+                project.setProjectId(c.getLong(c.getColumnIndex(KEY_ID)));
+                project.setProjectCode(c.getString(c.getColumnIndex(KEY_PROJECT_CODE)));
+
+                projects.add(project);
+
+
+            }
+
+            c.close();
+
+        }
+
+        c.close();
+
+        return projects;
+
     }
 
 

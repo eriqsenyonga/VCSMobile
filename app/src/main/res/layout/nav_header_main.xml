@@ -1,53 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.tr4android.support.extension.widget.AccountHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/account_header"
+    android:background="@drawable/side_nav_bar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="@drawable/side_nav_bar"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:weightSum="1">
+    app:accountHeaderManageEnabled="false"
+    app:accountHeaderAddEnabled="false"
 
-    <de.hdodenhof.circleimageview.CircleImageView
-
-        android:id="@+id/profile_image"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/prof_pic"
-        app:civ_border_color="#3c000000"
-        app:civ_border_width="2dp" />
-
-    <TextView
-        android:id="@+id/tv_display_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Eric Senyonga"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:textStyle="bold" />
-
-    <Spinner
-        android:id="@+id/spinner_projects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:textStyle="normal"
-        />
-
-
-
-   <!-- <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="bladfij"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:textStyle="bold"
-        style="@style/Widget.AppCompat.Spinner"/>
--->
-
-</LinearLayout>
+    />

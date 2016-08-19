@@ -22,6 +22,12 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 
+import com.tr4android.support.extension.internal.Account;
+import com.tr4android.support.extension.widget.AccountHeaderView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fm;
     public FloatingActionButton fab;
     int i = 1;
+    DbClass dbClass;
 
 
     @Override
@@ -61,52 +68,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-         View header = navigationView.getHeaderView(0);
-        Spinner projectSpinner = (Spinner) header.findViewById(R.id.spinner_projects);
-
-        ArrayAdapter<CharSequence> projectAdapter = ArrayAdapter.createFromResource(this,
-                R.array.project_list, android.R.layout.simple_spinner_item);
-
-        projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        setUpNavigationViewHeaderProjects();
 
 
-        projectSpinner.setAdapter(projectAdapter);
-/*
-        header.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LayoutInflater inf = LayoutInflater.from(MainActivity.this);
-                View vd = inf.inflate(R.layout.activity_my_profile,null,false);
-
-                if (i == 1) {
-
-                    navigationView.getMenu().clear();
-
-                    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                            FrameLayout.LayoutParams.MATCH_PARENT,
-                            FrameLayout.LayoutParams.MATCH_PARENT
-                    );
-
-                    params.setMargins(0, header.getHeight(), 0, 0);
-
-                    navigationView.addView(vd, params);
-
-                    i = 2;
-                } else {
 
 
-                 //   vd.setVisibility(View.GONE);
-                    navigationView.removeView(vd);
-
-                    navigationView.inflateMenu(R.menu.activity_main_drawer);
-
-                    i = 1;
-                }
-
-            }
-        });
-*/
         Intent callerIntent = getIntent();
         if (callerIntent.hasExtra("zero")) {
             drawer.openDrawer(GravityCompat.START);
@@ -115,6 +81,60 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
+    }
+
+    private void setUpNavigationViewHeaderProjects() {
+
+        dbClass = new DbClass(MainActivity.this);
+        List<Project> myProjects = new ArrayList<>();
+        myProjects = dbClass.getAllProjects(MainActivity.this);
+
+        View header = navigationView.getHeaderView(0);
+
+        // Get a reference to the `AccountHeaderView`
+        AccountHeaderView accountHeaderView = (AccountHeaderView) header.findViewById(R.id.account_header);
+
+        // Add your accounts
+        for(Project project: myProjects ){
+
+
+            accountHeaderView.addAccount(new Account().setName("admin").setEmail(project.getProjectName()));
+
+        }
+
+/*
+        // Add your accounts
+        accountHeaderView.addAccounts(new Account().setName("Eric Senyonga").setEmail("Karuma Interconnection Project"),
+                new Account().setName("Standard Gauge Railway").setEmail("Standard Gauge Railway"),
+                new Account().setName("Total Oil Expansion").setEmail("Total Oil Expansion")
+        );
+
+        accountHeaderView.addAccount(new Account().setName("Kyambadde").setEmail("Pingu all the way"));
+*/
+
+        // Attach a listener to the `AccountHeaderView` to respond to a selected account
+        accountHeaderView.setAccountSelectedListener(new AccountHeaderView.OnAccountSelectedListener() {
+            @Override
+            public boolean onAccountSelected(Account account) {
+                drawer.closeDrawers();
+                return false;
+            }
+
+            @Override
+            public void onAccountChecked(Account account, boolean b) {
+                drawer.closeDrawers();
+            }
+
+            @Override
+            public void onAccountAddSelected() {
+                drawer.closeDrawers();
+            }
+
+            @Override
+            public void onAccountManageSelected() {
+                drawer.closeDrawers();
+            }
+        });
     }
 
     @Override
@@ -152,6 +172,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_chats) {
 
             fragment = new PapEntry();
+        }
+
+        if(id == R.id.nav_valuation){
+
+            fragment = new ValuationFragment();
         }
 
 

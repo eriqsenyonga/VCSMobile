@@ -114,7 +114,7 @@ public class PapListPending extends Fragment {
        Toast.makeText(getActivity(), "Upload ready PAPs coming soon", Toast.LENGTH_LONG).show();
 
         DbClass dbClass = new DbClass(getActivity());
-        dbClass.getPapsForUploadAndConvertToJson();
+        dbClass.getPapsForUploadAndConvertToJson(getActivity());
 
 
 //

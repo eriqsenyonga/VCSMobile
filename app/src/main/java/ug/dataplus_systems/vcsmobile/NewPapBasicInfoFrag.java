@@ -45,8 +45,8 @@ public class NewPapBasicInfoFrag extends Fragment {
 
     TextInputLayout tilSurname;
     TextInputLayout tilBirthPlace;
-    TextInputLayout tilTribe, tilOccupation, tilReligion;
-    String tribe = "", occupation = "", religion = "";
+    TextInputLayout tilTribe, tilOccupation, tilReligion, tilPhoneNumber, tilOtherPhoneNumber, tilEmail;
+    String tribe = "", occupation = "", religion = "", email = "", phoneNumber = "", otherPhoneNumber = "";
 
     public NewPapBasicInfoFrag() {
         // Required empty public constructor
@@ -65,6 +65,11 @@ public class NewPapBasicInfoFrag extends Fragment {
         tilSurname = (TextInputLayout) rootView.findViewById(R.id.til_surname);
         tilOtherNames = (TextInputLayout) rootView.findViewById(R.id.til_othernames);
         tilBirthPlace = (TextInputLayout) rootView.findViewById(R.id.til_birth_place);
+
+        tilPhoneNumber = (TextInputLayout) rootView.findViewById(R.id.til_phone_number);
+        tilOtherPhoneNumber = (TextInputLayout) rootView.findViewById(R.id.til_other_phone_number);
+        tilEmail = (TextInputLayout) rootView.findViewById(R.id.til_email);
+
         spnSex = (Spinner) rootView.findViewById(R.id.spinner_sex);
         spnPapType = (Spinner) rootView.findViewById(R.id.spinner_pap_type);
         tilTribe = (TextInputLayout) rootView.findViewById(R.id.til_tribe);
@@ -317,6 +322,75 @@ public class NewPapBasicInfoFrag extends Fragment {
                     religion = "";
                 }
                 papLocal.setReligion(religion);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilPhoneNumber.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilPhoneNumber.getEditText().getText().toString().equals("")) {
+                    phoneNumber = tilPhoneNumber.getEditText().getText().toString();
+                } else {
+                    phoneNumber = "";
+                }
+                papLocal.setPhoneNumber(phoneNumber);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilOtherPhoneNumber.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilOtherPhoneNumber.getEditText().getText().toString().equals("")) {
+                    otherPhoneNumber = tilOtherPhoneNumber.getEditText().getText().toString();
+                } else {
+                    otherPhoneNumber = "";
+                }
+                papLocal.setOtherPhoneNumber(otherPhoneNumber);
+                newPapActivity.updatePapLocalItem(papLocal);
+
+            }
+        });
+
+        tilEmail.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (!tilEmail.getEditText().getText().toString().equals("")) {
+                    email = tilEmail.getEditText().getText().toString();
+                } else {
+                    email = "";
+                }
+                papLocal.setEmail(email);
                 newPapActivity.updatePapLocalItem(papLocal);
 
             }

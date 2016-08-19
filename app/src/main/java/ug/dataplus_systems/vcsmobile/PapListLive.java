@@ -187,7 +187,7 @@ public class PapListLive extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         isLoading = false;
                         pbLoading.setVisibility(View.GONE);
-                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
                         Log.d("PROJECT INFO", "PROJECT INFO ERROR");
 
 

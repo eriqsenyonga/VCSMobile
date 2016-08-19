@@ -38,7 +38,33 @@ public class PapLocal {
     boolean isTitledLand = false;
     List<Address> papAddresses;
     List<FamilyMember> papFamilyMembers;
+    String phoneNumber;
+    String otherPhoneNumber;
+    String email;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getOtherPhoneNumber() {
+        return otherPhoneNumber;
+    }
+
+    public void setOtherPhoneNumber(String otherPhoneNumber) {
+        this.otherPhoneNumber = otherPhoneNumber;
+    }
 
     public String getLandUnits() {
         return landUnits;

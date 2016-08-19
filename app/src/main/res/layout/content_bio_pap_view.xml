@@ -120,7 +120,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_papDOB"
                         android:gravity="right"
-                        android:text="24-Mar-2015" />
+                       />
 
 
                 </RelativeLayout>
@@ -144,7 +144,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_sex"
                         android:gravity="right"
-                        android:text="Male" />
+                      />
 
 
                 </RelativeLayout>
@@ -168,7 +168,79 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_birthPlace"
                         android:gravity="right"
-                        android:text="Kawempe" />
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_papPhone"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number: " />
+
+                    <TextView
+                        android:id="@+id/tv_entry_papPhone"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/tv_label_papPhone"
+                        android:gravity="right"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_papOtherPhone"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Other Phone Number: " />
+
+                    <TextView
+                        android:id="@+id/tv_entry_papOtherPhone"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/tv_label_papOtherPhone"
+                        android:gravity="right"
+                        />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_label_papEmail"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email: " />
+
+                    <TextView
+                        android:id="@+id/tv_entry_papEmail"
+                        style="@style/mDetailTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@id/tv_label_papEmail"
+                        android:gravity="right"
+                        />
 
 
                 </RelativeLayout>
@@ -192,7 +264,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_isMarried"
                         android:gravity="right"
-                        android:text="Yes" />
+                       />
 
 
                 </RelativeLayout>
@@ -217,7 +289,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_tribe"
                         android:gravity="right"
-                        android:text="Muganda" />
+                       />
 
 
                 </RelativeLayout>
@@ -241,7 +313,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_religion"
                         android:gravity="right"
-                        android:text="Catholic" />
+                       />
 
 
                 </RelativeLayout>
@@ -265,7 +337,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_occupation"
                         android:gravity="right"
-                        android:text="Business man" />
+                        />
 
 
                 </RelativeLayout>
@@ -320,7 +392,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_plotRef"
                         android:gravity="right"
-                        android:text="ALOB/AP104/004" />
+                        />
 
 
                 </RelativeLayout>
@@ -368,7 +440,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_designation"
                         android:gravity="right"
-                        android:text="Owner" />
+                        />
 
 
                 </RelativeLayout>
@@ -392,7 +464,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_toRightOf="@id/tv_label_isResident"
                         android:gravity="right"
-                        android:text="No" />
+                        />
 
 
                 </RelativeLayout>

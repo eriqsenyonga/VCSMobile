@@ -21,7 +21,7 @@ public class NewPapPreviewFragment extends Fragment {
 
     NewPapActivity newPapActivity;
 
-    TextView tvBirthPlace;
+    TextView tvBirthPlace, tvEmail, tvPhoneNumber, tvOtherPhoneNumber;
     TextView tvDesignation;
     TextView tvDob;
     TextView tvHhid;
@@ -79,6 +79,9 @@ public class NewPapPreviewFragment extends Fragment {
         tvSex = ((TextView) this.v.findViewById(R.id.tv_entry_sex));
         idCard = (CardView) v.findViewById(R.id.card_id);
         tvName = (TextView) v.findViewById(R.id.tv_entry_papName);
+        tvPhoneNumber = (TextView) v.findViewById(R.id.tv_entry_papPhone);
+        tvOtherPhoneNumber = (TextView) v.findViewById(R.id.tv_entry_papOtherPhone);
+        tvEmail = (TextView) v.findViewById(R.id.tv_entry_papEmail);
 
         return v;
     }
@@ -107,6 +110,12 @@ public class NewPapPreviewFragment extends Fragment {
         tvReligion.setText(papLocal.getReligion());
         tvDesignation.setText(papLocal.getPapStatus());
         tvPlotRef.setText(papLocal.getPlotReference());
+        tvPhoneNumber.setText(papLocal.getPhoneNumber());
+        tvOtherPhoneNumber.setText(papLocal.getOtherPhoneNumber());
+        tvEmail.setText(papLocal.getEmail());
+        tvPhoneNumber.setText(papLocal.getPhoneNumber());
+        tvOtherPhoneNumber.setText(papLocal.getOtherPhoneNumber());
+
 
         if (papLocal.isMarried() == true) {
 
