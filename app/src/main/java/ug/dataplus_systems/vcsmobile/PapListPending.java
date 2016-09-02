@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -114,8 +116,12 @@ public class PapListPending extends Fragment {
        Toast.makeText(getActivity(), "Upload ready PAPs coming soon", Toast.LENGTH_LONG).show();
 
         DbClass dbClass = new DbClass(getActivity());
-        dbClass.getPapsForUploadAndConvertToJson(getActivity());
+       JSONObject jobj =  dbClass.getPapsForUploadAndConvertToJson(getActivity());
 
+        BackupDatabase bd = new BackupDatabase(getActivity());
+        bd.callThem(1);
+
+Log.d("jsn", jobj.toString());
 
 //
 //        NotificationManager mNotifyManager;

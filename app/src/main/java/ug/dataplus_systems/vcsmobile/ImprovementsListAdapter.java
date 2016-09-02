@@ -101,7 +101,7 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
         final Spinner spinnerSubCategory = (Spinner) dialogView.findViewById(R.id.spinner_improvement_sub_category);
         final TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
         final Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
-
+        final TextInputLayout tilValue = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_value);
         final TextInputLayout tilRoofType = (TextInputLayout) dialogView.findViewById(R.id.til_roof_type);
         final TextInputLayout tilWallsType = (TextInputLayout) dialogView.findViewById(R.id.til_walls_type);
         final TextInputLayout tilWindowsType = (TextInputLayout) dialogView.findViewById(R.id.til_windows_type);
@@ -122,6 +122,7 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
         tilWindowsType.getEditText().setText(selectedImprovement.getWindows());
         tilDoorsType.getEditText().setText(selectedImprovement.getDoors());
         tilFloorType.getEditText().setText(selectedImprovement.getFloor());
+        tilValue.getEditText().setText(selectedImprovement.getValue());
 
         String selectedUnit = selectedImprovement.getUnit();
 
@@ -203,6 +204,7 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
                     selectedImprovement.setWalls(tilWallsType.getEditText().getText().toString());
                     selectedImprovement.setWindows(tilWindowsType.getEditText().getText().toString());
                     selectedImprovement.setDoors(tilDoorsType.getEditText().getText().toString());
+                    selectedImprovement.setValue(tilValue.getEditText().getText().toString());
 
                     improvementsListToShow.set(position, selectedImprovement);
 

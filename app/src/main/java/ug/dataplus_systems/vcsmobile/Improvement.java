@@ -18,6 +18,15 @@ public class Improvement {
     String doors;
     String floor;
     String otherDetails;
+    String value;
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
     public String getImprovementName() {
         return improvementName;

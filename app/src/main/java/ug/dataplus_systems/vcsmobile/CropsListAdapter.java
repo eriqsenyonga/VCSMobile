@@ -140,6 +140,7 @@ public class CropsListAdapter extends RecyclerView.Adapter<CropsListAdapter.View
         Toolbar dialogToolbar = (Toolbar) dialogView.findViewById(R.id.toolbar_dialog);
         final TextInputLayout tilCropName = (TextInputLayout) dialogView.findViewById(R.id.til_crop_name);
         final TextInputLayout tilCropDescription = (TextInputLayout) dialogView.findViewById(R.id.til_crop_description);
+        final TextInputLayout tilRate = (TextInputLayout) dialogView.findViewById(R.id.til_crop_rate);
         final TextInputLayout tilQuantity = (TextInputLayout) dialogView.findViewById(R.id.til_crop_quantity);
         final Spinner spnUnits = (Spinner) dialogView.findViewById(R.id.spinner_crop_units);
         final Spinner spnCropType = (Spinner) dialogView.findViewById(R.id.spinner_crop_type);
@@ -153,6 +154,7 @@ public class CropsListAdapter extends RecyclerView.Adapter<CropsListAdapter.View
         tilCropName.getEditText().setText(selectedCrop.getCropName());
         tilCropDescription.getEditText().setText(selectedCrop.getCropDescription());
         tilQuantity.getEditText().setText(selectedCrop.getQuantity());
+        tilRate.getEditText().setText(selectedCrop.getCropRate());
 
         String selectedCropType = selectedCrop.getCropType();
 
@@ -229,6 +231,7 @@ public class CropsListAdapter extends RecyclerView.Adapter<CropsListAdapter.View
                     selectedCrop.setCropType(spnCropType.getSelectedItem().toString());
                     selectedCrop.setQuantity(tilQuantity.getEditText().getText().toString());
                     selectedCrop.setUnit(spnUnits.getSelectedItem().toString());
+                    selectedCrop.setCropRate(tilRate.getEditText().getText().toString());
 
                     cropsListToShow.set(position, selectedCrop);
 

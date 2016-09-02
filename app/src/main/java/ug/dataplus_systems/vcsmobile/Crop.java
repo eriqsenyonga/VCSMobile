@@ -11,6 +11,7 @@ public class Crop {
     String otherDetails = "";
     String cropType ="";
     String cropDescription = "";
+    String cropRate = "";
 
     public String getCropDescription() {
         return cropDescription;
@@ -64,5 +65,11 @@ public class Crop {
         this.cropType = cropType;
     }
 
+    public String getCropRate() {
+        return cropRate;
+    }
 
+    public void setCropRate(String cropRate) {
+        this.cropRate = cropRate;
+    }
 }

@@ -83,6 +83,7 @@ public class NewPapPreviewFragment extends Fragment {
         tvOtherPhoneNumber = (TextView) v.findViewById(R.id.tv_entry_papOtherPhone);
         tvEmail = (TextView) v.findViewById(R.id.tv_entry_papEmail);
 
+
         return v;
     }
 
@@ -115,6 +116,9 @@ public class NewPapPreviewFragment extends Fragment {
         tvEmail.setText(papLocal.getEmail());
         tvPhoneNumber.setText(papLocal.getPhoneNumber());
         tvOtherPhoneNumber.setText(papLocal.getOtherPhoneNumber());
+        tvBirthPlace.setText(papLocal.getBirthPlace());
+        tvTribe.setText(papLocal.getTribe());
+
 
 
         if (papLocal.isMarried() == true) {

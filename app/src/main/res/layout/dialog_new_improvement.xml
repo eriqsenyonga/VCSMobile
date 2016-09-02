@@ -40,7 +40,7 @@
                         android:id="@+id/et_improvement_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Category"
+                        android:hint="Name"
                         android:inputType="textCapWords"
                         android:textColor="#000000" />
 
@@ -50,7 +50,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Improvement Sub Category"
+                    android:text="Improvement Category"
                     android:textColor="@color/colorAccent" />
 
                 <Spinner
@@ -84,6 +84,22 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="4dp"
                     android:entries="@array/land_size_units" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_improvement_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/et_improvement_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Value"
+                        android:inputType="textCapWords"
+                        android:textColor="#000000" />
+
+                </android.support.design.widget.TextInputLayout>
 
 
                 <android.support.design.widget.TextInputLayout
