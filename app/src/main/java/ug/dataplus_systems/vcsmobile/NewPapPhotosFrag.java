@@ -207,6 +207,8 @@ public class NewPapPhotosFrag extends Fragment implements View.OnClickListener,
 
                     papLocal.setPapPhotoUriString(image.getFilePathOriginal());
 
+                    Log.d("image_path", image.getFilePathOriginal());
+
                     newPapActivity.updatePapLocalItem(papLocal);
 
                     int wdpx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());

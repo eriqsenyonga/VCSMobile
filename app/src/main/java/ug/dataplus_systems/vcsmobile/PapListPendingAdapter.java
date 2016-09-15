@@ -2,7 +2,10 @@ package ug.dataplus_systems.vcsmobile;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +67,24 @@ public class PapListPendingAdapter extends CursorRecyclerAdapter<PapListPendingA
             //   String dateForDisp = mCC.dateForDisplayNew(dateFromDb);
             tvPapName.setText(papName);
 
+            Log.d("complete", cursor.getString(cursor.getColumnIndex(DbClass.KEY_COMPLETE)));
 
+            if (cursor.getString(cursor.getColumnIndex(DbClass.KEY_COMPLETE)).equals("true")) {
+
+                viewStatusIndicator.setBackgroundColor(Color.parseColor("#FF3E8F04"));
+
+            } else {
+
+                viewStatusIndicator.setBackgroundColor(Color.parseColor("#d48703"));
+            }
+
+            try {
+                ivPapPhoto.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(DbClass.KEY_PHOTO))));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            Log.d("URI IMAGE","RANDOME: " +  cursor.getString(cursor.getColumnIndex(DbClass.KEY_PHOTO)));
         }
     }
 }

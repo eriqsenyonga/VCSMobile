@@ -1,6 +1,8 @@
 package ug.dataplus_systems.vcsmobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public FloatingActionButton fab;
     int i = 1;
     DbClass dbClass;
+    SharedPreferences mPositionSavedPrefs;
+    SharedPreferences.Editor posSavedEditor;
 
 
     @Override
@@ -55,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         fm = getSupportFragmentManager();
 
+        mPositionSavedPrefs = getSharedPreferences("mPositionSaved",
+                Context.MODE_PRIVATE);
+        posSavedEditor = mPositionSavedPrefs.edit();
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,13 +79,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setUpNavigationViewHeaderProjects();
 
 
-
-
         Intent callerIntent = getIntent();
         if (callerIntent.hasExtra("zero")) {
             drawer.openDrawer(GravityCompat.START);
             fm.beginTransaction().replace(R.id.contentMain, new HomeFragment()).commit();
-            getSupportActionBar().setTitle("Home");
+            getSupportActionBar().setTitle("Dashboard");
+            posSavedEditor.putInt("last_main_position", R.id.nav_home).apply();
+
+        } else {
+
+            Fragment fragment = null;
+            CharSequence title = null;
+
+            int id = mPositionSavedPrefs.getInt(
+                    "last_main_position", 1);
+
+
+            if (id == R.id.nav_home) {
+
+                fragment = new HomeFragment();
+                title = "Dashboard";
+            }
+
+            if (id == R.id.nav_pap_list) {
+
+                fragment = new PapListFragment();
+                title = "PAP";
+            }
+
+            if (id == R.id.nav_project_details) {
+
+                fragment = new ProjectsDetailsFragment();
+                title = "Project";
+            }
+
+            if (id == R.id.nav_chats) {
+
+                fragment = new PapEntry();
+                title = "Chats";
+            }
+
+            if (id == R.id.nav_valuation) {
+
+                fragment = new ValuationFragment();
+                title = "Valuation";
+            }
+
+
+            if (fragment != null) {
+
+                getSupportActionBar().setTitle(title);
+                fm.beginTransaction().replace(R.id.contentMain, fragment).commit();
+
+                drawer.closeDrawer(GravityCompat.START);
+
+
+            }
+
+
         }
 
 
@@ -95,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AccountHeaderView accountHeaderView = (AccountHeaderView) header.findViewById(R.id.account_header);
 
         // Add your accounts
-        for(Project project: myProjects ){
+        for (Project project : myProjects) {
 
 
             accountHeaderView.addAccount(new Account().setName("admin").setEmail(project.getProjectName()));
@@ -174,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new PapEntry();
         }
 
-        if(id == R.id.nav_valuation){
+        if (id == R.id.nav_valuation) {
 
             fragment = new ValuationFragment();
         }
@@ -184,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             fm.beginTransaction().replace(R.id.contentMain, fragment).commit();
             getSupportActionBar().setTitle(item.getTitle());
+            posSavedEditor.putInt("last_main_position", id).apply();
             drawer.closeDrawer(GravityCompat.START);
             item.setChecked(true);
 

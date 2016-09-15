@@ -53,8 +53,8 @@ public class DbClass {
     public static final String KEY_DESIGNATION = "DESIGN";
     public static final String KEY_PHOTO = "PHOTO";
     public static final String KEY_PAP_TYPE = "PAP_TYPE";
-    public static final String KEY_COMPLETE = "COMPLETE";
-    public static final String KEY_SYNCED = "SYNCED";
+    public static final String KEY_COMPLETE = "complete";
+    public static final String KEY_SYNCED = "synced";
     public static final String KEY_OTHER_PHONE_NO = "OTHR_PHONE_NO";
 
 
@@ -525,7 +525,7 @@ public class DbClass {
 
     public Cursor getLocalPapCursor() {
 
-        String sql = "SELECT " + KEY_ID + ", " + KEY_NAME + ", " + KEY_COMPLETE + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_INFO;
+        String sql = "SELECT " + KEY_ID + ", " + KEY_NAME + ", " + KEY_COMPLETE + ", " + KEY_PHOTO + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_INFO;
 
         open();
         Cursor c = ourDatabase.rawQuery(sql, null);
