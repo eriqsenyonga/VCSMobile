@@ -1,7 +1,6 @@
 package ug.dataplus_systems.vcsmobile;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by senyer on 6/28/2016.
@@ -54,7 +51,7 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
 
         if (whichList == OVERVIEW_IMPROVEMENTS_LIST) {
 
-            itemsList = new ArrayList<Improvement>();
+            itemsList = new ArrayList<Structure>();
         }
 
         itemsList = list;
@@ -100,8 +97,8 @@ public class OverviewRecyclerViewAdapter extends RecyclerView.Adapter<OverviewRe
 
         if (whichList == OVERVIEW_IMPROVEMENTS_LIST) {
 
-            Improvement improvement = (Improvement) itemsList.get(position);
-            bindFields(improvement.getCategory(), improvement.getArea() + " " + improvement.getUnit(), holder);
+            Structure structure = (Structure) itemsList.get(position);
+            bindFields(structure.getStructureName(), structure.getArea() + " " + structure.getUnit(), holder);
         }
 
 

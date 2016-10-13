@@ -59,7 +59,7 @@ public class PagerAdapterNewPap extends FragmentStatePagerAdapter {
 
         if (position == NEW_PAP_STEP_PROPERTY_INFO_IMPROVEMENTS) {
 
-            return new NewPapPropertyInfoImprovements();
+            return new NewPapPropertyInfoStructures();
 
         }
 

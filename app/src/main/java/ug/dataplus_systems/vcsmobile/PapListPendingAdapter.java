@@ -79,7 +79,7 @@ public class PapListPendingAdapter extends CursorRecyclerAdapter<PapListPendingA
             }
 
             try {
-                ivPapPhoto.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(DbClass.KEY_PHOTO))));
+//                ivPapPhoto.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(DbClass.KEY_PHOTO))));
             }catch (Exception e){
                 e.printStackTrace();
             }

@@ -187,7 +187,7 @@ public class NewPapBasicInfoFrag extends Fragment {
 
         //   dateButton.setText(buttonTextDate);
 
-//        papLocal.setDateOfBirth(dobButton.getText().toString()); //to set the date just incase it is not clicked
+       papLocal.setDateOfBirth(mCC.dateForDb(dobButton.getText().toString())); //to set the date just incase it is not clicked
 
         dobButton.setOnClickListener(new View.OnClickListener() {
             @Override

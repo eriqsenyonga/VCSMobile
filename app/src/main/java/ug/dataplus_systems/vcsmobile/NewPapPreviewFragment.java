@@ -73,7 +73,7 @@ public class NewPapPreviewFragment extends Fragment {
         tvRefNo = ((TextView) this.v.findViewById(R.id.tv_entry_refNo));
         tvDesignation = ((TextView) this.v.findViewById(R.id.tv_entry_designation));
         tvIsResident = ((TextView) this.v.findViewById(R.id.tv_entry_isResident));
-        tvTribe = ((TextView) this.v.findViewById(R.id.tv_entry_trib));
+        tvTribe = ((TextView) this.v.findViewById(R.id.tv_entry_tribe));
         tvOccupation = ((TextView) this.v.findViewById(R.id.tv_entry_occupation));
         tvReligion = ((TextView) this.v.findViewById(R.id.tv_entry_religion));
         tvSex = ((TextView) this.v.findViewById(R.id.tv_entry_sex));
@@ -164,7 +164,7 @@ public class NewPapPreviewFragment extends Fragment {
         }
 
 
-        if (papLocal.getImprovements().size() > 0) {
+        if (papLocal.getStructures().size() > 0) {
             cardImprovements.setVisibility(View.VISIBLE);
             setImprovements();
         } else {
@@ -253,7 +253,7 @@ public class NewPapPreviewFragment extends Fragment {
         });
 
         OverviewRecyclerViewAdapter improvementsAdapter = new OverviewRecyclerViewAdapter(getActivity(),
-                papLocal.getImprovements(),
+                papLocal.getStructures(),
                 OverviewRecyclerViewAdapter.OVERVIEW_IMPROVEMENTS_LIST);
 
         rvImprovements.setAdapter(improvementsAdapter);

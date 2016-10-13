@@ -51,7 +51,7 @@ public class BioDataPapViewLiveFragment extends Fragment {
         tvRefNo = ((TextView)this.v.findViewById(R.id.tv_entry_refNo));
         tvDesignation = ((TextView)this.v.findViewById(R.id.tv_entry_designation));
         tvIsResident = ((TextView)this.v.findViewById(R.id.tv_entry_isResident));
-        tvTribe = ((TextView) this.v.findViewById(R.id.tv_entry_trib));
+        tvTribe = ((TextView) this.v.findViewById(R.id.tv_entry_tribe));
         tvOccupation = ((TextView)this.v.findViewById(R.id.tv_entry_occupation));
         tvReligion = ((TextView)this.v.findViewById(R.id.tv_entry_religion));
         tvSex = ((TextView)this.v.findViewById(R.id.tv_entry_sex));

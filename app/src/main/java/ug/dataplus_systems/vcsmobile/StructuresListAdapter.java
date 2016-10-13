@@ -13,25 +13,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 /**
  * Created by senyer on 5/13/2016.
  */
-public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsListAdapter.ViewHolder> {
+public class StructuresListAdapter extends RecyclerView.Adapter<StructuresListAdapter.ViewHolder> {
 
-    List<Improvement> improvementsListToShow;
+    List<Structure> improvementsListToShow;
     Context context;
     NewPapActivity newPapActivity;
     PapLocal papLocal;
 
 
-    public ImprovementsListAdapter(Context c, List<Improvement> improvementListToShow) {
+    public StructuresListAdapter(Context c, List<Structure> structureListToShow) {
 
         this.context = c;
-        this.improvementsListToShow = improvementListToShow;
+        this.improvementsListToShow = structureListToShow;
 
         newPapActivity = (NewPapActivity) context;
         papLocal = newPapActivity.getPapLocalItem();
@@ -40,7 +39,7 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.improvement_list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.structure_list_item, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(v);
 
@@ -50,10 +49,10 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Improvement improvement = improvementsListToShow.get(position);
-        holder.tvCategory.setText(improvement.getCategory());
-        holder.tvSubCategory.setText(improvement.getSubCategory());
-        holder.tvArea.setText(improvement.getArea() + " " + improvement.getUnit());
+        Structure structure = improvementsListToShow.get(position);
+        holder.tvStrName.setText(structure.getStructureName());
+        holder.tvStrType.setText(structure.getStructureType());
+        holder.tvArea.setText(structure.getArea() + " " + structure.getUnit());
 
         holder.setClickListener(new ItemClickListener() {
             @Override
@@ -94,11 +93,11 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
 
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View dialogView = inflater.inflate(R.layout.dialog_new_improvement, null);
+        View dialogView = inflater.inflate(R.layout.dialog_new_structure, null);
 
         Toolbar dialogToolbar = (Toolbar) dialogView.findViewById(R.id.toolbar_dialog);
-        final TextInputLayout tilCategory = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_name);
-        final Spinner spinnerSubCategory = (Spinner) dialogView.findViewById(R.id.spinner_improvement_sub_category);
+        final TextInputLayout tilStrName = (TextInputLayout) dialogView.findViewById(R.id.til_str_name);
+        final Spinner spnStrType = (Spinner) dialogView.findViewById(R.id.spinner_str_type);
         final TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
         final Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
         final TextInputLayout tilValue = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_value);
@@ -111,20 +110,20 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
         Button cancel = (Button) dialogView.findViewById(R.id.b_cancel);
 
 
-        final Improvement selectedImprovement = improvementsListToShow.get(position);
+        final Structure selectedStructure = improvementsListToShow.get(position);
 
-        dialogToolbar.setTitle("Edit Improvement");
+        dialogToolbar.setTitle("Edit Structure");
 
-        tilCategory.getEditText().setText(selectedImprovement.getCategory());
-        tilArea.getEditText().setText(selectedImprovement.getArea());
-        tilRoofType.getEditText().setText(selectedImprovement.getRoof());
-        tilWallsType.getEditText().setText(selectedImprovement.getWalls());
-        tilWindowsType.getEditText().setText(selectedImprovement.getWindows());
-        tilDoorsType.getEditText().setText(selectedImprovement.getDoors());
-        tilFloorType.getEditText().setText(selectedImprovement.getFloor());
-        tilValue.getEditText().setText(selectedImprovement.getValue());
+        tilStrName.getEditText().setText(selectedStructure.getStructureName());
+        tilArea.getEditText().setText(selectedStructure.getArea());
+        tilRoofType.getEditText().setText(selectedStructure.getRoof());
+        tilWallsType.getEditText().setText(selectedStructure.getWalls());
+        tilWindowsType.getEditText().setText(selectedStructure.getWindows());
+        tilDoorsType.getEditText().setText(selectedStructure.getDoors());
+        tilFloorType.getEditText().setText(selectedStructure.getFloor());
+        tilValue.getEditText().setText(selectedStructure.getValue());
 
-        String selectedUnit = selectedImprovement.getUnit();
+        String selectedUnit = selectedStructure.getUnit();
 
         String[] unitsInSpinner = context.getResources().getStringArray(R.array.land_size_units);
 
@@ -142,17 +141,17 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
 
         }
 
-        String selectedSubCategory = selectedImprovement.getSubCategory();
+        String selectedStrType = selectedStructure.getStructureType();
 
-        String[] subCategoriesInSpinner = context.getResources().getStringArray(R.array.structure_types);
+        String[] strTypesInSpinner = context.getResources().getStringArray(R.array.structure_types);
 
-        int numberOfSubCategories = subCategoriesInSpinner.length;
+        int numberOfStrTypes = strTypesInSpinner.length;
 
-        for (int savedSubCategorySpinnerPosition = 0; savedSubCategorySpinnerPosition < numberOfSubCategories; savedSubCategorySpinnerPosition++) {
+        for (int savedStrTypeSpinnerPos = 0; savedStrTypeSpinnerPos < numberOfStrTypes; savedStrTypeSpinnerPos++) {
 
-            if (selectedSubCategory.equals(subCategoriesInSpinner[savedSubCategorySpinnerPosition])) {
+            if (selectedStrType.equals(strTypesInSpinner[savedStrTypeSpinnerPos])) {
 
-                spinnerSubCategory.setSelection(savedSubCategorySpinnerPosition);
+                spnStrType.setSelection(savedStrTypeSpinnerPos);
 
                 break;
             }
@@ -178,12 +177,12 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
             @Override
             public void onClick(View v) {
 
-                if (tilCategory.getEditText().getText().toString().isEmpty()
+                if (tilStrName.getEditText().getText().toString().isEmpty()
                         || tilArea.getEditText().getText().toString().isEmpty()) {
 
-                    if (tilCategory.getEditText().getText().toString().isEmpty()) {
+                    if (tilStrName.getEditText().getText().toString().isEmpty()) {
 
-                        tilCategory.getEditText().setError("Enter category");
+                        tilStrName.getEditText().setError("Enter name");
                     }
 
                     if (tilArea.getEditText().getText().toString().isEmpty()) {
@@ -195,21 +194,21 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
 
 
 
-                    selectedImprovement.setCategory(tilCategory.getEditText().getText().toString());
-                    selectedImprovement.setSubCategory(spinnerSubCategory.getSelectedItem().toString());
-                    selectedImprovement.setArea(tilArea.getEditText().getText().toString());
-                    selectedImprovement.setUnit(spinnerUnits.getSelectedItem().toString());
-                    selectedImprovement.setRoof(tilRoofType.getEditText().getText().toString());
-                    selectedImprovement.setFloor(tilFloorType.getEditText().getText().toString());
-                    selectedImprovement.setWalls(tilWallsType.getEditText().getText().toString());
-                    selectedImprovement.setWindows(tilWindowsType.getEditText().getText().toString());
-                    selectedImprovement.setDoors(tilDoorsType.getEditText().getText().toString());
-                    selectedImprovement.setValue(tilValue.getEditText().getText().toString());
+                    selectedStructure.setStructureName(tilStrName.getEditText().getText().toString());
+                    selectedStructure.setStructureType(spnStrType.getSelectedItem().toString());
+                    selectedStructure.setArea(tilArea.getEditText().getText().toString());
+                    selectedStructure.setUnit(spinnerUnits.getSelectedItem().toString());
+                    selectedStructure.setRoof(tilRoofType.getEditText().getText().toString());
+                    selectedStructure.setFloor(tilFloorType.getEditText().getText().toString());
+                    selectedStructure.setWalls(tilWallsType.getEditText().getText().toString());
+                    selectedStructure.setWindows(tilWindowsType.getEditText().getText().toString());
+                    selectedStructure.setDoors(tilDoorsType.getEditText().getText().toString());
+                    selectedStructure.setValue(tilValue.getEditText().getText().toString());
 
-                    improvementsListToShow.set(position, selectedImprovement);
+                    improvementsListToShow.set(position, selectedStructure);
 
 
-                    papLocal.setImprovements(improvementsListToShow);
+                    papLocal.setStructures(improvementsListToShow);
 
                     newPapActivity.updatePapLocalItem(papLocal);
 
@@ -248,7 +247,7 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
 
                 improvementsListToShow.remove(position);
 
-                papLocal.setImprovements(improvementsListToShow);
+                papLocal.setStructures(improvementsListToShow);
 
                 newPapActivity.updatePapLocalItem(papLocal);
 
@@ -273,15 +272,15 @@ public class ImprovementsListAdapter extends RecyclerView.Adapter<ImprovementsLi
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tvCategory, tvSubCategory, tvArea;
+        TextView tvStrName, tvStrType, tvArea;
         ItemClickListener clickListener;
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            tvCategory = (TextView) itemView.findViewById(R.id.tv_category);
-            tvSubCategory = (TextView) itemView.findViewById(R.id.tv_sub_category);
+            tvStrName = (TextView) itemView.findViewById(R.id.tv_category);
+            tvStrType = (TextView) itemView.findViewById(R.id.tv_sub_category);
             tvArea = (TextView) itemView.findViewById(R.id.tv_area);
 
 

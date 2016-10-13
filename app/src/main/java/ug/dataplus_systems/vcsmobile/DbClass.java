@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DbClass {
@@ -34,6 +33,7 @@ public class DbClass {
     public static final String KEY_CATEGORY = "CATG";
     public static final String KEY_SUB_CATEGORY = "SUB_CATG";
     public static final String KEY_UNIT_OF_MEASURE = "UNIT_MSR";
+    public static final String KEY_COUNTY_ID = "CTY_ID";
 
 
     //column names for table trn_bio_pap_info
@@ -67,19 +67,20 @@ public class DbClass {
     //column names for table trn_val_crop
     public static final String DATABASE_TABLE_TRN_VAL_CROP = "trn_val_crop";
     public static final String KEY_CROP_ID = "CROP_ID";
-    public static final String KEY_CROP_TYPE_ID = "TYPE_ID";
-    public static final String KEY_CROP_DESCRIPTION_ID = "DESC_ID";
+    public static final String KEY_CROP_TYPE_ID = "CROP_TYPE";
+    public static final String KEY_CROP_DESCRIPTION = "CROP_DESC";
     public static final String KEY_CROP_RATE = "RATE";
-    public static final String KEY_QUANTITY = "QUANTITY";
+    public static final String KEY_QUANTITY = "CROP_UNITS";
     public static final String KEY_TOTAL = "TOTAL";
 
 
-    //column names for table trn_val_impr
-    public static final String DATABASE_TABLE_TRN_VAL_IMPR = "trn_val_impr";
-    public static final String KEY_STRUCTURE_ID = "STR_ID";
-    public static final String KEY_STRUCTURE_CATEGORY_ID = "CATG_ID";
-    public static final String KEY_STRUCTURE_AREA = "STR_AREA";
+    //column names for table trn_val_str
+    public static final String DATABASE_TABLE_TRN_VAL_STR = "trn_val_str";
+    public static final String KEY_STRUCTURE_NAME = "STR_NAME";
+    public static final String KEY_STRUCTURE_TYPE_ID = "STR_TYPE";
+    public static final String KEY_STRUCTURE_UNITS = "STR_UNITS";
     public static final String KEY_STRUCTURE_VALUE = "STR_VALUE";
+    public static final String KEY_STRUCTURE_RATE = "RATE";
     public static final String KEY_ROOF = "STR_ROOF";
     public static final String KEY_WALLS = "STR_WALL";
     public static final String KEY_WINDOWS = "STR_WINDW";
@@ -88,33 +89,54 @@ public class DbClass {
 
     //column names for table trn_val_land
     public static final String DATABASE_TABLE_TRN_VAL_LAND = "trn_val_land";
-    public static final String KEY_RIGHT_OF_WAY_SIZE = "ROW_SIZE";
-    public static final String KEY_WAYLEAVE_SIZE = "WL_SIZE";
+    public static final String KEY_RIGHT_OF_WAY_UNITS = "ROW_UNITS";
+    public static final String KEY_WAYLEAVE_UNITS = "WL_UNITS";
     public static final String KEY_SHARE_OF_LAND = "SHARE_OF_LND";
     public static final String KEY_DIMINUTION = "DIMINUTION";
-    public static final String KEY_LAND_RATE = "LAND_RATE";
+    public static final String KEY_LAND_RATE = "RATE";
     public static final String KEY_LAND_TYPE_ID = "LND_TYPE";
     public static final String KEY_IS_TITLED = "IS_TITLED";
+
+    //column names for table trn_val_fix
+    public static final String DATABASE_TABLE_TRN_VAL_FIX = "trn_val_fix";
+    public static final String KEY_FIXTURE_TYPE_ID = "FIX_TYPE";
+    public static final String KEY_FIXTURE_DESCRIPTION = "FIX_DESC";
+    public static final String KEY_FIXTURE_UNITS = "FIX_UNITS";
+    public static final String KEY_FIXTURE_RATE = "RATE";
+
+    //column names for table trn_val_totals
+    public static final String DATABASE_TABLE_TRN_VAL_TOTALS = "trn_val_totals";
+    public static final String KEY_LAND_VAL = "LAND_VAL";
+    public static final String KEY_LAND_DA = "LAND_DA";
+    public static final String KEY_CROP_VAL = "CROP_VAL";
+    public static final String KEY_CROP_DA = "CROP_DA";
+    public static final String KEY_STR_VAL = "STR_VAL";
+    public static final String KEY_STR_DA= "STR_DA";
+    public static final String KEY_FIX_VAL = "STR_VAL";
+    public static final String KEY_FIX_DA= "STR_DA";
+    public static final String KEY_ALLOW_VAL = "ALLOW_VAL";
+
 
     //column names for table mst_val_crop
     public static final String DATABASE_TABLE_MST_VAL_CROP = "mst_val_crop";
     public static final String KEY_CROP = "CROP";
 
-    //column names for table mst_val_crop_desc
-    public static final String DATABASE_TABLE_MST_VAL_CROP_DESC = "mst_val_crop_desc";
-    public static final String KEY_CROP_DESCRIPTION = "CROP_DESC";
+    //column names for table mst_val_fix_type
+    public static final String DATABASE_TABLE_MST_VAL_FIX_TYPE = "mst_val_fix_type";
+    public static final String KEY_FIXTURE_TYPE = "FIX_TYPE";
+
 
     //column names for table mst_val_crop_type
     public static final String DATABASE_TABLE_MST_VAL_CROP_TYPE = "mst_val_crop_type";
     public static final String KEY_CROP_TYPE = "CROP_TYPE";
 
-    //column names for table mst_val_land
-    public static final String DATABASE_TABLE_MST_VAL_LAND = "mst_val_land";
+    //column names for table mst_val_land_type
+    public static final String DATABASE_TABLE_MST_VAL_LAND_TYPE = "mst_val_lnd_type";
     public static final String KEY_LAND_TYPE = "LND_TYPE";
 
-    //column names for table mst_val_str
-    public static final String DATABASE_TABLE_MST_VAL_STR = "mst_val_str";
-    public static final String KEY_STRUCTURE_NAME = "STR_TYPE";
+    //column names for table mst_val_str_type
+    public static final String DATABASE_TABLE_MST_VAL_STR_TYPE = "mst_val_str_type";
+    public static final String KEY_STRUCTURE_TYPE = "STR_TYPE";
 
     //column names for table mst_val_str_catg
     public static final String DATABASE_TABLE_MST_VAL_STR_CATG = "mst_val_str_catg";
@@ -123,13 +145,13 @@ public class DbClass {
     //column names for table trn_bio_pap_addr
     public static final String DATABASE_TABLE_TRN_BIO_PAP_ADDR = "trn_bio_pap_addr";
     public static final String KEY_ROAD = "ROAD";
-    public static final String KEY_COUNTY_ID = "CTY_ID";
+
     public static final String KEY_VILLAGE_ID = "VILL_ID";
 
 
     //column names for table mst_val_unit_msr
     public static final String DATABASE_TABLE_MST_VAL_UNIT_MSR = "MST_VAL_UNIT_MSR";
-    public static final String KEY_ACRE_RATE = "ACRE_RATE";
+
 
     //column names for table mst_sys_user
     public static final String DATABASE_TABLE_MST_SYS_USER = "mst_sys_user";
@@ -199,10 +221,15 @@ public class DbClass {
     public static final String KEY_VILLAGE_NAME = "VILLAGE";
     public static final String KEY_SUBCOUNTY_ID = "SUBCTY_ID";
 
+    //column names for mst_bio_subcounty
+    public static final String DATABASE_TABLE_MST_BIO_SUBCOUNTY = "mst_bio_subcounty";
+    public static final String KEY_SUBCOUNTY_NAME = "SUBCOUNTY";
+
+
 
     // details of the database that is, database name and version
-    private static final String DATABASE_NAME = "vcs_db_android_nine.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final String DATABASE_NAME = "vcs_db_and_ten.db";
+    private static final int DATABASE_VERSION = 14;
 
     private DbHelper ourHelper; // instance of the DbHelper class
     private Context ourContext;
@@ -233,12 +260,16 @@ public class DbClass {
     public void insertPap(PapLocal papLocal) {
         Log.d("checking this nigga", "1");
 
+        ConversionClass mCC = new ConversionClass(ourContext);
+
+
+
         ContentValues cv = new ContentValues();
 
 
         //these are direct text entries captured as Strings and saved as Text
         cv.put(KEY_NAME, papLocal.getName());
-        cv.put(KEY_DATE_OF_BIRTH, papLocal.getDateOfBirth());
+        cv.put(KEY_DATE_OF_BIRTH, mCC.dateForDb(papLocal.getDateOfBirth()));
         cv.put(KEY_SEX, papLocal.getSex());
         cv.put(KEY_PLOT_REFERENCE, papLocal.getPlotReference());
         cv.put(KEY_BIRTH_PLACE, papLocal.getBirthPlace());
@@ -285,7 +316,7 @@ public class DbClass {
 
 
         /*insert the values into database and get the id for the pap so as to be able to
-        insert crops and improvements in their respective tables
+        insert crops and structures in their respective tables
         */
         Log.d("checking this nigga", "7");
         Long papId = ourDatabase.insert(DATABASE_TABLE_TRN_BIO_PAP_INFO, null, cv);
@@ -319,11 +350,11 @@ public class DbClass {
 
         }
 
-        if (!papLocal.getImprovements().isEmpty()) {
-            //if pap has improvements
+        if (!papLocal.getStructures().isEmpty()) {
+            //if pap has structures
 
 
-            addImprovementsToDatabase(papId, papLocal.getImprovements());
+            addStructuresToDatabase(papId, papLocal.getStructures());
 
         }
 
@@ -332,6 +363,7 @@ public class DbClass {
 
     private void addFamilyMembersToDatabase(Long papId, List<FamilyMember> papFamilyMembers) {
 
+        ConversionClass mCC = new ConversionClass(ourContext);
 
         for (FamilyMember familyMember : papFamilyMembers) {
 
@@ -339,7 +371,7 @@ public class DbClass {
 
             cv.put(KEY_PAP_ID, papId);
             cv.put(KEY_FAMILY_MEMBER_NAME, familyMember.getName());
-            cv.put(KEY_DATE_OF_BIRTH, familyMember.getDateOfBirth());
+            cv.put(KEY_DATE_OF_BIRTH, mCC.dateForDb(familyMember.getDateOfBirth()));
             cv.put(KEY_BIRTH_PLACE, familyMember.getPlaceOfBirth());
             cv.put(KEY_SEX, familyMember.getSex());
             cv.put(KEY_FAMILY_RELATION_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_RELATION, KEY_RELATION, familyMember.getRelationType()));
@@ -364,7 +396,7 @@ public class DbClass {
 
             cv.put(KEY_PAP_ID, papId);
             cv.put(KEY_ROAD, address.getPlotNoRoad());
-            cv.put(KEY_VILLAGE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_VILLAGE, KEY_VILLAGE_NAME, address.getVillage()));
+            cv.put(KEY_VILLAGE_ID, checkForVillageAndReturnId(DATABASE_TABLE_MST_BIO_VILLAGE, KEY_VILLAGE_NAME, address.getVillage(), address));
 
             if (address.isMainAddress()) {
 
@@ -391,15 +423,14 @@ public class DbClass {
         ContentValues cv = new ContentValues();
 
         cv.put(KEY_PAP_ID, papId);
-        cv.put(KEY_RIGHT_OF_WAY_SIZE, papLocal.getRightOfWaySize());
-        cv.put(KEY_WAYLEAVE_SIZE, papLocal.getWayLeaveSize());
+        cv.put(KEY_RIGHT_OF_WAY_UNITS, papLocal.getRightOfWaySize());
+        cv.put(KEY_WAYLEAVE_UNITS, papLocal.getWayLeaveSize());
         cv.put(KEY_LAND_TYPE, papLocal.getLandType());
         cv.put(KEY_SHARE_OF_LAND, papLocal.getShareOfLand());
         cv.put(KEY_DIMINUTION, papLocal.getDiminution());
         cv.put(KEY_LAND_RATE, papLocal.getLandRate());
-
-        cv.put(KEY_LAND_TYPE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_LAND, KEY_LAND_TYPE, papLocal.getLandType()));
-
+        cv.put(KEY_IS_DELETED, "false");
+        cv.put(KEY_LAND_TYPE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_LAND_TYPE, KEY_LAND_TYPE, papLocal.getLandType()));
         cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, papLocal.getLandUnits()));
 
         if (papLocal.isTitledLand()) {
@@ -425,6 +456,7 @@ public class DbClass {
             cv.put(KEY_PAP_ID, papId);
             cv.put(KEY_CROP_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_CROP, KEY_CROP, crop.getCropName()));
             cv.put(KEY_CROP_TYPE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_CROP_TYPE, KEY_CROP_TYPE, crop.getCropType()));
+            cv.put(KEY_CROP_DESCRIPTION, crop.getCropDescription());
             cv.put(KEY_QUANTITY, crop.getQuantity());
             cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, crop.getUnit()));
             cv.put(KEY_IS_DELETED, "false");
@@ -438,34 +470,34 @@ public class DbClass {
         }
     }
 
-    private void addImprovementsToDatabase(Long papId, List<Improvement> improvements) {
+    private void addStructuresToDatabase(Long papId, List<Structure> structures) {
 
 
-        //TODO save improvements
+        //TODO save structures
 
 
-        for (Improvement improvement : improvements) {
+        for (Structure structure : structures) {
 
             ContentValues cv = new ContentValues();
 
             cv.put(KEY_PAP_ID, papId);
-            cv.put(KEY_STRUCTURE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR, KEY_STRUCTURE_NAME, improvement.getCategory()));
-            cv.put(KEY_STRUCTURE_CATEGORY_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR_CATG, KEY_STRUCTURE_CATEGORY, improvement.getSubCategory()));
-            cv.put(KEY_STRUCTURE_AREA, improvement.getArea());
-            cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, improvement.getUnit()));
-            cv.put(KEY_ROOF, improvement.getRoof());
-            cv.put(KEY_WALLS, improvement.getWalls());
-            cv.put(KEY_WINDOWS, improvement.getWindows());
-            cv.put(KEY_DOORS, improvement.getDoors());
-            cv.put(KEY_FLOOR, improvement.getFloor());
-            cv.put(KEY_STRUCTURE_VALUE, improvement.getTotal());
+            cv.put(KEY_STRUCTURE_NAME, structure.getStructureName());
+            cv.put(KEY_STRUCTURE_TYPE_ID, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_STR_TYPE, KEY_STRUCTURE_TYPE, structure.getStructureType()));
+            cv.put(KEY_STRUCTURE_UNITS, structure.getArea());
+            cv.put(KEY_UNIT_OF_MEASURE, checkForEntryAndReturnId(DATABASE_TABLE_MST_VAL_UNIT_MSR, KEY_UNIT_OF_MEASURE, structure.getUnit()));
+            cv.put(KEY_ROOF, structure.getRoof());
+            cv.put(KEY_WALLS, structure.getWalls());
+            cv.put(KEY_WINDOWS, structure.getWindows());
+            cv.put(KEY_DOORS, structure.getDoors());
+            cv.put(KEY_FLOOR, structure.getFloor());
+            cv.put(KEY_STRUCTURE_VALUE, structure.getValue());
             cv.put(KEY_IS_DELETED, "false");
-            cv.put(KEY_OTHER_DETAILS, improvement.getOtherDetails());
+            cv.put(KEY_OTHER_DETAILS, structure.getOtherDetails());
 
             //TODO add insert for UPDATEDBY, UPDATEDDATE, CREATEDBY, CREATEDDATE
 
 
-            Long improvementId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_IMPR, null, cv);
+            Long improvementId = ourDatabase.insert(DATABASE_TABLE_TRN_VAL_STR, null, cv);
 
             Log.d("IMPROVEMENT ID", "" + improvementId);
 
@@ -509,6 +541,123 @@ public class DbClass {
 
 
     }
+
+    private long checkForVillageAndReturnId(String tableNameToBeSearched, String columnNameWhereClause, String parameter, Address address) {
+
+
+
+        String sql = "SELECT " + KEY_ID
+                + " FROM " + tableNameToBeSearched
+                + " WHERE " + columnNameWhereClause + " = '" + parameter + "'";
+
+        Cursor c = ourDatabase.rawQuery(sql, null);
+
+
+
+        if (c.getCount() > 0) {
+
+            //if there is a row with that village already, get the _id and return it to caller
+
+            c.moveToFirst();
+
+            long id = c.getLong(c.getColumnIndex(KEY_ID));
+
+            c.close();
+            return id;
+        } else {
+            //if the village is not there, insert the village in 3 steps and then get its id and return it
+            c.close();
+
+
+
+           return insertVillageIntoDatabase(address);
+
+        }
+
+
+    }
+
+    private long insertVillageIntoDatabase(Address address){
+
+        //Step 1: Check for the district and get its Id
+        long districtId = checkForEntryAndReturnId(DATABASE_TABLE_MST_BIO_DISTRICT, KEY_DISTRICT, address.getDistrict());
+        long countyId;
+        long subCountyId;
+        long villageId;
+
+        //Step 2: Check for county and get its id
+        String checkCountySql = "SELECT " + KEY_ID
+                + " FROM " + DATABASE_TABLE_MST_BIO_COUNTY
+                + " WHERE " + KEY_COUNTY + " = '" + address.getCounty() + "'"
+                + " AND " + KEY_DISTRICT_ID + " = " + districtId;
+
+        Cursor c = ourDatabase.rawQuery(checkCountySql, null);
+
+        if(c.getCount() > 0){
+
+            c.moveToFirst();
+
+            countyId = c.getLong(c.getColumnIndex(KEY_ID));
+
+            c.close();
+        }else{
+            c.close();
+
+            ContentValues cv = new ContentValues();
+            cv.put(KEY_COUNTY, address.getCounty());
+            cv.put(KEY_DISTRICT_ID, districtId);
+            cv.put(KEY_IS_DELETED, "false");
+
+             countyId = ourDatabase.insert(DATABASE_TABLE_MST_BIO_COUNTY, null, cv);
+
+
+        }
+
+        //Step 3: Check for subcounty and get its id
+        String checkSubCountySql = "SELECT " + KEY_ID
+                + " FROM " + DATABASE_TABLE_MST_BIO_SUBCOUNTY
+                + " WHERE " + KEY_SUBCOUNTY_NAME + " = '" + address.getSubCounty() + "'"
+                + " AND " + KEY_COUNTY_ID + " = " + countyId;
+
+        Cursor cu = ourDatabase.rawQuery(checkSubCountySql, null);
+
+        if(cu.getCount() > 0){
+
+            cu.moveToFirst();
+
+           subCountyId = cu.getLong(c.getColumnIndex(KEY_ID));
+
+            cu.close();
+        }else{
+
+            cu.close();
+
+            ContentValues cvs = new ContentValues();
+            cvs.put(KEY_SUBCOUNTY_NAME, address.getSubCounty());
+            cvs.put(KEY_COUNTY_ID, countyId);
+            cvs.put(KEY_IS_DELETED, "false");
+
+            subCountyId = ourDatabase.insert(DATABASE_TABLE_MST_BIO_SUBCOUNTY, null, cvs);
+
+
+        }
+
+        //STEP 4: insert village with its subcounty id and return the id of new village
+
+        ContentValues cvv  = new ContentValues();
+        cvv.put(KEY_VILLAGE_NAME, address.getVillage());
+        cvv.put(KEY_SUBCOUNTY_ID, subCountyId);
+        cvv.put(KEY_IS_DELETED, "false");
+
+        villageId = ourDatabase.insert(DATABASE_TABLE_MST_BIO_VILLAGE, null, cvv);
+
+        return villageId;
+
+
+
+
+    }
+
 
     private long insertParameterIntoTable(String tableNameToBeInserted, String columnNameToInsert, String parameter) {
 
@@ -655,38 +804,45 @@ public class DbClass {
 
 //section for land details being added to papLocal
                 String sqlLandDetails = "SELECT "
-                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_RIGHT_OF_WAY_SIZE + ","
-                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_WAYLEAVE_SIZE + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_RIGHT_OF_WAY_UNITS + ","
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_WAYLEAVE_UNITS + ","
                         + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_UNIT_OF_MEASURE + ","
                         + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_SHARE_OF_LAND + ","
                         + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_DIMINUTION + ","
                         + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_LAND_RATE + ","
-                        + DATABASE_TABLE_MST_VAL_LAND + "." + KEY_LAND_TYPE + ","
+                        + DATABASE_TABLE_MST_VAL_LAND_TYPE + "." + KEY_LAND_TYPE + ","
                         + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_IS_TITLED
                         + " FROM " + DATABASE_TABLE_TRN_VAL_LAND
-                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_LAND
+                        + " LEFT JOIN " + DATABASE_TABLE_MST_VAL_LAND_TYPE
                         + " ON "
-                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_LAND_TYPE_ID + " = " + DATABASE_TABLE_MST_VAL_LAND + "." + KEY_ID
-                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_UNIT_MSR
+                        + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_LAND_TYPE_ID + " = " + DATABASE_TABLE_MST_VAL_LAND_TYPE + "." + KEY_ID
+                        + " LEFT JOIN " + DATABASE_TABLE_MST_VAL_UNIT_MSR
                         + " ON "
                         + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_UNIT_OF_MEASURE + " = " + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_ID
-                        + " WHERE " + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_PAP_ID + " = " + papId
-                        + " AND " + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_IS_DELETED + " = 'false'";
+                        + " WHERE " + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_PAP_ID + " = " + papId;
+                    //    + " AND " + DATABASE_TABLE_TRN_VAL_LAND + "." + KEY_IS_DELETED + " = 'false'";
 
 
                 Cursor landCursor = ourDatabase.rawQuery(sqlLandDetails, null);
 
+                Log.d("lAND CURSOR COUNT", "" +landCursor.getCount());
+
                 if (landCursor.getCount() > 0) {
+
+                    Log.d("in Land Cursor", "in Land Cursor");
 
                     for (landCursor.moveToFirst(); !landCursor.isAfterLast(); landCursor.moveToNext()) {
 
-                        papLocal.setRightOfWaySize(landCursor.getString(landCursor.getColumnIndex(KEY_RIGHT_OF_WAY_SIZE)));
-                        papLocal.setWayLeaveSize(landCursor.getString(landCursor.getColumnIndex(KEY_WAYLEAVE_SIZE)));
+                        papLocal.setRightOfWaySize("" + landCursor.getDouble(landCursor.getColumnIndex(KEY_RIGHT_OF_WAY_UNITS)));
+                        papLocal.setWayLeaveSize("" + landCursor.getDouble(landCursor.getColumnIndex(KEY_WAYLEAVE_UNITS)));
                         papLocal.setLandUnits(landCursor.getString(landCursor.getColumnIndex(KEY_UNIT_OF_MEASURE)));
-                        papLocal.setDiminution(landCursor.getString(landCursor.getColumnIndex(KEY_DIMINUTION)));
-                        papLocal.setLandRate(landCursor.getString(landCursor.getColumnIndex(KEY_LAND_RATE)));
-                        papLocal.setShareOfLand(landCursor.getString(landCursor.getColumnIndex(KEY_SHARE_OF_LAND)));
+                        papLocal.setDiminution(""+landCursor.getDouble(landCursor.getColumnIndex(KEY_DIMINUTION)));
+                        papLocal.setLandRate(""+landCursor.getDouble(landCursor.getColumnIndex(KEY_LAND_RATE)));
+                        papLocal.setShareOfLand(""+landCursor.getDouble(landCursor.getColumnIndex(KEY_SHARE_OF_LAND)));
                         papLocal.setLandType(landCursor.getString(landCursor.getColumnIndex(KEY_LAND_TYPE)));
+
+
+                        Log.d("ROW SIZE","" + landCursor.getDouble(landCursor.getColumnIndex(KEY_RIGHT_OF_WAY_UNITS)) );
 
                         if (landCursor.getString(landCursor.getColumnIndex(KEY_IS_TITLED)) == "true") {
                             papLocal.setIsTitled(true);
@@ -714,7 +870,37 @@ public class DbClass {
                         + " WHERE " + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_PAP_ID + " = " + papId
                         + " AND " + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_IS_DELETED + " = 'false'";
 
-                Cursor addressCursor = ourDatabase.rawQuery(sqlAdresses, null);
+
+
+                String sqlDAdresses = "SELECT "
+                        + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_ROAD + ", "
+                        + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_IS_RESIDENT + ", "
+                        + DATABASE_TABLE_MST_BIO_VILLAGE + "." + KEY_VILLAGE_NAME + ", "
+                        + DATABASE_TABLE_MST_BIO_SUBCOUNTY + "." + KEY_SUBCOUNTY_NAME + ", "
+                        + DATABASE_TABLE_MST_BIO_COUNTY + "." + KEY_COUNTY + ", "
+                        + DATABASE_TABLE_MST_BIO_DISTRICT + "." + KEY_DISTRICT
+                        + " FROM " + DATABASE_TABLE_TRN_BIO_PAP_ADDR
+                        + " INNER JOIN " + DATABASE_TABLE_MST_BIO_VILLAGE
+                        + " ON "
+                        + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_VILLAGE_ID + " = " + DATABASE_TABLE_MST_BIO_VILLAGE + "." + KEY_ID
+                        + " INNER JOIN " + DATABASE_TABLE_MST_BIO_SUBCOUNTY
+                        + " ON "
+                        + DATABASE_TABLE_MST_BIO_VILLAGE + "." + KEY_SUBCOUNTY_ID + " = " + DATABASE_TABLE_MST_BIO_SUBCOUNTY + "." + KEY_ID
+                        + " INNER JOIN " + DATABASE_TABLE_MST_BIO_COUNTY
+                        + " ON "
+                        + DATABASE_TABLE_MST_BIO_SUBCOUNTY + "." + KEY_COUNTY_ID + " = " + DATABASE_TABLE_MST_BIO_COUNTY + "." + KEY_ID
+                        + " INNER JOIN " + DATABASE_TABLE_MST_BIO_DISTRICT
+                        + " ON "
+                        + DATABASE_TABLE_MST_BIO_COUNTY + "." + KEY_DISTRICT_ID + " = " + DATABASE_TABLE_MST_BIO_DISTRICT + "." + KEY_ID
+
+                        + " WHERE " + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_PAP_ID + " = " + papId
+                        + " AND " + DATABASE_TABLE_TRN_BIO_PAP_ADDR + "." + KEY_IS_DELETED + " = 'false'";
+
+
+
+
+
+                Cursor addressCursor = ourDatabase.rawQuery(sqlDAdresses, null);
 
                 if (addressCursor.getCount() > 0) {
 
@@ -724,6 +910,9 @@ public class DbClass {
 
                         Address address = new Address();
                         address.setVillage(addressCursor.getString(addressCursor.getColumnIndex(KEY_VILLAGE_NAME)));
+                        address.setSubCounty(addressCursor.getString(addressCursor.getColumnIndex(KEY_SUBCOUNTY_NAME)));
+                        address.setCounty(addressCursor.getString(addressCursor.getColumnIndex(KEY_COUNTY)));
+                        address.setDistrict(addressCursor.getString(addressCursor.getColumnIndex(KEY_DISTRICT)));
                         address.setPlotNoRoad(addressCursor.getString(addressCursor.getColumnIndex(KEY_ROAD)));
 
                         if (addressCursor.getString(addressCursor.getColumnIndex(KEY_IS_RESIDENT)) == "true") {
@@ -731,6 +920,7 @@ public class DbClass {
                         } else {
                             address.setIsMainAddress(false);
                         }
+
 
                         addresses.add(address);
 
@@ -802,8 +992,8 @@ public class DbClass {
                 String sqlCrops = "SELECT "
                         + DATABASE_TABLE_MST_VAL_CROP + "." + KEY_CROP + ","
                         + DATABASE_TABLE_MST_VAL_CROP_TYPE + "." + KEY_CROP_TYPE + ","
-                        + DATABASE_TABLE_MST_VAL_CROP_DESC + "." + KEY_CROP_DESCRIPTION + ","
-                        + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_UNIT_OF_MEASURE + ","
+                        + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_CROP_DESCRIPTION + ","
+                        + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_UNIT_OF_MEASURE + ","
                         + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_QUANTITY + ","
                         + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_CROP_RATE + ","
                         + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_OTHER_DETAILS
@@ -811,12 +1001,12 @@ public class DbClass {
                         + " LEFT JOIN " + DATABASE_TABLE_MST_VAL_CROP
                         + " ON "
                         + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_CROP_ID + " = " + DATABASE_TABLE_MST_VAL_CROP + "." + KEY_ID
+                        + " LEFT JOIN " + DATABASE_TABLE_MST_VAL_UNIT_MSR
+                        + " ON "
+                        + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_UNIT_OF_MEASURE + " = " + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_ID
                         + " LEFT JOIN " + DATABASE_TABLE_MST_VAL_CROP_TYPE
                         + " ON "
                         + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_CROP_TYPE_ID + " = " + DATABASE_TABLE_MST_VAL_CROP_TYPE + "." + KEY_ID
-                        + " LEFT JOIN " + DATABASE_TABLE_MST_VAL_CROP_DESC
-                        + " ON "
-                        + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_CROP_DESCRIPTION_ID + " = " + DATABASE_TABLE_MST_VAL_CROP_DESC + "." + KEY_ID
                         + " WHERE " + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_PAP_ID + " = " + papId
                         + " AND " + DATABASE_TABLE_TRN_VAL_CROP + "." + KEY_IS_DELETED + " = 'false'";
 
@@ -857,54 +1047,53 @@ public class DbClass {
 //SECTION FOR ADDING IMPROVEMENTS
 
                 String sqlImprov = "SELECT "
-                        + DATABASE_TABLE_MST_VAL_STR + "." + KEY_STRUCTURE_NAME + ","
-                        + DATABASE_TABLE_MST_VAL_STR_CATG + "." + KEY_STRUCTURE_CATEGORY + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_STRUCTURE_AREA + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_UNIT_OF_MEASURE + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_STRUCTURE_VALUE + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_ROOF + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_WALLS + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_WINDOWS + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_DOORS + ","
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_FLOOR
-                        + " FROM " + DATABASE_TABLE_TRN_VAL_IMPR
-                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_STR
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_STRUCTURE_NAME + ","
+                        + DATABASE_TABLE_MST_VAL_STR_TYPE + "." + KEY_STRUCTURE_TYPE + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_STRUCTURE_UNITS + ","
+                        + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_UNIT_OF_MEASURE + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_STRUCTURE_VALUE + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_ROOF + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_WALLS + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_WINDOWS + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_DOORS + ","
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_FLOOR
+                        + " FROM " + DATABASE_TABLE_TRN_VAL_STR
+                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_STR_TYPE
                         + " ON "
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_STRUCTURE_ID + " = " + DATABASE_TABLE_MST_VAL_STR + "." + KEY_ID
-                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_STR_CATG
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_STRUCTURE_TYPE_ID + " = " + DATABASE_TABLE_MST_VAL_STR_TYPE + "." + KEY_ID
+                        + " INNER JOIN " + DATABASE_TABLE_MST_VAL_UNIT_MSR
                         + " ON "
-                        + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_STRUCTURE_CATEGORY_ID + " = " + DATABASE_TABLE_MST_VAL_STR_CATG + "." + KEY_ID
-
-                        + " WHERE " + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_PAP_ID + " = " + papId
-                        + " AND " + DATABASE_TABLE_TRN_VAL_IMPR + "." + KEY_IS_DELETED + " = 'false'";
+                        + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_UNIT_OF_MEASURE + " = " + DATABASE_TABLE_MST_VAL_UNIT_MSR + "." + KEY_ID
+                        + " WHERE " + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_PAP_ID + " = " + papId
+                        + " AND " + DATABASE_TABLE_TRN_VAL_STR + "." + KEY_IS_DELETED + " = 'false'";
 
 
                 Cursor imprCursor = ourDatabase.rawQuery(sqlImprov, null);
 
                 if (imprCursor.getCount() > 0) {
 
-                    List<Improvement> improvements = new ArrayList<>();
+                    List<Structure> structures = new ArrayList<>();
 
                     for (imprCursor.moveToFirst(); !imprCursor.isAfterLast(); imprCursor.moveToNext()) {
 
-                        Improvement improvement = new Improvement();
-                        improvement.setImprovementName(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_NAME)));
-                        improvement.setCategory(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_CATEGORY)));
-                        improvement.setUnit(imprCursor.getString(imprCursor.getColumnIndex(KEY_UNIT_OF_MEASURE)));
-                        improvement.setValue(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_VALUE)));
-                        improvement.setRoof(imprCursor.getString(imprCursor.getColumnIndex(KEY_ROOF)));
-                        improvement.setWalls(imprCursor.getString(imprCursor.getColumnIndex(KEY_WALLS)));
-                        improvement.setWindows(imprCursor.getString(imprCursor.getColumnIndex(KEY_WINDOWS)));
-                        improvement.setDoors(imprCursor.getString(imprCursor.getColumnIndex(KEY_DOORS)));
-                        improvement.setFloor(imprCursor.getString(imprCursor.getColumnIndex(KEY_FLOOR)));
-                        improvement.setArea(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_AREA)));
+                        Structure structure = new Structure();
+                        structure.setStructureName(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_NAME)));
+                        structure.setCategory(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_TYPE)));
+                        structure.setUnit(imprCursor.getString(imprCursor.getColumnIndex(KEY_UNIT_OF_MEASURE)));
+                        structure.setValue(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_VALUE)));
+                        structure.setRoof(imprCursor.getString(imprCursor.getColumnIndex(KEY_ROOF)));
+                        structure.setWalls(imprCursor.getString(imprCursor.getColumnIndex(KEY_WALLS)));
+                        structure.setWindows(imprCursor.getString(imprCursor.getColumnIndex(KEY_WINDOWS)));
+                        structure.setDoors(imprCursor.getString(imprCursor.getColumnIndex(KEY_DOORS)));
+                        structure.setFloor(imprCursor.getString(imprCursor.getColumnIndex(KEY_FLOOR)));
+                        structure.setArea(imprCursor.getString(imprCursor.getColumnIndex(KEY_STRUCTURE_UNITS)));
 
-                        improvements.add(improvement);
+                        structures.add(structure);
 
 
                     }
 
-                    papLocal.setImprovements(improvements);
+                    papLocal.setStructures(structures);
                 }
 
                 imprCursor.close();
@@ -973,12 +1162,19 @@ public class DbClass {
                 propertyInfo.put("plot_ref", p.getPlotReference());
                 propertyInfo.put("pap_status", p.getPapStatus());
                 propertyInfo.put("ref_no", p.getReferenceNumber());
+
                 propertyInfo.put("right_of_way_size", p.getRightOfWaySize());
+
+//                Log.d("right_of_way_size", p.getRightOfWaySize());
+
                 propertyInfo.put("wayleave_size", p.getWayLeaveSize());
                 propertyInfo.put("land_units", p.getLandUnits());
                 propertyInfo.put("land_rate", p.getLandRate());
                 propertyInfo.put("diminution", p.getDiminution());
                 propertyInfo.put("share_of_land", p.getShareOfLand());
+                propertyInfo.put("land_type", p.getLandType());
+
+
                 if (p.isResident()) {
                     propertyInfo.put("is_resident", "true");
                 } else {
@@ -1003,6 +1199,12 @@ public class DbClass {
                     JSONObject addObject = new JSONObject();
                     addObject.put("plot_no_road", address.getPlotNoRoad());
                     addObject.put("village", address.getVillage());
+                    addObject.put("subcounty", address.getSubCounty());
+                    addObject.put("county", address.getCounty());
+                    addObject.put("district", address.getDistrict());
+
+                    Log.d("village" , address.getVillage());
+                    Log.d("subcounty", address.getSubCounty());
 
                     if (address.isMainAddress()) {
                         addObject.put("is_main_residence", "true");
@@ -1074,32 +1276,32 @@ public class DbClass {
 
 
                 //CONVERT IMPROVEMENTS TO JSON
-                JSONArray imprJsonArray = new JSONArray();
+                JSONArray strJsonArray = new JSONArray();
 
-                List<Improvement> imprList = p.getImprovements();
+                List<Structure> strList = p.getStructures();
 
-                for (Improvement impr : imprList) {
+                for (Structure str : strList) {
 
-                    JSONObject imprObject = new JSONObject();
+                    JSONObject strObject = new JSONObject();
 
-                    imprObject.put("improvement_name", impr.getImprovementName());
-                    imprObject.put("improvement_units", impr.getUnit());
-                    imprObject.put("improvement_value", impr.getValue());
-                    imprObject.put("improvement_area", impr.getArea());
-                    imprObject.put("improvement_category", impr.getCategory());
-                    imprObject.put("doors", impr.getDoors());
-                    imprObject.put("windows", impr.getWindows());
-                    imprObject.put("floor", impr.getFloor());
-                    imprObject.put("walls", impr.getWalls());
-                    imprObject.put("roof", impr.getRoof());
+                    strObject.put("structure_name", str.getStructureName());
+                    strObject.put("structure_units", str.getUnit());
+                    strObject.put("structure_value", str.getValue());
+                    strObject.put("structure_area", str.getArea());
+                    strObject.put("structure_type", str.getCategory());
+                    strObject.put("doors", str.getDoors());
+                    strObject.put("windows", str.getWindows());
+                    strObject.put("floor", str.getFloor());
+                    strObject.put("walls", str.getWalls());
+                    strObject.put("roof", str.getRoof());
 
-                    imprJsonArray.put(imprObject);
+                    strJsonArray.put(strObject);
 
 
                 }
 
                 //add imprJSONArray to obj
-                obj.put("improvements", imprJsonArray);
+                obj.put("structures", strJsonArray);
 
 
 

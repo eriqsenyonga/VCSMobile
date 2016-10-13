@@ -124,8 +124,8 @@ public class PapViewLocal extends AppCompatActivity {
             recyclerView.setAdapter(simpleRecyclerAdapter);
         } */
 
-        title = (LinearLayout) findViewById(R.id.title_d);
-        contents = (LinearLayout) findViewById(R.id.content_d);
+      //  title = (LinearLayout) findViewById(R.id.title_d);
+    //    contents = (LinearLayout) findViewById(R.id.content_d);
 
 
 

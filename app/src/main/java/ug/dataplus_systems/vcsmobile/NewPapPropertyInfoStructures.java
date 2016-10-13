@@ -15,26 +15,24 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewPapPropertyInfoImprovements extends Fragment implements View.OnClickListener {
+public class NewPapPropertyInfoStructures extends Fragment implements View.OnClickListener {
 
     RecyclerView rvImprovementsList;
     TextView tvNoImprovementsMessage;
     View v;
     NewPapActivity newPapActivity;
     PapLocal papLocal;
-    List<Improvement> improvementsHere;
-    ImprovementsListAdapter adapter;
+    List<Structure> improvementsHere;
+    StructuresListAdapter adapter;
 
 
-    public NewPapPropertyInfoImprovements() {
+    public NewPapPropertyInfoStructures() {
         // Required empty public constructor
     }
 
@@ -62,7 +60,7 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
         newPapActivity = (NewPapActivity) getActivity();
         papLocal = newPapActivity.getPapLocalItem();
 
-        improvementsHere = papLocal.getImprovements();
+        improvementsHere = papLocal.getStructures();
 
 
         newPapActivity.fab.show();
@@ -75,7 +73,7 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
 
     private void showImprovements() {
 
-        adapter = new ImprovementsListAdapter(getActivity(), improvementsHere);
+        adapter = new StructuresListAdapter(getActivity(), improvementsHere);
         rvImprovementsList.setAdapter(adapter);
 
 
@@ -88,14 +86,13 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
 
             LayoutInflater inflater = LayoutInflater.from(getActivity());
 
-            View dialogView = inflater.inflate(R.layout.dialog_new_improvement, null);
+            View dialogView = inflater.inflate(R.layout.dialog_new_structure, null);
 
-            final TextInputLayout tilCategory = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_name);
-            final Spinner spinnerSubCategory = (Spinner) dialogView.findViewById(R.id.spinner_improvement_sub_category);
+            final TextInputLayout tilStrName = (TextInputLayout) dialogView.findViewById(R.id.til_str_name);
+            final Spinner spnStrType = (Spinner) dialogView.findViewById(R.id.spinner_str_type);
             final TextInputLayout tilArea = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_area);
             final Spinner spinnerUnits = (Spinner) dialogView.findViewById(R.id.spinner_improvement_area_units);
             final TextInputLayout tilValue = (TextInputLayout) dialogView.findViewById(R.id.til_improvement_value);
-
             final TextInputLayout tilRoofType = (TextInputLayout) dialogView.findViewById(R.id.til_roof_type);
             final TextInputLayout tilWallsType = (TextInputLayout) dialogView.findViewById(R.id.til_walls_type);
             final TextInputLayout tilWindowsType = (TextInputLayout) dialogView.findViewById(R.id.til_windows_type);
@@ -122,12 +119,12 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
                 @Override
                 public void onClick(View v) {
 
-                    if (tilCategory.getEditText().getText().toString().isEmpty()
+                    if (tilStrName.getEditText().getText().toString().isEmpty()
                             || tilArea.getEditText().getText().toString().isEmpty()) {
 
-                        if (tilCategory.getEditText().getText().toString().isEmpty()) {
+                        if (tilStrName.getEditText().getText().toString().isEmpty()) {
 
-                            tilCategory.getEditText().setError("Enter category");
+                            tilStrName.getEditText().setError("Enter name");
                         }
 
                         if (tilArea.getEditText().getText().toString().isEmpty()) {
@@ -137,22 +134,22 @@ public class NewPapPropertyInfoImprovements extends Fragment implements View.OnC
 
                     } else {
 
-                        Improvement improvement = new Improvement();
+                        Structure structure = new Structure();
 
-                        improvement.setCategory(tilCategory.getEditText().getText().toString());
-                        improvement.setSubCategory(spinnerSubCategory.getSelectedItem().toString());
-                        improvement.setArea(tilArea.getEditText().getText().toString());
-                        improvement.setUnit(spinnerUnits.getSelectedItem().toString());
-                        improvement.setRoof(tilRoofType.getEditText().getText().toString());
-                        improvement.setFloor(tilFloorType.getEditText().getText().toString());
-                        improvement.setWalls(tilWallsType.getEditText().getText().toString());
-                        improvement.setWindows(tilWindowsType.getEditText().getText().toString());
-                        improvement.setDoors(tilDoorsType.getEditText().getText().toString());
-                        improvement.setValue(tilValue.getEditText().getText().toString());
+                        structure.setStructureName(tilStrName.getEditText().getText().toString());
+                        structure.setStructureType(spnStrType.getSelectedItem().toString());
+                        structure.setArea(tilArea.getEditText().getText().toString());
+                        structure.setUnit(spinnerUnits.getSelectedItem().toString());
+                        structure.setRoof(tilRoofType.getEditText().getText().toString());
+                        structure.setFloor(tilFloorType.getEditText().getText().toString());
+                        structure.setWalls(tilWallsType.getEditText().getText().toString());
+                        structure.setWindows(tilWindowsType.getEditText().getText().toString());
+                        structure.setDoors(tilDoorsType.getEditText().getText().toString());
+                        structure.setValue(tilValue.getEditText().getText().toString());
 
-                        improvementsHere.add(improvement);
+                        improvementsHere.add(structure);
 
-                        papLocal.setImprovements(improvementsHere);
+                        papLocal.setStructures(improvementsHere);
 
                         showImprovements();
 

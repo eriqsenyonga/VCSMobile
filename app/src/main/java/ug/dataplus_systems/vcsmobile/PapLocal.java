@@ -14,7 +14,7 @@ public class PapLocal {
     boolean hasCrops;
     boolean hasImprovements;
     String id;
-    List<Improvement> improvements;
+    List<Structure> structures;
     boolean isComplete = false;
     boolean isMarried = false;
     boolean isResident;
@@ -23,7 +23,7 @@ public class PapLocal {
     List<String> otherPhotosUrlList;
     String papPhotoUriString;
     String papType = "Individual";
-    String physicalAddress;
+    String physicalAddress = "";
     String plotReference;
     String referenceNumber;
     String religion;
@@ -31,10 +31,10 @@ public class PapLocal {
     String sex = "Male";
     String tribe;
     String wayLeaveSize;
-    String landType;
-    String landRate;
-    String diminution;
-    String shareOfLand;
+    String landType = "";
+    String landRate = "";
+    String diminution = "";
+    String shareOfLand = "";
     boolean isTitledLand = false;
     List<Address> papAddresses;
     List<FamilyMember> papFamilyMembers;
@@ -80,7 +80,7 @@ public class PapLocal {
     public PapLocal(Context paramContext) {
 
         crops = new ArrayList();
-        improvements = new ArrayList();
+        structures = new ArrayList();
         papAddresses = new ArrayList();
         papFamilyMembers = new ArrayList();
 
@@ -123,8 +123,8 @@ public class PapLocal {
         return this.id;
     }
 
-    public List<Improvement> getImprovements() {
-        return this.improvements;
+    public List<Structure> getStructures() {
+        return this.structures;
     }
 
     public String getName() {
@@ -269,8 +269,8 @@ public class PapLocal {
         this.id = paramString;
     }
 
-    public void setImprovements(List<Improvement> paramList) {
-        this.improvements = paramList;
+    public void setStructures(List<Structure> paramList) {
+        this.structures = paramList;
     }
 
     public void setIsComplete(boolean paramBoolean) {

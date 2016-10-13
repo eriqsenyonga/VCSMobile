@@ -3,12 +3,13 @@ package ug.dataplus_systems.vcsmobile;
 /**
  * Created by senyer on 5/13/2016.
  */
-public class Improvement {
+public class Structure {
 
 
-    String improvementName;
+    String structureName;
     String category;
     String subCategory;
+    String structureType;
     String area;
     String unit;
     long total;
@@ -20,6 +21,14 @@ public class Improvement {
     String otherDetails;
     String value;
 
+    public String getStructureType() {
+        return structureType;
+    }
+
+    public void setStructureType(String structureType) {
+        this.structureType = structureType;
+    }
+
     public String getValue() {
         return value;
     }
@@ -28,12 +37,12 @@ public class Improvement {
         this.value = value;
     }
 
-    public String getImprovementName() {
-        return improvementName;
+    public String getStructureName() {
+        return structureName;
     }
 
-    public void setImprovementName(String improvementName) {
-        this.improvementName = improvementName;
+    public void setStructureName(String structureName) {
+        this.structureName = structureName;
     }
 
     public String getCategory() {

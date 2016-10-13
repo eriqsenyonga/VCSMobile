@@ -95,7 +95,7 @@ public class BackupDatabase {
             if (sd.canWrite()) {
                 Log.d("3", "3");
                 String currentDBPath = "//data//" + "ug.dataplus_systems.vcsmobile"
-                        + "//databases//" + "vcs_db_android.db";
+                        + "//databases//" + "vcs_db_and_ten.db";
 
                 String backupDBPath = "VCSBackup";
 
