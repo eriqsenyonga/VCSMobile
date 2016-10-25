@@ -18,7 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -30,6 +41,8 @@ public class PapListPending extends Fragment {
     PapListPendingAdapter adapter;
     DbClass mDb;
     View v;
+    MyApplicationClass helper = MyApplicationClass.getInstance();
+    String URL_UPLOAD_PAPS = "VcsMobile/uploadPaps.php";
 
 
     public PapListPending() {
@@ -113,15 +126,18 @@ public class PapListPending extends Fragment {
         * */
 
 
-       Toast.makeText(getActivity(), "Upload ready PAPs coming soon", Toast.LENGTH_LONG).show();
+        //  Toast.makeText(getActivity(), "Upload ready PAPs coming soon", Toast.LENGTH_LONG).show();
 
         DbClass dbClass = new DbClass(getActivity());
-       JSONObject jobj =  dbClass.getPapsForUploadAndConvertToJson(getActivity());
+        JSONObject jobj = dbClass.getPapsForUploadAndConvertToJson(getActivity());
+
+
+        sendPapsToServer(jobj.toString());
 
         BackupDatabase bd = new BackupDatabase(getActivity());
         bd.callThem(1);
 
-Log.d("jsn", jobj.toString());
+        Log.d("jsn", jobj.toString());
 
 //
 //        NotificationManager mNotifyManager;
@@ -165,6 +181,56 @@ Log.d("jsn", jobj.toString());
 //// Starts the thread by calling the run() method in its Runnable
 //        ).start();
 
+
+    }
+
+    private void sendPapsToServer(final String s) {
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, helper.getGeneralUrl() + URL_UPLOAD_PAPS,
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d("response", response);
+
+
+                        try {
+                            JSONArray jsonResponse = new JSONArray(response);
+                         //   Log.d("uploadresult", jsonResponse.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                       // isLoading = false;
+                      //  pbLoading.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                      //  Log.d("PROJECT INFO", "PROJECT INFO ERROR");
+
+
+                    }
+                }) {
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("paps_json_string", s);
+             //   map.put("page", String.valueOf(page));
+
+                return map;
+            }
+        };
+
+        helper.add(stringRequest);
 
 
     }

@@ -188,7 +188,7 @@ public class PapListLive extends Fragment {
                         isLoading = false;
                         pbLoading.setVisibility(View.GONE);
                        // Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
-                        Log.d("PROJECT INFO", "PROJECT INFO ERROR");
+                        Log.d("Live List", "live list ERROR");
 
 
                     }
